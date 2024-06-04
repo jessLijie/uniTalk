@@ -5,86 +5,115 @@ import { useRouter } from 'vue-router';
 /* Approved page */
 const temp = ref([
     {
-        campaignName: 'Educate360 ',
-        name: 'ABC Company',
-        purpose: 'Service',
-        description: 'To educate people',
-        startDate: '21 Jan 2024',
-        endDate: '21 Apr 2024',
-        fundRaised: 80000,
-        target: 7000000,
-        pricePerShare: 10,
-        targetAmount: 1000,
-        deadline: '2024-02-01T00:00',
-        valuation: 'Valuation 1',
-        minInvestment: 100,
-        maxInvestment: 1000,
-        minSharesOffered: 10,
-        maxSharesOffered: 100,
-        offeringType: 'public',
-        assetType: 'equity',
-        sharesOffered: 'common'
+        title: 'New trend is style: Wearing the black out of the blue ',
+        content: 'Lately, the reporters from T...',
+        topic: 'Fashion',
+        author: 'Bella Hadid',
+        posted_date: '22 Jan 2024',
+        like: 5800,
+        comment: 15
+
     },
     {
-        campaignName: 'BizBoost',
-        name: 'DEF Company',
-        purpose: 'E-Commerce',
-        description: 'Elevate, Expand, Excel!',
-        startDate: '22 Jan 2024',
-        endDate: '21 Jun 2024',
-        fundRaised: 60000,
-        target: 3000000
+        title: 'The Rise of Plant-Based Diets: What You Need to Know',
+        content: 'With the growing awareness of health...',
+        topic: 'Food',
+        author: 'Jamie Oliver',
+        posted_date: '15 Feb 2024',
+        like: 4200,
+        comment: 37
     },
     {
-        campaignName: 'Caring',
-        name: 'GHI Company',
-        purpose: 'Service',
-        description: 'To enhance experience',
-        startDate: '1 Jan 2024',
-        endDate: '23 Apr 2024',
-        fundRaised: 8000000,
-        target: 10000000
+        title: 'Revolutionizing Urban Mobility: The Future of E-Scooters',
+        content: 'E-scooters have become increasingly popular...',
+        topic: 'Transportation',
+        author: 'Elon Musk',
+        posted_date: '8 Mar 2024',
+        like: 7600,
+        comment: 54
     },
     {
-        campaignName: 'Help Victim',
-        name: 'JKL Company',
-        purpose: 'Service',
-        description: 'description ......',
-        startDate: '1 Jan 2024',
-        endDate: '29 Apr 2024',
-        fundRaised: 700000,
-        target: 13000000
+        title: 'AI in 2024: What’s Next for Artificial Intelligence?',
+        content: 'Artificial intelligence continues to advance...',
+        topic: 'Technology',
+        author: 'Sundar Pichai',
+        posted_date: '20 Jan 2024',
+        like: 9300,
+        comment: 82
     },
     {
-        campaignName: 'AI Technology',
-        name: 'MNO Company',
-        purpose: 'Technology',
-        description: 'description ......',
-        startDate: '1 Jan 2024',
-        endDate: '16 Apr 2024',
-        fundRaised: 99141,
-        target: 1000000
+        title: 'Top 10 Streetwear Trends to Watch This Year',
+        content: 'Streetwear has evolved significantly...',
+        topic: 'Fashion',
+        author: 'Virgil Abloh',
+        posted_date: '5 Apr 2024',
+        like: 6800,
+        comment: 45
     },
     {
-        campaignName: 'AI for rakyat',
-        name: 'PQR Company',
-        purpose: 'Service',
-        description: 'description ......',
-        startDate: '1 Jan 2024',
-        endDate: '16 Apr 2024',
-        fundRaised: 99141,
-        target: 1000000
+        title: 'The Best Foods to Boost Your Immune System',
+        content: 'Incorporating these foods into your diet...',
+        topic: 'Food',
+        author: 'Gordon Ramsay',
+        posted_date: '10 May 2024',
+        like: 5200,
+        comment: 23
     },
     {
-        campaignName: 'AI for rakyat',
-        name: 'PQR Company',
-        purpose: 'Service',
-        description: 'description ......',
-        startDate: '1 Jan 2024',
-        endDate: '16 Apr 2024',
-        fundRaised: 99141,
-        target: 1000000
+        title: 'How Data Analytics is Changing the Game in Sports',
+        content: 'Data analytics is revolutionizing the sports...',
+        topic: 'Sports',
+        author: 'Bill James',
+        posted_date: '12 Feb 2024',
+        like: 7800,
+        comment: 67
+    },
+    {
+        title: 'Exploring the Latest Innovations in Electric Vehicles',
+        content: 'The electric vehicle market is expanding...',
+        topic: 'Transportation',
+        author: 'Mary Barra',
+        posted_date: '30 Jan 2024',
+        like: 6100,
+        comment: 39
+    },
+    {
+        title: '5G Technology: The Future of Connectivity',
+        content: '5G technology promises to revolutionize...',
+        topic: 'Technology',
+        author: 'Tim Cook',
+        posted_date: '2 Mar 2024',
+        like: 8500,
+        comment: 59
+    },
+    {
+        title: 'The Impact of Sustainable Fashion on the Industry',
+        content: 'Sustainable fashion is becoming a...',
+        topic: 'Fashion',
+        author: 'Stella McCartney',
+        posted_date: '18 Apr 2024',
+        like: 7100,
+        comment: 32
+    },
+    {
+        title: 'Healthy Eating on a Budget: Tips and Tricks',
+        content: 'Eating healthy doesn’t have to be expensive...',
+        topic: 'Food',
+        author: 'Alice Waters',
+        posted_date: '25 May 2024',
+        like: 4800,
+        comment: 20
+    },
+    {
+        title: 'Analyzing the Latest Trends in Sports Technology',
+        content: 'Sports technology is evolving rapidly...',
+        topic: 'Sports',
+        author: 'Mark Cuban',
+        posted_date: '28 Feb 2024',
+        like: 6700,
+        comment: 50
     }
+
 ]);
 
 const sortBy = ref(null);
@@ -92,6 +121,10 @@ const sortOrder = ref('asc');
 const currentPage = ref(1);
 const maxPageSize = ref(null);
 const listData = ref([]);
+
+function truncatedTitle(title) {
+    return title.length > 25 ? title.substring(0, 25) + '...' : title;
+}
 
 function sortData(criteria) {
     if (sortBy.value === criteria) {
@@ -167,95 +200,18 @@ onMounted(() => {
 /* Pending page */
 const temp2 = ref([
     {
-        campaignName: 'Software Tech ',
-        name: 'ABC Company',
-        purpose: 'Service',
-        description: 'description ......',
-        startDate: '21 Jan 2024',
-        endDate: '21 Apr 2024',
-        status: 'Pending',
-        target: 1000000,
-        pricePerShare: 10,
-        targetAmount: 1000,
-        deadline: '2024-02-01T00:00',
-        valuation: 'Valuation 1',
-        minInvestment: 100,
-        maxInvestment: 1000,
-        minSharesOffered: 10,
-        maxSharesOffered: 100,
-        offeringType: 'public',
-        assetType: 'equity',
-        sharesOffered: 'common'
+        title: 'Healthy Eating on a Budget: Tips and Tricks',
+        content: 'Eating healthy doesn’t have to be expensive...',
+        topic: 'Food',
+        author: 'Alice Waters',
+        posted_date: '25 May 2024'
     },
     {
-        campaignName: 'Business',
-        name: 'DEF Company',
-        purpose: 'E-Commerce',
-        description: 'description ......',
-        startDate: '22 Jan 2024',
-        endDate: '21 Jun 2024',
-        status: 'Pending',
-        target: 2000000
-    },
-    {
-        campaignName: 'Caring',
-        name: 'GHI Company',
-        purpose: 'Service',
-        description: 'description ......',
-        startDate: '1 Jan 2024',
-        endDate: '23 Apr 2024',
-        status: 'Pending',
-        target: 1000000
-    },
-    {
-        campaignName: 'Help Victim',
-        name: 'JKL Company',
-        purpose: 'Service',
-        description: 'description ......',
-        startDate: '1 Jan 2024',
-        endDate: '29 Apr 2024',
-        status: 'Pending',
-        target: 1000000,
-    },
-    {
-        campaignName: 'AI Technology',
-        name: 'MNO Company',
-        purpose: 'Technology',
-        description: 'description ......',
-        startDate: '1 Jan 2024',
-        endDate: '16 Apr 2024',
-        status: 'Pending',
-        target: 1000000
-    },
-    {
-        campaignName: 'AI for rakyat',
-        name: 'PQR Company',
-        purpose: 'Service',
-        description: 'description ......',
-        startDate: '1 Jan 2024',
-        endDate: '16 Apr 2024',
-        status: 'Pending',
-        target: 1000000
-    },
-    {
-        campaignName: 'AI for rakyat',
-        name: 'PQR Company',
-        purpose: 'Service',
-        description: 'description ......',
-        startDate: '1 Jan 2024',
-        endDate: '16 Apr 2024',
-        status: 'Pending',
-        target: 1000000
-    },
-    {
-        campaignName: 'AI for rakyat',
-        name: 'PQR Company',
-        purpose: 'Service',
-        description: 'description ......',
-        startDate: '1 Jan 2024',
-        endDate: '16 Apr 2024',
-        status: 'Pending',
-        target: 1000000
+        title: 'Analyzing the Latest Trends in Sports Technology',
+        content: 'Sports technology is evolving rapidly...',
+        topic: 'Sports',
+        author: 'Mark Cuban',
+        posted_date: '28 Feb 2024'
     }
 ]);
 
@@ -312,13 +268,17 @@ onMounted(() => {
 
 </script>
 <style>
-  .nav-btn:not(.active) {
-    color: gray !important; /* Change the color to gray */
-  }
-  .nav-btn.active {
-    color: #344767 !important; /* Change the color to gray */
+.nav-btn:not(.active) {
+    color: gray !important;
+    /* Change the color to gray */
+}
+
+.nav-btn.active {
+    color: #344767 !important;
+    /* Change the color to gray */
     font-weight: 600 !important;
 }
+
 </style>
 <template>
     <div class="card m-4">
@@ -326,23 +286,24 @@ onMounted(() => {
             <li class="nav-item" role="presentation">
                 <button class="nav-btn nav-link active" id="pills-approved-tab" data-bs-toggle="pill"
                     data-bs-target="#pills-approve" type="button" role="tab" aria-controls="pills-approve"
-                    aria-selected="true">Approved</button>
+                    aria-selected="true">Approved ({{ temp.length }})</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-btn nav-link" id="pills-pending-tab" data-bs-toggle="pill" data-bs-target="#pills-pending"
-                    type="button" role="tab" aria-controls="pills-pending" aria-selected="false">Pending</button>
+                <button class="nav-btn nav-link" id="pills-pending-tab" data-bs-toggle="pill"
+                    data-bs-target="#pills-pending" type="button" role="tab" aria-controls="pills-pending"
+                    aria-selected="false">Pending ({{ temp2.length }})</button>
             </li>
         </ul>
         <div class="tab-content" id="pills-tabContent">
             <div class="tab-pane fade show active" id="pills-approve" role="tabpanel"
                 aria-labelledby="pills-approved-tab" tabindex="0">
                 <div class="card-header py-0 d-flex justify-content-between align-items-center">
-                    <h5>Approved Campaign</h5>
+                    <h5>Approved Talks</h5>
 
                     <div class="d-flex">
                         <div class="form-outline">
                             <input type="search" id="form1" class="form-control rounded-start rounded-0"
-                                placeholder="name" />
+                                placeholder="Search" />
                         </div>
                         <button id="search-button" type="button" class="btn btn-success rounded-0 rounded-end">
                             <i class="fas fa-search"></i>
@@ -355,96 +316,96 @@ onMounted(() => {
                             <thead>
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        <div class="d-flex align-items-center" @click="sortData('campaignName')"
+                                        <div class="d-flex align-items-center" @click="sortData('title')"
                                             style="cursor: pointer">
-                                            Campaign
+                                            Talks Title
                                             <div class="d-flex flex-column ms-3">
                                                 <i class="fas fa-caret-up text-sm lh-1"
-                                                    :class="{ 'text-dark': sortBy === 'campaignName' && sortOrder === 'asc' }"></i>
+                                                    :class="{ 'text-dark': sortBy === 'title' && sortOrder === 'asc' }"></i>
                                                 <i class="fas fa-caret-down text-sm lh-1"
-                                                    :class="{ 'text-dark': sortBy === 'campaignName' && sortOrder === 'desc' }"></i>
+                                                    :class="{ 'text-dark': sortBy === 'title' && sortOrder === 'desc' }"></i>
                                             </div>
                                         </div>
                                     </th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        <div class="d-flex align-items-center" @click="sortData('purpose')"
+                                    <!-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        <div class="d-flex align-items-center" @click="sortData('content')"
                                             style="cursor: pointer">
-                                            Purpose
+                                            Content
                                             <div class="d-flex flex-column ms-3">
                                                 <i class="fas fa-caret-up text-sm lh-1"
-                                                    :class="{ 'text-dark': sortBy === 'purpose' && sortOrder === 'asc' }"></i>
+                                                    :class="{ 'text-dark': sortBy === 'content' && sortOrder === 'asc' }"></i>
                                                 <i class="fas fa-caret-down text-sm lh-1"
-                                                    :class="{ 'text-dark': sortBy === 'purpose' && sortOrder === 'desc' }"></i>
+                                                    :class="{ 'text-dark': sortBy === 'content' && sortOrder === 'desc' }"></i>
+                                            </div>
+                                        </div>
+                                    </th> -->
+                                    <th
+                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                        <div class="d-flex align-items-center" @click="sortData('topic')"
+                                            style="cursor: pointer">
+                                            Topic
+                                            <div class="d-flex flex-column ms-3">
+                                                <i class="fas fa-caret-up text-sm lh-1"
+                                                    :class="{ 'text-dark': sortBy === 'topic' && sortOrder === 'asc' }"></i>
+                                                <i class="fas fa-caret-down text-sm lh-1"
+                                                    :class="{ 'text-dark': sortBy === 'topic' && sortOrder === 'desc' }"></i>
                                             </div>
                                         </div>
                                     </th>
                                     <th
                                         class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        <div class="d-flex align-items-center" @click="sortData('startDate')"
+                                        <div class="d-flex align-items-center" @click="sortData('author')"
                                             style="cursor: pointer">
-                                            Start Date
+                                            Author
                                             <div class="d-flex flex-column ms-3">
                                                 <i class="fas fa-caret-up text-sm lh-1"
-                                                    :class="{ 'text-dark': sortBy === 'startDate' && sortOrder === 'asc' }"></i>
+                                                    :class="{ 'text-dark': sortBy === 'author' && sortOrder === 'asc' }"></i>
                                                 <i class="fas fa-caret-down text-sm lh-1"
-                                                    :class="{ 'text-dark': sortBy === 'startDate' && sortOrder === 'desc' }"></i>
+                                                    :class="{ 'text-dark': sortBy === 'author' && sortOrder === 'desc' }"></i>
                                             </div>
                                         </div>
                                     </th>
                                     <th
                                         class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        <div class="d-flex align-items-center" @click="sortData('endDate')"
+                                        <div class="d-flex align-items-center" @click="sortData('posted_date')"
                                             style="cursor: pointer">
-                                            End Date
+                                            Posted Date
                                             <div class="d-flex flex-column ms-3">
                                                 <i class="fas fa-caret-up text-sm lh-1"
-                                                    :class="{ 'text-dark': sortBy === 'endDate' && sortOrder === 'asc' }"></i>
+                                                    :class="{ 'text-dark': sortBy === 'posted_date' && sortOrder === 'asc' }"></i>
                                                 <i class="fas fa-caret-down text-sm lh-1"
-                                                    :class="{ 'text-dark': sortBy === 'endDate' && sortOrder === 'desc' }"></i>
+                                                    :class="{ 'text-dark': sortBy === 'posted_date' && sortOrder === 'desc' }"></i>
                                             </div>
                                         </div>
                                     </th>
                                     <th
                                         class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        <div class="d-flex align-items-center" @click="sortData('fundRaised')"
+                                        <div class="d-flex align-items-center" @click="sortData('like')"
                                             style="cursor: pointer">
-                                            Fund Raised
+                                            Like(s)
                                             <div class="d-flex flex-column ms-3">
                                                 <i class="fas fa-caret-up text-sm lh-1"
-                                                    :class="{ 'text-dark': sortBy === 'fundRaised' && sortOrder === 'asc' }"></i>
+                                                    :class="{ 'text-dark': sortBy === 'like' && sortOrder === 'asc' }"></i>
                                                 <i class="fas fa-caret-down text-sm lh-1"
-                                                    :class="{ 'text-dark': sortBy === 'fundRaised' && sortOrder === 'desc' }"></i>
+                                                    :class="{ 'text-dark': sortBy === 'like' && sortOrder === 'desc' }"></i>
                                             </div>
                                         </div>
                                     </th>
                                     <th
                                         class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        <div class="d-flex align-items-center" @click="sortData('target')"
+                                        <div class="d-flex align-items-center" @click="sortData('comment')"
                                             style="cursor: pointer">
-                                            Target
+                                            Comment(s)
                                             <div class="d-flex flex-column ms-3">
                                                 <i class="fas fa-caret-up text-sm lh-1"
-                                                    :class="{ 'text-dark': sortBy === 'target' && sortOrder === 'asc' }"></i>
+                                                    :class="{ 'text-dark': sortBy === 'comment' && sortOrder === 'asc' }"></i>
                                                 <i class="fas fa-caret-down text-sm lh-1"
-                                                    :class="{ 'text-dark': sortBy === 'target' && sortOrder === 'desc' }"></i>
+                                                    :class="{ 'text-dark': sortBy === 'comment' && sortOrder === 'desc' }"></i>
                                             </div>
                                         </div>
                                     </th>
                                     <th
-                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        <div class="d-flex align-items-center" @click="sortData('status')"
-                                            style="cursor: pointer">
-                                            Status
-                                            <div class="d-flex flex-column ms-3">
-                                                <i class="fas fa-caret-up text-sm lh-1"
-                                                    :class="{ 'text-dark': sortBy === 'status' && sortOrder === 'asc' }"></i>
-                                                <i class="fas fa-caret-down text-sm lh-1"
-                                                    :class="{ 'text-dark': sortBy === 'status' && sortOrder === 'desc' }"></i>
-                                            </div>
-                                        </div>
-                                    </th>
-                                    <th
-                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2" style="text-align: center;"> 
                                         Action
                                     </th>
                                 </tr>
@@ -452,25 +413,25 @@ onMounted(() => {
                             <tbody>
                                 <tr v-for="(item, index) in listData" :key="index">
                                     <td>
-                                        <h6 class="item ps-3">{{ item.campaignName }}</h6>
+                                        <h6 class="item ps-3">{{ truncatedTitle(item.title) }}</h6>
+                                    </td>
+                                    <!-- <td>
+                                        <h6 class="item ps-3">{{ item.content }}</h6>
+                                    </td> -->
+                                    <td>
+                                        <h6 class="item">{{ item.topic }}</h6>
                                     </td>
                                     <td>
-                                        <h6 class="item ps-3">{{ item.purpose }}</h6>
+                                        <h6 class="item">{{ item.author }}</h6>
                                     </td>
                                     <td>
-                                        <h6 class="item">{{ item.startDate }}</h6>
+                                        <h6 class="item">{{ item.posted_date }}</h6>
                                     </td>
                                     <td>
-                                        <h6 class="item">{{ item.endDate }}</h6>
+                                        <h6 class="item">{{ item.like }}</h6>
                                     </td>
                                     <td>
-                                        <h6 class="item">{{ item.fundRaised }}</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="item">{{ item.target }}</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="item">Ongoing</h6>
+                                        <h6 class="item" >{{ item.comment }}</h6>
                                     </td>
                                     <td>
                                         <router-link class="btn mb-0" to="/campaign-detail"><i
@@ -502,7 +463,7 @@ onMounted(() => {
                                                                         Name</label>
                                                                     <input type="text" class="form-control"
                                                                         placeholder="Enter investment name"
-                                                                        :value="item.campaignName" />
+                                                                        :value="item.title" />
                                                                 </div>
                                                                 <div class="col-md-6">
                                                                     <label for="investmentPoster"
@@ -525,7 +486,8 @@ onMounted(() => {
                                                                         class="form-label">Campaign Issuer
                                                                         Name</label>
                                                                     <input type="text" class="form-control"
-                                                                        placeholder="Enter issuer name" :value="item.name" />
+                                                                        placeholder="Enter issuer name"
+                                                                        :value="item.name" />
                                                                 </div>
                                                             </div>
 
@@ -538,14 +500,16 @@ onMounted(() => {
                                                                         class="form-label">Price Per Share
                                                                         (ETH)</label>
                                                                     <input type="number" step="0.01"
-                                                                        class="form-control" placeholder="0.00" :value="item.pricePerShare" />
+                                                                        class="form-control" placeholder="0.00"
+                                                                        :value="item.pricePerShare" />
                                                                 </div>
                                                                 <div class="col-md-6">
                                                                     <label for="investmentTargetAmount"
                                                                         class="form-label">Target Amount
                                                                         (ETH)</label>
                                                                     <input type="number" step="0.01"
-                                                                        class="form-control" placeholder="0.00" :value="item.target" />
+                                                                        class="form-control" placeholder="0.00"
+                                                                        :value="item.target" />
                                                                 </div>
                                                                 <div class="col-md-6">
                                                                     <label for="investmentDeadline"
@@ -560,7 +524,8 @@ onMounted(() => {
                                                                     <label for="investmentValuation"
                                                                         class="form-label">Valuation</label>
                                                                     <input type="text" class="form-control"
-                                                                        placeholder="Enter valuation" :value="item.valuation" />
+                                                                        placeholder="Enter valuation"
+                                                                        :value="item.valuation" />
                                                                 </div>
                                                             </div>
 
@@ -574,7 +539,8 @@ onMounted(() => {
                                                                         Investment
                                                                         (ETH)</label>
                                                                     <input type="number" step="0.01"
-                                                                        class="form-control" placeholder="0.00" :value="item.minInvestment" />
+                                                                        class="form-control" placeholder="0.00"
+                                                                        :value="item.minInvestment" />
                                                                 </div>
                                                                 <div class="col-md-6">
                                                                     <label for="maxInvestment"
@@ -582,7 +548,8 @@ onMounted(() => {
                                                                         Investment
                                                                         (ETH)</label>
                                                                     <input type="number" step="0.01"
-                                                                        class="form-control" placeholder="0.00" :value="item.maxInvestment" />
+                                                                        class="form-control" placeholder="0.00"
+                                                                        :value="item.maxInvestment" />
                                                                 </div>
                                                                 <div class="col-md-6">
                                                                     <label for="minSharesOffered"
@@ -590,7 +557,8 @@ onMounted(() => {
                                                                         Number of Shares
                                                                         Offered</label>
                                                                     <input type="number" class="form-control"
-                                                                        placeholder="Enter minimum shares" :value="item.minSharesOffered" />
+                                                                        placeholder="Enter minimum shares"
+                                                                        :value="item.minSharesOffered" />
                                                                 </div>
                                                                 <div class="col-md-6">
                                                                     <label for="maxSharesOffered"
@@ -598,7 +566,8 @@ onMounted(() => {
                                                                         Number of Shares
                                                                         Offered</label>
                                                                     <input type="number" class="form-control"
-                                                                        placeholder="Enter maximum shares" :value="item.maxSharesOffered" />
+                                                                        placeholder="Enter maximum shares"
+                                                                        :value="item.maxSharesOffered" />
                                                                 </div>
                                                                 <div class="col-md-6">
                                                                     <label for="offeringType"
@@ -716,12 +685,12 @@ onMounted(() => {
             <div class="tab-pane fade" id="pills-pending" role="tabpanel" aria-labelledby="pills-pending-tab"
                 tabindex="0">
                 <div class="card-header py-0 d-flex justify-content-between align-items-center">
-                    <h5>Pending Validate Campaign</h5>
+                    <h5>Pending Talks</h5>
 
                     <div class="d-flex">
                         <div class="form-outline">
                             <input type="search" id="form1" class="form-control rounded-start rounded-0"
-                                placeholder="name" />
+                                placeholder="Search" />
                         </div>
                         <button id="search-button" type="button" class="btn btn-success rounded-0 rounded-end">
                             <i class="fas fa-search"></i>
@@ -734,83 +703,60 @@ onMounted(() => {
                             <thead>
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        <div class="d-flex align-items-center" @click="sortData2('campaignName')"
+                                        <div class="d-flex align-items-center" @click="sortData2('title')"
                                             style="cursor: pointer">
-                                            Campaign
+                                            Talks Title
                                             <div class="d-flex flex-column ms-3">
                                                 <i class="fas fa-caret-up text-sm lh-1"
-                                                    :class="{ 'text-dark': sortBy2 === 'campaignName' && sortOrder2 === 'asc' }"></i>
+                                                    :class="{ 'text-dark': sortBy2 === 'title' && sortOrder2 === 'asc' }"></i>
                                                 <i class="fas fa-caret-down text-sm lh-1"
-                                                    :class="{ 'text-dark': sortBy2 === 'campaignName' && sortOrder2 === 'desc' }"></i>
+                                                    :class="{ 'text-dark': sortBy2 === 'title' && sortOrder2 === 'desc' }"></i>
                                             </div>
                                         </div>
                                     </th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        <div class="d-flex align-items-center" @click="sortData2('purpose')"
+
+                                    <th
+                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                        <div class="d-flex align-items-center" @click="sortData2('topic')"
                                             style="cursor: pointer">
-                                            Purpose
+                                            Topic
                                             <div class="d-flex flex-column ms-3">
                                                 <i class="fas fa-caret-up text-sm lh-1"
-                                                    :class="{ 'text-dark': sortBy2 === 'purpose' && sortOrder2 === 'asc' }"></i>
+                                                    :class="{ 'text-dark': sortBy2 === 'topic' && sortOrder2 === 'asc' }"></i>
                                                 <i class="fas fa-caret-down text-sm lh-1"
-                                                    :class="{ 'text-dark': sortBy2 === 'purpose' && sortOrder2 === 'desc' }"></i>
+                                                    :class="{ 'text-dark': sortBy2 === 'topic' && sortOrder2 === 'desc' }"></i>
                                             </div>
                                         </div>
                                     </th>
                                     <th
                                         class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        <div class="d-flex align-items-center" @click="sortData2('startDate')"
+                                        <div class="d-flex align-items-center" @click="sortData2('author')"
                                             style="cursor: pointer">
-                                            Start Date
+                                            Author
                                             <div class="d-flex flex-column ms-3">
                                                 <i class="fas fa-caret-up text-sm lh-1"
-                                                    :class="{ 'text-dark': sortBy2 === 'startDate' && sortOrder2 === 'asc' }"></i>
+                                                    :class="{ 'text-dark': sortBy2 === 'author' && sortOrder2 === 'asc' }"></i>
                                                 <i class="fas fa-caret-down text-sm lh-1"
-                                                    :class="{ 'text-dark': sortBy2 === 'startDate' && sortOrder2 === 'desc' }"></i>
+                                                    :class="{ 'text-dark': sortBy2 === 'author' && sortOrder2 === 'desc' }"></i>
+                                            </div>
+                                        </div>
+                                    </th>
+
+                                    <th
+                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                        <div class="d-flex align-items-center" @click="sortData2('posted_date')"
+                                            style="cursor: pointer">
+                                            Posted Date
+                                            <div class="d-flex flex-column ms-3">
+                                                <i class="fas fa-caret-up text-sm lh-1"
+                                                    :class="{ 'text-dark': sortBy2 === 'posted_date' && sortOrder2 === 'asc' }"></i>
+                                                <i class="fas fa-caret-down text-sm lh-1"
+                                                    :class="{ 'text-dark': sortBy2 === 'posted_date' && sortOrder2 === 'desc' }"></i>
                                             </div>
                                         </div>
                                     </th>
                                     <th
-                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        <div class="d-flex align-items-center" @click="sortData2('endDate')"
-                                            style="cursor: pointer">
-                                            End Date
-                                            <div class="d-flex flex-column ms-3">
-                                                <i class="fas fa-caret-up text-sm lh-1"
-                                                    :class="{ 'text-dark': sortBy2 === 'endDate' && sortOrder2 === 'asc' }"></i>
-                                                <i class="fas fa-caret-down text-sm lh-1"
-                                                    :class="{ 'text-dark': sortBy2 === 'endDate' && sortOrder2 === 'desc' }"></i>
-                                            </div>
-                                        </div>
-                                    </th>
-                                    <th
-                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        <div class="d-flex align-items-center" @click="sortData2('target')"
-                                            style="cursor: pointer">
-                                            Target
-                                            <div class="d-flex flex-column ms-3">
-                                                <i class="fas fa-caret-up text-sm lh-1"
-                                                    :class="{ 'text-dark': sortBy2 === 'target' && sortOrder2 === 'asc' }"></i>
-                                                <i class="fas fa-caret-down text-sm lh-1"
-                                                    :class="{ 'text-dark': sortBy2 === 'target' && sortOrder2 === 'desc' }"></i>
-                                            </div>
-                                        </div>
-                                    </th>
-                                    <th
-                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        <div class="d-flex align-items-center" @click="sortData2('status')"
-                                            style="cursor: pointer">
-                                            Status
-                                            <div class="d-flex flex-column ms-3">
-                                                <i class="fas fa-caret-up text-sm lh-1"
-                                                    :class="{ 'text-dark': sortBy2 === 'status' && sortOrder2 === 'asc' }"></i>
-                                                <i class="fas fa-caret-down text-sm lh-1"
-                                                    :class="{ 'text-dark': sortBy2 === 'status' && sortOrder2 === 'desc' }"></i>
-                                            </div>
-                                        </div>
-                                    </th>
-                                    <th
-                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2" style="text-align: center;">
                                         Action
                                     </th>
                                 </tr>
@@ -818,22 +764,17 @@ onMounted(() => {
                             <tbody>
                                 <tr v-for="(item, index) in listData2" :key="index">
                                     <td>
-                                        <h6 class="item ps-3">{{ item.campaignName }}</h6>
+                                        <h6 class="item ps-3">{{ item.title }}</h6>
+                                    </td>
+
+                                    <td>
+                                        <h6 class="item">{{ item.topic }}</h6>
                                     </td>
                                     <td>
-                                        <h6 class="item ps-3">{{ item.purpose }}</h6>
+                                        <h6 class="item">{{ item.author }}</h6>
                                     </td>
                                     <td>
-                                        <h6 class="item">{{ item.startDate }}</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="item">{{ item.endDate }}</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="item">{{ item.target }}</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="item">{{ item.status }}</h6>
+                                        <h6 class="item">{{ item.posted_date }}</h6>
                                     </td>
                                     <td>
                                         <button type="button" class="btn mb-0 ms-3" data-bs-toggle="modal"
@@ -879,7 +820,7 @@ onMounted(() => {
                                                                             Name</label>
                                                                         <input type="text" class="form-control"
                                                                             placeholder="Enter investment name"
-                                                                            :value="item.campaignName" disabled />
+                                                                            :value="item.title" disabled />
                                                                     </div>
                                                                     <div class="col">
                                                                         <label for="investmentPurpose"
@@ -910,16 +851,16 @@ onMounted(() => {
                                                                         class="form-label">Price Per Share
                                                                         (ETH)</label>
                                                                     <input type="number" step="0.01"
-                                                                        class="form-control" placeholder="0.00" :value="item.pricePerShare"
-                                                                        disabled />
+                                                                        class="form-control" placeholder="0.00"
+                                                                        :value="item.pricePerShare" disabled />
                                                                 </div>
                                                                 <div class="col-md-6">
                                                                     <label for="investmentTargetAmount"
                                                                         class="form-label">Target Amount
                                                                         (ETH)</label>
                                                                     <input type="number" step="0.01"
-                                                                        class="form-control" placeholder="0.00" :value="item.target"
-                                                                        disabled />
+                                                                        class="form-control" placeholder="0.00"
+                                                                        :value="item.target" disabled />
                                                                 </div>
                                                                 <div class="col-md-6">
                                                                     <label for="investmentDeadline"
@@ -1065,7 +1006,7 @@ onMounted(() => {
                                                             aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        Confirm to approve the creation of "{{ item.campaignName }}" ?
+                                                        Confirm to approve the creation of "{{ item.title }}" ?
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary"
@@ -1088,7 +1029,7 @@ onMounted(() => {
                                                             aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        Confirm to reject the creation of "{{ item.campaignName }}" ?
+                                                        Confirm to reject the creation of "{{ item.title }}" ?
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary"

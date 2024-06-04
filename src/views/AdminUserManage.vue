@@ -4,84 +4,25 @@ import { useRouter } from 'vue-router';
 import { useStore } from "vuex";
 const temp = ref([
     {
-        "username": "john_doe",
-        "firstName": "John",
-        "lastName": "Doe",
-        "phone": "+1234567890",
-        "email": "john.doe@example.com",
-        "walletAddress": "0xAbCdEf1234567890"
+        "id":"1",
+        "password":"abcde",
+        "username": "Qian888",
+        "email": "qianhui@example.com",
+        "total_talk": "15"
     },
     {
-        "username": "jane_smith",
-        "firstName": "Jane",
-        "lastName": "Smith",
-        "phone": "+1987654321",
-        "email": "jane.smith@example.com",
-        "walletAddress": "0xFeDcBa0987654321"
+        "id":"2",
+        "password":"abcde",
+        "username": "Jess666",
+        "email": "jess@gmail.com",
+        "total_talk": "20"
     },
     {
-        "username": "alice_johnson",
-        "firstName": "Alice",
-        "lastName": "Johnson",
-        "phone": "+1122334455",
-        "email": "alice.johnson@example.com",
-        "walletAddress": "0x1234567890AbCdEf"
-    },
-    {
-        "username": "mark_turner",
-        "firstName": "Mark",
-        "lastName": "Turner",
-        "phone": "+1555666777",
-        "email": "mark.turner@example.com",
-        "walletAddress": "0x4567890AbCdEf123"
-    },
-    {
-        "username": "sarah_brown",
-        "firstName": "Sarah",
-        "lastName": "Brown",
-        "phone": "+1777888999",
-        "email": "sarah.brown@example.com",
-        "walletAddress": "0x67890AbCdEf12345"
-    },
-    {
-        "username": "chris_jackson",
-        "firstName": "Chris",
-        "lastName": "Jackson",
-        "phone": "+1888999000",
-        "email": "chris.jackson@example.com",
-        "walletAddress": "0xAbCdEf1234567890"
-    },
-    {
-        "username": "emily_taylor",
-        "firstName": "Emily",
-        "lastName": "Taylor",
-        "phone": "+1444555666",
-        "email": "emily.taylor@example.com",
-        "walletAddress": "0xFeDcBa0987654321"
-    },
-    {
-        "username": "david_clark",
-        "firstName": "David",
-        "lastName": "Clark",
-        "phone": "+1222333444",
-        "email": "david.clark@example.com",
-        "walletAddress": "0x1234567890AbCdEf"
-    },
-    {
-        "username": "jennifer_white",
-        "firstName": "Jennifer",
-        "lastName": "White",
-        "phone": "+1333444555",
-        "email": "jennifer.white@example.com",
-        "walletAddress": "0xAbCdEf1234567890"
-    },
-    {
-        "username": "ryan_miller",
-        "firstName": "Ryan",
-        "lastName": "Miller",
-        "phone": "+1666777888",
-        "email": "ryan.miller@example.com",
-        "walletAddress": "0xFeDcBa0987654321"
+        "id":"3",
+        "password":"abcde",
+        "username": "Loy Chai",
+        "email": "loyzc@gmail.com",
+        "total_talk": "333"
     }
 ]
 );
@@ -220,10 +161,13 @@ onBeforeUnmount(() => {
                 <table class="table align-items-center justify-content-center mb-0">
                     <thead>
                         <tr>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">
+                                ID
+                            </th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                 <div class="d-flex align-items-center" @click="sortData('username')"
                                     style="cursor: pointer">
-                                    User Name
+                                    UserName
                                     <div class="d-flex flex-column ms-3">
                                         <i class="fas fa-caret-up text-sm lh-1"
                                             :class="{ 'text-dark': sortBy === 'username' && sortOrder === 'asc' }"></i>
@@ -232,7 +176,7 @@ onBeforeUnmount(() => {
                                     </div>
                                 </div>
                             </th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                            <!-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                 First Name
                             </th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
@@ -240,12 +184,12 @@ onBeforeUnmount(() => {
                             </th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                 Phone Number
-                            </th>
+                            </th> -->
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                 Email
                             </th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                Wallet Address
+                                Total talks
                             </th>
                             <!-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                 Fund Raised
@@ -264,9 +208,12 @@ onBeforeUnmount(() => {
                     <tbody>
                         <tr v-for="(item, index) in listData" :key="index">
                             <td>
-                                <h6 class="item ps-3">{{ item.username }}</h6>
+                                <h6 class="item ps-3">{{ item.id }}</h6>
                             </td>
                             <td>
+                                <h6 class="item ps-3">{{ item.username }}</h6>
+                            </td>
+                            <!-- <td>
                                 <h6 class="item">{{ item.firstName }}</h6>
                             </td>
                             <td>
@@ -274,12 +221,12 @@ onBeforeUnmount(() => {
                             </td>
                             <td>
                                 <h6 class="item">{{ item.phone }}</h6>
-                            </td>
+                            </td> -->
                             <td>
                                 <h6 class="item">{{ item.email }}</h6>
                             </td>
                             <td>
-                                <h6 class="item">{{ item.walletAddress }}</h6>
+                                <h6 class="item">{{ item.total_talk }}</h6>
                             </td>
                             <td>
                                 <button type="button" class="btn mb-0" data-bs-toggle="modal"

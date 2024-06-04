@@ -103,8 +103,11 @@ function getSelectedRole() {
                 </div>
               </div>
             </div>
+            <router-link class="nav-link" to="/dashboard-default">
+
             <div
               class="top-0 my-auto text-center col-6 d-lg-flex d-none h-100 pe-0 position-absolute end-0 justify-content-center flex-column">
+
               <div
                 class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden"
                 style="
@@ -120,6 +123,8 @@ function getSelectedRole() {
                 </p>
               </div>
             </div>
+            </router-link>
+            
           </div>
         </div>
       </div>

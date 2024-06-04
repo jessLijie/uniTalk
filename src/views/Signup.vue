@@ -39,6 +39,8 @@ onBeforeUnmount(() => {
       <div class="page-header min-vh-100">
         <div class="container">
           <div class="row">
+            <router-link class="nav-link" to="/dashboard-default">
+ 
             <div
               class="top-0 my-auto text-center col-6 d-lg-flex d-none h-100 pe-0 position-absolute start-0 justify-content-center flex-column">
               <div
@@ -56,6 +58,7 @@ onBeforeUnmount(() => {
                 </p>
               </div>
             </div>
+            </router-link>
             <div
               class="mx-0 col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-8 mt-7 position-absolute end-0 top-6 px-5">
               <div class="card card-plain">
@@ -130,11 +133,13 @@ onBeforeUnmount(() => {
                     <div class="mb-3">
                       <argon-input id="password" type="password" placeholder="Password" name="password" size="lg" />
                     </div>
+
                     <div class="mb-3" hidden>
                       <select class="form-control" id="sharesOffered">
                         <option value="Issuer" selected>Issuer</option>
                       </select>
                     </div>
+
                     <argon-checkbox checked>
                       <label class="form-check-label" for="flexCheckDefault">
                         I agree the

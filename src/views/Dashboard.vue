@@ -46,13 +46,13 @@ const transactionList = [{
   receiver: "Jess666",
   timestamp: "57",
   amount: 10000
-},{
+}, {
   hash: "Did you guys know that we can actually fly to t...",
   sender: "0x2256dfq424efrt382341",
   receiver: "Anonymous",
   timestamp: "57",
   amount: 10000
-},{
+}, {
   hash: "I hate it when my friends don't reply my messages",
   sender: "0x2256dfq424efrt382341",
   receiver: "Loy Chai",
@@ -61,7 +61,6 @@ const transactionList = [{
 },];// Log VueSession object
 </script>
 <template>
-
   <!-- <div class="container top-0 position-sticky z-index-sticky">
     <div class="row">
       <div class="col-12">
@@ -78,14 +77,19 @@ const transactionList = [{
         background-position: top;
       ">
         <div class="pt-8">
-          
+
           <h1 class="text-black text-center text-white" style="padding-top: 5rem;">
             UniTalk
           </h1>
           <p class="text-black text-center text-white">
-            <i>            Your Voice, Your Space; Express Freely, Connect Deeply
-</i>
+            <i> Your Voice, Your Space; Express Freely, Connect Deeply
+            </i>
           </p>
+          <center>
+            <router-link class="nav-link" to="/signin">
+              <button type="button" class="btn btn-outline-primary" style="background-color: white;">Get
+                Started</button></router-link>
+          </center>
         </div>
       </div>
       <div class="container">
@@ -96,32 +100,32 @@ const transactionList = [{
                 <mini-statistics-card title="Total Talks" value="500" description="<span
                 class='text-sm font-weight-bolder text-success'
                 >+34</span> since yesterday" :icon="{
-          component: 'ni ni-paper-diploma',
-          background: 'bg-gradient-primary',
-          shape: 'rounded-circle',
-        }" />
+                  component: 'ni ni-paper-diploma',
+                  background: 'bg-gradient-primary',
+                  shape: 'rounded-circle',
+                }" />
               </div>
               <div class="col-lg-4 col-md-6 col-12">
                 <mini-statistics-card title="Topics to talk" value="5++" description="
                     More to discover!" :icon="{
-          component: 'ni ni-bullet-list-67',
-          background: 'bg-gradient-danger',
-          shape: 'rounded-circle',
-        }" />
+                      component: 'ni ni-bullet-list-67',
+                      background: 'bg-gradient-danger',
+                      shape: 'rounded-circle',
+                    }" />
               </div>
               <div class="col-lg-4 col-md-6 col-12">
                 <mini-statistics-card title="UniTalkers" value="+100" description="<span
                 class='text-sm font-weight-bolder text-success'
                 >+2%</span>" :icon="{
-          component: 'ni  ni-world-2',
-          background: 'bg-gradient-info',
-          shape: 'rounded-circle',
-        }" />
+                  component: 'ni  ni-world-2',
+                  background: 'bg-gradient-info',
+                  shape: 'rounded-circle',
+                }" />
               </div>
-             
+
 
             </div>
-            
+
             <div class="row mt-5">
               <div class="col-lg-7 mb-lg-0 mb-4">
                 <div class="card px-3">
@@ -168,37 +172,37 @@ const transactionList = [{
               </div>
               <div class="col-lg-5">
                 <categories-list :categories="[
-          {
-            icon: {
-              component: 'fa fa-cutlery',
-              background: 'dark',
-            },
-            label: 'Food',
-            description: 'Total <strong>888 </strong>talks',
-          },
-          {
-            icon: {
-              component: 'ni ni-world-2',
-              background: 'dark',
-            },
-            label: 'Technology',
-            description: 'Total <strong>254 </strong>talks',
-          },
-          {
-            icon: { component: 'fa fa-heart', background: 'dark' },
-            label: 'Fashion',
-            description: 'Total <strong>100 </strong>talks',
-          },
-          {
-            icon: { component: 'fa fa-futbol-o', background: 'dark' },
-            label: 'Sport',
-            description: 'Total <strong>50 </strong>talks',
-          },{
-            icon: { component: 'fa fa-bus', background: 'dark' },
-            label: 'Transport',
-            description: 'Total <strong>5 </strong>talks',
-          },
-        ]" />
+                  {
+                    icon: {
+                      component: 'fa fa-cutlery',
+                      background: 'dark',
+                    },
+                    label: 'Food',
+                    description: 'Total <strong>888 </strong>talks',
+                  },
+                  {
+                    icon: {
+                      component: 'ni ni-world-2',
+                      background: 'dark',
+                    },
+                    label: 'Technology',
+                    description: 'Total <strong>254 </strong>talks',
+                  },
+                  {
+                    icon: { component: 'fa fa-heart', background: 'dark' },
+                    label: 'Fashion',
+                    description: 'Total <strong>100 </strong>talks',
+                  },
+                  {
+                    icon: { component: 'fa fa-futbol-o', background: 'dark' },
+                    label: 'Sports',
+                    description: 'Total <strong>50 </strong>talks',
+                  }, {
+                    icon: { component: 'fa fa-bus', background: 'dark' },
+                    label: 'Transport',
+                    description: 'Total <strong>5 </strong>talks',
+                  },
+                ]" />
               </div>
             </div>
           </div>

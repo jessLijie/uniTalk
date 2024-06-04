@@ -4,20 +4,122 @@ import { ref } from 'vue';
 
 const temp = ref([
     {
-        campaignName: 'Help Victim',
-        name: 'JKL Company',
-        purpose: 'Service',
-        description: 'description ......',
-        startDate: '1 Jan 2024',
-        endDate: '29 Apr 2024',
-        fundRaised: 74199,
-        target: 1000000
+        title: 'New trend is style: Wearing the black out of the blue ',
+        content: 'Lately, the reporters from T...',
+        topic: 'Fashion',
+        author: 'Bella Hadid',
+        posted_date: '22 Jan 2024',
+        like: 5800,
+        comment: 15
     },
+    {
+        title: 'The Rise of Plant-Based Diets: What You Need to Know',
+        content: 'With the growing awareness of health...',
+        topic: 'Food',
+        author: 'Jamie Oliver',
+        posted_date: '15 Feb 2024',
+        like: 4200,
+        comment: 37
+    },
+    {
+        title: 'Revolutionizing Urban Mobility: The Future of E-Scooters',
+        content: 'E-scooters have become increasingly popular...',
+        topic: 'Transportation',
+        author: 'Elon Musk',
+        posted_date: '8 Mar 2024',
+        like: 7600,
+        comment: 54
+    },
+    {
+        title: 'AI in 2024: What’s Next for Artificial Intelligence?',
+        content: 'Artificial intelligence continues to advance...',
+        topic: 'Technology',
+        author: 'Sundar Pichai',
+        posted_date: '20 Jan 2024',
+        like: 9300,
+        comment: 82
+    },
+    {
+        title: 'Top 10 Streetwear Trends to Watch This Year',
+        content: 'Streetwear has evolved significantly...',
+        topic: 'Fashion',
+        author: 'Virgil Abloh',
+        posted_date: '5 Apr 2024',
+        like: 6800,
+        comment: 45
+    },
+    {
+        title: 'The Best Foods to Boost Your Immune System',
+        content: 'Incorporating these foods into your diet...',
+        topic: 'Food',
+        author: 'Gordon Ramsay',
+        posted_date: '10 May 2024',
+        like: 5200,
+        comment: 23
+    },
+    {
+        title: 'How Data Analytics is Changing the Game in Sports',
+        content: 'Data analytics is revolutionizing the sports...',
+        topic: 'Sports',
+        author: 'Bill James',
+        posted_date: '12 Feb 2024',
+        like: 7800,
+        comment: 67
+    },
+    {
+        title: 'Exploring the Latest Innovations in Electric Vehicles',
+        content: 'The electric vehicle market is expanding...',
+        topic: 'Transportation',
+        author: 'Mary Barra',
+        posted_date: '30 Jan 2024',
+        like: 6100,
+        comment: 39
+    },
+    {
+        title: '5G Technology: The Future of Connectivity',
+        content: '5G technology promises to revolutionize...',
+        topic: 'Technology',
+        author: 'Tim Cook',
+        posted_date: '2 Mar 2024',
+        like: 8500,
+        comment: 59
+    },
+    {
+        title: 'The Impact of Sustainable Fashion on the Industry',
+        content: 'Sustainable fashion is becoming a...',
+        topic: 'Fashion',
+        author: 'Stella McCartney',
+        posted_date: '18 Apr 2024',
+        like: 7100,
+        comment: 32
+    },
+    {
+        title: 'Healthy Eating on a Budget: Tips and Tricks',
+        content: 'Eating healthy doesn’t have to be expensive...',
+        topic: 'Food',
+        author: 'Alice Waters',
+        posted_date: '25 May 2024',
+        like: 4800,
+        comment: 20
+    },
+    {
+        title: 'Analyzing the Latest Trends in Sports Technology',
+        content: 'Sports technology is evolving rapidly...',
+        topic: 'Sports',
+        author: 'Mark Cuban',
+        posted_date: '28 Feb 2024',
+        like: 6700,
+        comment: 50
+    }
 
 ]);
 
 const sortBy = ref(null);
 const sortOrder = ref('asc');
+
+function truncatedTitle(title) {
+    return title.length > 25 ? title.substring(0, 25) + '...' : title;
+}
 
 function sortData(criteria) {
     if (sortBy.value === criteria) {
@@ -53,86 +155,74 @@ function sortData(criteria) {
                     <thead>
                         <tr>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                <div class="d-flex align-items-center" @click="sortData('campaignName')"
+                                <div class="d-flex align-items-center" @click="sortData('title')"
                                     style="cursor: pointer">
-                                    Talk
+                                    Talks Title
                                     <div class="d-flex flex-column ms-3">
                                         <i class="fas fa-caret-up text-sm lh-1"
-                                            :class="{ 'text-dark': sortBy === 'campaignName' && sortOrder === 'asc' }"></i>
+                                            :class="{ 'text-dark': sortBy === 'title' && sortOrder === 'asc' }"></i>
                                         <i class="fas fa-caret-down text-sm lh-1"
-                                            :class="{ 'text-dark': sortBy === 'campaignName' && sortOrder === 'desc' }"></i>
+                                            :class="{ 'text-dark': sortBy === 'title' && sortOrder === 'desc' }"></i>
                                     </div>
                                 </div>
                             </th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                <div class="d-flex align-items-center" @click="sortData('purpose')"
+                                <div class="d-flex align-items-center" @click="sortData('purp')"
                                     style="cursor: pointer">
-                                    Purpose
+                                    Topic
                                     <div class="d-flex flex-column ms-3">
                                         <i class="fas fa-caret-up text-sm lh-1"
-                                            :class="{ 'text-dark': sortBy === 'purpose' && sortOrder === 'asc' }"></i>
+                                            :class="{ 'text-dark': sortBy === 'topic' && sortOrder === 'asc' }"></i>
                                         <i class="fas fa-caret-down text-sm lh-1"
-                                            :class="{ 'text-dark': sortBy === 'purpose' && sortOrder === 'desc' }"></i>
+                                            :class="{ 'text-dark': sortBy === 'topic' && sortOrder === 'desc' }"></i>
                                     </div>
                                 </div>
                             </th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                <div class="d-flex align-items-center" @click="sortData('startDate')"
+                                <div class="d-flex align-items-center" @click="sortData('author')"
                                     style="cursor: pointer">
-                                    Start Date
+                                    Author
                                     <div class="d-flex flex-column ms-3">
                                         <i class="fas fa-caret-up text-sm lh-1"
-                                            :class="{ 'text-dark': sortBy === 'startDate' && sortOrder === 'asc' }"></i>
+                                            :class="{ 'text-dark': sortBy === 'author' && sortOrder === 'asc' }"></i>
                                         <i class="fas fa-caret-down text-sm lh-1"
-                                            :class="{ 'text-dark': sortBy === 'startDate' && sortOrder === 'desc' }"></i>
+                                            :class="{ 'text-dark': sortBy === 'author' && sortOrder === 'desc' }"></i>
                                     </div>
                                 </div>
                             </th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                <div class="d-flex align-items-center" @click="sortData('endDate')"
+                                <div class="d-flex align-items-center" @click="sortData('posted_date')"
                                     style="cursor: pointer">
-                                    End Date
+                                    Posted Date
                                     <div class="d-flex flex-column ms-3">
                                         <i class="fas fa-caret-up text-sm lh-1"
-                                            :class="{ 'text-dark': sortBy === 'endDate' && sortOrder === 'asc' }"></i>
+                                            :class="{ 'text-dark': sortBy === 'posted_date' && sortOrder === 'asc' }"></i>
                                         <i class="fas fa-caret-down text-sm lh-1"
-                                            :class="{ 'text-dark': sortBy === 'endDate' && sortOrder === 'desc' }"></i>
+                                            :class="{ 'text-dark': sortBy === 'posted_date' && sortOrder === 'desc' }"></i>
                                     </div>
                                 </div>
                             </th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                <div class="d-flex align-items-center" @click="sortData('fundRaised')"
+                                <div class="d-flex align-items-center" @click="sortData('like')"
                                     style="cursor: pointer">
-                                    Fund Raised
+                                    Like(s)
                                     <div class="d-flex flex-column ms-3">
                                         <i class="fas fa-caret-up text-sm lh-1"
-                                            :class="{ 'text-dark': sortBy === 'fundRaised' && sortOrder === 'asc' }"></i>
+                                            :class="{ 'text-dark': sortBy === 'like' && sortOrder === 'asc' }"></i>
                                         <i class="fas fa-caret-down text-sm lh-1"
-                                            :class="{ 'text-dark': sortBy === 'fundRaised' && sortOrder === 'desc' }"></i>
+                                            :class="{ 'text-dark': sortBy === 'like' && sortOrder === 'desc' }"></i>
                                     </div>
                                 </div>
                             </th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                <div class="d-flex align-items-center" @click="sortData('target')"
+                                <div class="d-flex align-items-center" @click="sortData('comment')"
                                     style="cursor: pointer">
-                                    Target
+                                    Comment(s)
                                     <div class="d-flex flex-column ms-3">
                                         <i class="fas fa-caret-up text-sm lh-1"
-                                            :class="{ 'text-dark': sortBy === 'target' && sortOrder === 'asc' }"></i>
+                                            :class="{ 'text-dark': sortBy === 'comment' && sortOrder === 'asc' }"></i>
                                         <i class="fas fa-caret-down text-sm lh-1"
-                                            :class="{ 'text-dark': sortBy === 'target' && sortOrder === 'desc' }"></i>
-                                    </div>
-                                </div>
-                            </th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                <div class="d-flex align-items-center" @click="sortData('status')"
-                                    style="cursor: pointer">
-                                    Status
-                                    <div class="d-flex flex-column ms-3">
-                                        <i class="fas fa-caret-up text-sm lh-1"
-                                            :class="{ 'text-dark': sortBy === 'status' && sortOrder === 'asc' }"></i>
-                                        <i class="fas fa-caret-down text-sm lh-1"
-                                            :class="{ 'text-dark': sortBy === 'status' && sortOrder === 'desc' }"></i>
+                                            :class="{ 'text-dark': sortBy === 'comment' && sortOrder === 'desc' }"></i>
                                     </div>
                                 </div>
                             </th>
@@ -144,25 +234,22 @@ function sortData(criteria) {
                     <tbody>
                         <tr v-for="(item, index) in temp" :key="index">
                             <td>
-                                <h6 class="item ps-3">{{ item.campaignName }}</h6>
+                                <h6 class="item ps-3">{{ truncatedTitle(item.title) }}</h6>
                             </td>
                             <td>
-                                <h6 class="item ps-3">{{ item.purpose }}</h6>
+                                <h6 class="item ps-3">{{ item.topic }}</h6>
                             </td>
                             <td>
-                                <h6 class="item">{{ item.startDate }}</h6>
+                                <h6 class="item">{{ item.author }}</h6>
                             </td>
                             <td>
-                                <h6 class="item">{{ item.endDate }}</h6>
+                                <h6 class="item">{{ item.posted_date }}</h6>
                             </td>
                             <td>
-                                <h6 class="item">{{ item.fundRaised }}</h6>
+                                <h6 class="item">{{ item.like }}</h6>
                             </td>
                             <td>
-                                <h6 class="item">{{ item.target }}</h6>
-                            </td>
-                            <td>
-                                <h6 class="item">Ongoing</h6>
+                                <h6 class="item">{{ item.comment }}</h6>
                             </td>
                             <td>
                                 <router-link class="btn mb-0" to="/campaign-detail"><i

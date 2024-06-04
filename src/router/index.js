@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import AdminCrowdfundManage from "../views/AdminCrowdfundManage.vue";
+import AdminTalksManage from "../views/AdminTalksManage.vue";
 import Billing from "../views/Billing.vue";
 import createCampaign from "../views/CreateCampaign.vue";
 import Dashboard from "../views/Dashboard.vue";
@@ -13,7 +13,7 @@ import CrowdfundList from "../views/CrowdfundList.vue";
 import Transaction from "../views/transaction.vue";
 import Certificate from "../views/Certificate.vue";
 import GeneralList from "../views/GeneralList.vue";
-import UserManage from "../views/UserManage.vue";
+import AdminUserManage from "../views/AdminUserManage.vue";
 import issuerCrowdfundList from "../views/issuerCrowdfundList.vue";
 const routes = [
   {
@@ -47,9 +47,9 @@ const routes = [
     component: Signup,
   },
   {
-    path: "/crowdfundmanage",
-    name: "AdminCrowdfundManage",
-    component: AdminCrowdfundManage,
+    path: "/admin/talks-manage",
+    name: "AdminTalksManage",
+    component: AdminTalksManage,
   },
   {
     path: "/issuer/crowdfundmanage",
@@ -57,9 +57,9 @@ const routes = [
     component: issuerCrowdfundList,
   },
   {
-    path: "/usermanage",
-    name: "UserManage",
-    component: UserManage,
+    path: "/admin/users-manage",
+    name: "AdminUserManage",
+    component: AdminUserManage,
   },
   {
     path: "/notification",
