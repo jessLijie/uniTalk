@@ -6,7 +6,37 @@ const toggleEditProfile = () => {
     editProfile.value = !editProfile.value;
 };
 
-const sessionData = ref(localStorage.getItem('role'));
+// const sessionData = ref(localStorage.getItem('role'));
+
+
+const transactionList = [{
+  hash: "OMG!! Double decker bus caught fire in Lagos",
+  sender: "0x2256dfq424efrt382341c",
+//   receiver: "Anonymous",
+  amount: 8000
+},
+{
+  hash: "Hey guys I found out that the new iPhone 88 is out!!",
+  sender: "0x2256dfq424efrt382341",
+//   receiver: "Qian888",
+  amount: 7000
+},
+{
+  hash: "What do you think about the new song of Ariana...",
+  sender: "0x2256dfq424efrt382341",
+//   receiver: "Jess666",
+  amount: 10000
+},{
+  hash: "Did you guys know that we can actually fly to t...",
+  sender: "0x2256dfq424efrt382341",
+//   receiver: "Anonymous",
+  amount: 10000
+},{
+  hash: "I hate it when my friends don't reply my messages",
+  sender: "0x2256dfq424efrt382341",
+//   receiver: "Loy Chai",
+  amount: 10000
+},];
 </script>
 <template>
 
@@ -36,53 +66,21 @@ const sessionData = ref(localStorage.getItem('role'));
             </div>
             <div class="card col-md-8 col22">
                 <div class="p-4 form-style-5" style="border-radius: 1rem;">
-                    <h5 class="mb-4"><span class="number">1</span> User Information</h5>
+                    <h5 class="mb-4">User Information</h5>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-10">
                             <label for="example-text-input" class="form-control-label">Username</label>
                             <input type="text" value="lucky.jesse" />
                         </div>
-                        <div class="col-md-6">
-                            <label for="example-text-input" class="form-control-label">Citizenship</label>
-                            <input type="email" value="Malaysian" />
+                        <div class="col-md-10">
+                            <label for="example-text-input" class="form-control-label">Email</label>
+                            <input type="email" value="jesse@gmail.com" />
                         </div>
-                        <div class="col-md-6">
-                            <label for="example-text-input" class="form-control-label">First name</label>
-                            <input class="form-control" type="text" value="Jesse" />
-                        </div>
-                        <div class="col-md-6">
-                            <label for="example-text-input" class="form-control-label">Last name</label>
-                            <input type="text" value="Lucky" />
+                        <div class="col-md-10">
+                            <label for="example-text-input" class="form-control-label">Password</label>
+                            <input class="form-control" type="text" value="******" />
                         </div>
                     </div>
-                    <hr />
-                    <h5 class="mb-4"><span class="number">2</span> Contact Information</h5>
-                    <div class="row">
-                        <div class="col-md-12 row mb-1">
-                            <div class="col-md-7">
-                                <label for="example-text-input" class="form-control-label">Wallet Address</label>
-                                <button class="button-31" style="margin-bottom: 20px;">Connect to Metamask</button>
-                            </div>
-                            <div class="col-md-5" v-if="sessionData === 'Issuer'">
-                                <label for="example-text-input" class="form-control-label">Documentation</label>
-                                <div class="button-31" style="margin-bottom: 20px;">
-                                    <span>Upload Document</span>
-                                    <input type="file" class="upload-file-button">
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="example-text-input" class="form-control-label">Phone Number</label>
-                            <input type="text" value="5855555555" />
-                        </div>
-                        <div class="col-md-8">
-                            <label for="example-text-input" class="form-control-label">Email Address</label>
-                            <input type="text" value="jesse@example.com" />
-                        </div>
-
-                    </div>
-
                 </div>
             </div>
 
@@ -111,48 +109,101 @@ const sessionData = ref(localStorage.getItem('role'));
                     </div>
                 </div>
                 <div class="card-body">
-                    <h5 class="mb-4"><span class="number">1</span> User Information</h5>
+                    <h5 class="mb-4">User Information</h5>
                     <div>
                         <div>
                             <h6 style="display:inline-block; width:30%;">Username:</h6>
                             <p style="display:inline-block;">Jesse</p>
                         </div>
+                        <br>
                         <div>
-                            <h6 style="display:inline-block; width:30%;">Citizenship:</h6>
-                            <p style="display:inline-block;">Malaysian</p>
+                            <h6 style="display:inline-block; width:30%;">Email: </h6>
+                            <p style="display:inline-block;">jesse@gmail.com</p>
                         </div>
+                        <br>
                         <div>
-                            <h6 style="display:inline-block; width:30%;">Name:</h6>
-                            <p style="display:inline-block;">Wong Yu Hui</p>
-                        </div>
-
-                    </div>
-
-                    <hr />
-                    <h5 class="mb-4"><span class="number">2</span> Contact Information</h5>
-                    <div>
-                        <div>
-                            <h6 style="display:inline-block; width:30%;">Wallet Address:</h6>
-                            <p style="display:inline-block;">4338984023898404</p>
-                        </div>
-                        <div>
-                            <h6 style="display:inline-block; width:30%;">Phone Number:</h6>
-                            <p style="display:inline-block;">5858475</p>
-                        </div>
-                        <div>
-                            <h6 style="display:inline-block; width:30%;">Email Address:</h6>
-                            <p style="display:inline-block;">hello@gmail.com</p>
+                            <h6 style="display:inline-block; width:30%;">Password: </h6>
+                            <p style="display:inline-block;">******</p>
                         </div>
                     </div>
-
                 </div>
             </div>
-
         </div>
-    </div>
-
-
-
+        <div class="row mt-5">
+              <div class="col-lg-7 mb-lg-0 mb-4">
+                <div class="card px-3">
+                  <div class="p-3 pb-0 card-header">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                      <h6 class="mb-0">Liked Post</h6>
+                      <router-link class="nav-link" to="/signin">
+                        View All
+                      </router-link>
+                    </div>
+                  </div>
+                  <div class="table-responsive pe-3">
+                    <table class="table align-items-center">
+                      <tbody>
+                        <tr v-for="(transaction, index) in transactionList" :key="index">
+                          <td class="w-30">
+                            <div class="px-2 py-1 d-flex align-items-center">
+                              <div class="d-flex px-2 align-items-center justify-content-center">
+                                <i class="rounded-circle me-2 ni ni-bold-right" alt="hash"></i>
+                              </div>
+                              <div class="ms-2">
+                                <p class="mb-0 text-xs font-weight-bold">
+                                  Topic:
+                                </p>
+                                <h6 class="mb-0 text-sm">{{ transaction.hash }}</h6>
+                              </div>
+                            </div>
+                          </td>
+                          <!-- <td>
+                            <div class="text-center">
+                              <h6 class="mb-0 text-xs">Posted by {{ transaction.receiver }}</h6>
+                            </div>
+                          </td> -->
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-5">
+                <categories-list :categories="[
+          {
+            icon: {
+              component: 'fa fa-cutlery',
+              background: 'dark',
+            },
+            label: 'Food',
+            description: 'Total <strong>888 </strong>talks',
+          },
+          {
+            icon: {
+              component: 'ni ni-world-2',
+              background: 'dark',
+            },
+            label: 'Technology',
+            description: 'Total <strong>254 </strong>talks',
+          },
+          {
+            icon: { component: 'fa fa-heart', background: 'dark' },
+            label: 'Fashion',
+            description: 'Total <strong>100 </strong>talks',
+          },
+          {
+            icon: { component: 'fa fa-futbol-o', background: 'dark' },
+            label: 'Sport',
+            description: 'Total <strong>50 </strong>talks',
+          },{
+            icon: { component: 'fa fa-bus', background: 'dark' },
+            label: 'Transport',
+            description: 'Total <strong>5 </strong>talks',
+          },
+        ]" />
+              </div>
+            </div>
+          </div>
 </template>
 
 <style scoped>
