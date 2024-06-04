@@ -4,7 +4,6 @@ import DonatorList from "./components/DonatorList.vue";
 import Navbar from "@/examples/PageLayout/Navbar.vue";
 import { ref, onBeforeMount, onMounted, onBeforeUnmount } from "vue";
 import { useStore } from "vuex";
-import { useRouter } from "vue-router";
 
 import setNavPills from "@/assets/js/nav-pills.js";
 import setTooltip from "@/assets/js/tooltip.js";
@@ -12,7 +11,6 @@ import setTooltip from "@/assets/js/tooltip.js";
 const body = document.getElementsByTagName("body")[0];
 
 const store = useStore();
-const showdonation = ref(false);
 const role = ref(localStorage.getItem('role'));
 onMounted(() => {
   setNavPills();
@@ -61,25 +59,6 @@ onBeforeUnmount(() => {
   }
 })
 
-const selectedAmount = ref(null);
-
-const selectAmount = (amount) => {
-  selectedAmount.value = amount;
-};
-
-const updateSelectedAmount = () => {
-  selectedAmount.value = selectedAmount.value ? parseInt(selectedAmount.value) : null;
-};
-
-const router = useRouter();
-const toggledonation = () => {
-  if (role.value !== 'null') {
-    showdonation.value = !showdonation.value;
-  } else {
-    router.push('/signin');
-  }
-};
-
 </script>
 
 <template>
@@ -87,7 +66,7 @@ const toggledonation = () => {
   <div class="container top-0 position-sticky z-index-sticky" v-if="role === 'null'">
     <div class="row">
       <div class="col-12">
-        <navbar isBlur="blur  border-radius-lg my-3 py-2 start-0 end-0 mx-4 shadow" v-bind:darkMode="true"
+        <navbar isBlur="blur border-radius-lg my-3 py-2 start-0 end-0 mx-4 shadow" v-bind:darkMode="true"
           isBtn="bg-gradient-success" />
       </div>
     </div>
@@ -107,7 +86,7 @@ const toggledonation = () => {
 
           <div class="card">
             <div class="card-header pb-0 p-3">
-              <div class="row">
+              <div class="row p-3">
                 <div class="d-flex my-2 ">
                   <img src="https://via.placeholder.com/50" alt="User Avatar" width="50" height="50">
                   <div class="mx-4">
@@ -115,62 +94,34 @@ const toggledonation = () => {
                     <div class="text-muted">5 hrs ago</div>
                   </div>
                 </div>
-                <div class="col-6 flex-column align-items-center mt-2">
+                <div class="col-6 flex-column align-items-center mb-4">
                   <h4>{Education 360}</h4>
                   <p>To Educate People</p>
-                  <img src="https://via.placeholder.com/500x300" alt="Post Image" class="img-fluid">
+                  <img src="https://via.placeholder.com/500x300" alt="Post Image" class="img-fluid ">
                 </div>
+                <div class="d-flex justify-content-between mb-3">
+                  <div>like 100</div>
+                  <div>Comment 100</div>
+                </div>
+              </div>
+              <div class="d-flex bg-success p-2">
+                <button class="border-0 bg-success text-white w-100 my-0">Like</button>
+                <button class="border-0 bg-success text-white w-100 my-0">Comment</button>
+                <button class="border-0 bg-success text-white w-100 my-0">Share</button>
+              </div>
+              <div class="row my-4 mx-1">
+                <DonatorList />
               </div>
             </div>
           </div>
 
         </div>
-        <div class="row mb-4">
-          <DonatorList />
-        </div>
       </div>
     </div>
 
 
 
 
-  </div>
-  <div v-if="showdonation" class="donation-pop-out border rounded-lg shadow ">
-    <div @click="toggledonation"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="red"
-        class="bi bi-x-circle closebutton" viewBox="0 0 16 16">
-        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
-        <path
-          d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
-      </svg></div>
-    <h4 style="margin-left:10px">Investment amount</h4>
-
-    <button id="button" :class="{ 'selected': selectedAmount === 100 }" @click="selectAmount(5000)">5000</button>
-    <button id="button" :class="{ 'selected': selectedAmount === 200 }" @click="selectAmount(300000)">300000</button>
-    <button id="button" :class="{ 'selected': selectedAmount === 300 }" @click="selectAmount(699994)">699994 </button>
-    <div>
-      RM<input class="donationamount" v-model="selectedAmount" @input="updateSelectedAmount" placeholder="Amount" />
-    </div>
-    <div class="d-flex align-items-center mt-3" style="margin-left:10px">
-      <div class="checkbox-wrapper-46">
-        <input class="inp-cbx" id="cbx-46" type="checkbox" />
-        <label class="cbx" for="cbx-46"><span>
-            <svg width="12px" height="10px" viewbox="0 0 12 10">
-              <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-            </svg></span>
-        </label>
-      </div>
-      <p class="mb-0" style="display:inline;font-size:14px;margin-left:3px;">I agree with the terms and conditions
-      </p>
-    </div>
-    <div class="d-flex align-items-center justify-content-center mt-4">
-      <button id="paynowbutton" @click="toggledonation"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-          fill="currentColor" class="bi bi-wallet-fill" style="margin-right:5px;" viewBox="0 0 16 16">
-          <path
-            d="M1.5 2A1.5 1.5 0 0 0 0 3.5v2h6a.5.5 0 0 1 .5.5c0 .253.08.644.306.958.207.288.557.542 1.194.542s.987-.254 1.194-.542C9.42 6.644 9.5 6.253 9.5 6a.5.5 0 0 1 .5-.5h6v-2A1.5 1.5 0 0 0 14.5 2z" />
-          <path
-            d="M16 6.5h-5.551a2.7 2.7 0 0 1-.443 1.042C9.613 8.088 8.963 8.5 8 8.5s-1.613-.412-2.006-.958A2.7 2.7 0 0 1 5.551 6.5H0v6A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5z" />
-        </svg>Pay Now</button>
-    </div>
   </div>
 
 
