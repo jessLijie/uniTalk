@@ -27,7 +27,7 @@ onBeforeUnmount(() => {
 
 const transactionList = [{
   title: "Educate360",
-  category: "Service",
+  category: "Food",
   objective: "To educate people",
   goal: 7000000,
   raised: 80000,
@@ -35,7 +35,7 @@ const transactionList = [{
   status: "Open"
 }, {
   title: "BizBoost",
-  category: "E-Commerce",
+  category: "Technology",
   objective: " Elevate, Expand, Excel!",
   goal: 3000000,
   raised: 60000,
@@ -43,7 +43,7 @@ const transactionList = [{
   status: "Open"
 }, {
   title: "Caring",
-  category: "Service",
+  category: "Fashion",
   objective: "To enhance experience",
   goal: 10000000,
   raised: 8000000,
@@ -51,7 +51,7 @@ const transactionList = [{
   status: "Closed"
 }, {
   title: "AI Technology",
-  category: "Technology",
+  category: "Sport",
   objective: "To enhance experience",
   goal: 15000000,
   raised: 10000000,
@@ -59,7 +59,7 @@ const transactionList = [{
   status: "Closed"
 }, {
   title: "Help Victim",
-  category: "Service",
+  category: "Transport",
   objective: "Together, We Rebuild Lives.",
   goal: 13000000,
   raised: 700000,
@@ -97,34 +97,36 @@ const filterTransactions = (category) => {
       <div style="margin-top: 8rem;" class="d-flex justify-content-center align-items-center w-100"
         :class="`${darkMode ? 'bg-transparent' : ''}`">
         <!-- admin -->
-        <button type="button" class="btn" :class="{ 'btn-success': selectedCategory === 'E-Commerce' }"
-          @click="filterTransactions('E-Commerce')">
-          E-Commerce
+        <button type="button" class="btn" :class="{ 'btn-success': selectedCategory === 'Food' }"
+          @click="filterTransactions('Food')">
+          Food
         </button>
-        <button type="button" class="btn mx-3" :class="{ 'btn-success': selectedCategory === 'Service' }"
-          @click="filterTransactions('Service')">
-          Service
-        </button>
-        <button type="button" class="btn" :class="{ 'btn-success': selectedCategory === 'Technology' }"
+        <button type="button" class="btn mx-3" :class="{ 'btn-success': selectedCategory === 'Technology' }"
           @click="filterTransactions('Technology')">
           Technology
         </button>
+        <button type="button" class="btn" :class="{ 'btn-success': selectedCategory === 'Fashion' }"
+          @click="filterTransactions('Fashion')">
+          Fashion
+        </button>
+        <button type="button" class="btn mx-3" :class="{ 'btn-success': selectedCategory === 'Sport' }"
+          @click="filterTransactions('Sport')">
+          Sport
+        </button>
+        <button type="button" class="btn" :class="{ 'btn-success': selectedCategory === 'Transport' }"
+          @click="filterTransactions('Transport')">
+          Transport
+        </button>
       </div>
       <div class="container">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="row py-5">
-              <div class="col-lg-4 col-md-6 col-12 px-3" v-for="(transaction, index) in filteredTransactions"
-                :key="index">
-                <CrowdFundCard :title="`${transaction.title}`" :category="`${transaction.category}`"
-                  :objective="`${transaction.objective}`" :goal="`${transaction.goal}`"
-                  :raised="`${transaction.raised}`" :investor="`${transaction.investor}`"
-                  :status="`${transaction.status}`" />
-              </div>
-            </div>
-
+        <div class="row py-5">
+          <div class="px-3" v-for="(transaction, index) in filteredTransactions" :key="index">
+            <CrowdFundCard :title="`${transaction.title}`" :category="`${transaction.category}`"
+              :objective="`${transaction.objective}`" :goal="`${transaction.goal}`" :raised="`${transaction.raised}`"
+              :investor="`${transaction.investor}`" :status="`${transaction.status}`" />
           </div>
         </div>
+
       </div>
     </section>
   </main>

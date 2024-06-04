@@ -31,42 +31,30 @@ defineProps({
 });
 </script>
 <template>
-    <router-link class="nav-link text-dark" to="/campaign-detail">
-        <div class="card card-profile mb-6 ">
-            <div>
-                <img src="../../assets/img/bg-profile.jpg" alt="Image placeholder" class="card-img-top" />
-                <span :class="{ 'card mask opacity-6': status === 'Closed' }"></span>
-            </div>
-            <div class="card-body py-3">
-                <div class="text-center">
-                    <h5>
-                        {{ title }}
-                    </h5>
-                    <div class="d-flex justify-content-center align-items-center gap-2 m-1">
-                        <i class="ni ni-tag text-sm"></i>
-                        <h6 class="m-0 ">{{ category }}</h6>
-                    </div>
-                    <div>
-                        {{ objective }}
+    <div class="container my-4">
+        <div class="post">
+            <router-link class="nav-link text-dark" to="/campaign-detail">
+                <div class="d-flex">
+                    <img src="https://via.placeholder.com/50" alt="User Avatar" width="50" height="50">
+                    <div class="mx-4">
+                        <div class="name">John Doe</div>
+                        <div class="text-muted">5 hrs ago</div>
                     </div>
                 </div>
-            </div>
-            <div class="row px-3 pb-4">
-                <div class="col-12 d-flex justify-content-center">
-                    <div class="d-grid text-center justify-content-center col-4">
-                        <span class="text-lg font-weight-bolder">RM{{ goal }}</span>
-                        <span class="text-sm" :class="{ 'opacity-8': status !== 'Closed' }">Goals</span>
-                    </div>
-                    <div class="d-grid text-center justify-content-center  col-4">
-                        <span class="text-lg font-weight-bolder">{{ investor }}</span>
-                        <span class="text-sm" :class="{ 'opacity-8': status !== 'Closed' }">Investor</span>
-                    </div>
-                    <div class="d-grid text-center justify-content-center col-4">
-                        <span class="text-lg font-weight-bolder">RM{{ raised }}</span>
-                        <span class="text-sm" :class="{ 'opacity-8': status !== 'Closed' }">Raised</span>
-                    </div>
+                <div class="my-2">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus.</p>
+                    <img src="https://via.placeholder.com/500x300" alt="Post Image" class="img-fluid">
                 </div>
+            </router-link>
+            <div class="d-flex justify-content-between px-3 mb-3">
+                <div>like 100</div>
+                <div>Comment 100</div>
+            </div>
+            <div class="d-flex bg-success p-2">
+                <button class="border-0 bg-success text-white w-100 my-0">Like</button>
+                <button class="border-0 bg-success text-white w-100 my-0">Comment</button>
+                <button class="border-0 bg-success text-white w-100 my-0">Share</button>
             </div>
         </div>
-    </router-link>
+    </div>
 </template>

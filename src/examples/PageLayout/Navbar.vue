@@ -36,21 +36,14 @@ defineProps({
             <router-link class="nav-link d-flex align-items-center me-2 active" aria-current="page" to="/crowdfundlist">
               <i class="fa fa-chart-pie opacity-6 me-1" aria-hidden="true"
                 :class="isBlur ? 'text-dark' : 'text-white'"></i>
-              CrowdFund
-            </router-link>
-          </li>
-          <li class="nav-item">
-            <router-link class="nav-link me-2" to="/info">
-              <i class="fa fa-info-circle opacity-6 me-1" aria-hidden="true"
-                :class="isBlur ? 'text-dark' : 'text-white'"></i>
-              Information
+              Discussion
             </router-link>
           </li>
           <li class="nav-item">
             <router-link class="nav-link me-2" to="/transactionlist">
               <i class="fa fa-exchange opacity-6 me-1" aria-hidden="true"
                 :class="isBlur ? 'text-dark' : 'text-white'"></i>
-              Investment
+              Category
             </router-link>
           </li>
           <li class="nav-item">

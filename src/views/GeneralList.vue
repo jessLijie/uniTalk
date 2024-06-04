@@ -5,7 +5,7 @@ import CrowdFundCard from "./components/CrowdfundCard.vue";
 
 const transactionList = [{
     title: "Educate360",
-    category: "Service",
+    category: "Transport",
     objective: "To educate people",
     goal: 7000000,
     raised: 80000,
@@ -13,7 +13,7 @@ const transactionList = [{
     status: "Open"
 }, {
     title: "BizBoost",
-    category: "E-Commerce",
+    category: "Sport",
     objective: " Elevate, Expand, Excel!",
     goal: 3000000,
     raised: 60000,
@@ -21,7 +21,7 @@ const transactionList = [{
     status: "Open"
 }, {
     title: "Caring",
-    category: "Service",
+    category: "Food",
     objective: "To enhance experience",
     goal: 10000000,
     raised: 8000000,
@@ -37,7 +37,7 @@ const transactionList = [{
     status: "Closed"
 }, {
     title: "Help Victim",
-    category: "Service",
+    category: "Fashion",
     objective: "Together, We Rebuild Lives.",
     goal: 13000000,
     raised: 700000,
@@ -99,37 +99,39 @@ onBeforeUnmount(() => {
 <template>
     <div class="card m-4 px-4 pt-1">
         <h1 class="m-0 mx-auto pt-3">Crowdfund List</h1>
-        <div class="d-flex justify-content-center align-items-center w-100 mt-3"
+        <div class="d-flex justify-content-center align-items-center w-100 mt-4"
             :class="`${darkMode ? 'bg-transparent' : ''}`">
-            <!-- admin -->
-            <button type="button" class="btn" :class="{ 'btn-success': selectedCategory === 'E-Commerce' }"
-                @click="filterTransactions('E-Commerce')">
-                E-Commerce
+            <button type="button" class="btn" :class="{ 'btn-success': selectedCategory === 'Food' }"
+                @click="filterTransactions('Food')">
+                Food
             </button>
-            <button type="button" class="btn mx-3" :class="{ 'btn-success': selectedCategory === 'Service' }"
-                @click="filterTransactions('Service')">
-                Service
-            </button>
-            <button type="button" class="btn" :class="{ 'btn-success': selectedCategory === 'Technology' }"
+            <button type="button" class="btn mx-3" :class="{ 'btn-success': selectedCategory === 'Technology' }"
                 @click="filterTransactions('Technology')">
                 Technology
             </button>
+            <button type="button" class="btn" :class="{ 'btn-success': selectedCategory === 'Fashion' }"
+                @click="filterTransactions('Fashion')">
+                Fashion
+            </button>
+            <button type="button" class="btn mx-3" :class="{ 'btn-success': selectedCategory === 'Sport' }"
+                @click="filterTransactions('Sport')">
+                Sport
+            </button>
+            <button type="button" class="btn" :class="{ 'btn-success': selectedCategory === 'Transport' }"
+                @click="filterTransactions('Transport')">
+                Transport
+            </button>
         </div>
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="row py-4">
-                        <div class="col-lg-4 col-md-6 col-12 px-3" v-for="(transaction, index) in filteredTransactions"
-                            :key="index">
-                            <CrowdFundCard :title="`${transaction.title}`" :category="`${transaction.category}`"
-                                :objective="`${transaction.objective}`" :goal="`${transaction.goal}`"
-                                :raised="`${transaction.raised}`" :investor="`${transaction.investor}`"
-                                :status="`${transaction.status}`" />
-                        </div>
-                    </div>
-
+            <div class="row py-2">
+                <div class="px-3" v-for="(transaction, index) in filteredTransactions" :key="index">
+                    <CrowdFundCard :title="`${transaction.title}`" :category="`${transaction.category}`"
+                        :objective="`${transaction.objective}`" :goal="`${transaction.goal}`"
+                        :raised="`${transaction.raised}`" :investor="`${transaction.investor}`"
+                        :status="`${transaction.status}`" />
                 </div>
             </div>
+
         </div>
     </div>
 </template>

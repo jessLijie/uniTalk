@@ -1,6 +1,6 @@
 <script setup>
 import DonatorList from "./components/DonatorList.vue";
-import ArgonButton from "@/components/ArgonButton.vue";
+// import ArgonButton from "@/components/ArgonButton.vue";
 import Navbar from "@/examples/PageLayout/Navbar.vue";
 import { ref, onBeforeMount, onMounted, onBeforeUnmount } from "vue";
 import { useStore } from "vuex";
@@ -93,8 +93,7 @@ const toggledonation = () => {
     </div>
   </div>
   <div class="container-fluid">
-    <div class="page-header min-height-400" style="
-        background-image: url(https://www.unodc.org/res/endht/get-involved_html/join-theme.png);
+    <div class="page-header min-height-200 bg-success" style="
         margin-right: -24px;
         margin-left: -34%;
       ">
@@ -103,106 +102,36 @@ const toggledonation = () => {
   </div>
   <div class="container-fluid" style="margin-top:-5%;">
     <div class="row">
-      <div class="col-lg-8">
-        <div class="col-md-12 mb-4">
-          <div class="row mb-4">
+      <div class="col-md-12 mb-4">
+        <div class="row mb-4">
 
-            <div class="card">
-              <div class="card-header pb-0 p-3">
-                <div class="row">
-                  <div class="col-6 flex-column align-items-center">
-                    <h4>Education 360</h4>
-                    <p>To Educate People</p>
-                  </div>
-
-
-                  <div class="col-6 text-end">
-                    <argon-button @click="toggledonation" color="dark" variant="gradient">
-                      <i class="bi bi-heart-fill"></i>
-                      Invest Now
-                    </argon-button>
-                  </div>
-                  <div class="col-12 text-end p-3">
-                    <div class="progress" style="height:40px;border-radius:10px;">
-                      <div class="progress-bar" role="progressbar" style="width: 50%;border-radius:10px;"
-                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">50%</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="card-body p-3">
-                <div class="row">
-                  <div class="col-md-4 mb-md-0 mb-4">
-                    <div
-                      class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-column">
-                      <h3>Our Goal</h3>
-                      <h6>RM7000000</h6>
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div
-                      class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-column">
-                      <h3>Raised</h3>
-                      <h6>RM80000</h6>
-                    </div>
-                  </div>
-                  <div class="col-md-4 mb-md-0 mb-4">
-                    <div
-                      class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-column">
-                      <h3>Completed</h3>
-                      <h6>1.14%</h6>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-
-          </div>
-          <div class="row mb-4">
-            <DonatorList />
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4">
-        <div class="col-md-12 mb-4">
           <div class="card">
-            <div class="p-4">
-              <h6>About the investment</h6>
-              <hr />
-              <p class="text-sm mb-0">Investment Deadline</p>
-              <p class="text-sm" style="color:black;font-weight:bold">21 March 2025</p>
-              <p class="text-sm mb-0">Investment Price Per Share</p>
-              <p class="text-sm" style="color:black;font-weight:bold">12</p>
-              <p class="text-sm mb-0">Investment Target Amount</p>
-              <p class="text-sm" style="color:black;font-weight:bold">RM7000000</p>
-              <p class="text-sm mb-0">Investment Valuation</p>
-              <p class="text-sm" style="color:black;font-weight:bold">RM50000000</p>
-              <p class="text-sm mb-0">Minimum Investment</p>
-              <p class="text-sm" style="color:black;font-weight:bold">RM1000</p>
-              <p class="text-sm mb-0">Maximum Investment</p>
-              <p class="text-sm" style="color:black;font-weight:bold">RM699994
-                </p>
-              <p class="text-sm mb-0">Minimum Number of Shares Offered</p>
-              <p class="text-sm" style="color:black;font-weight:bold">2555</p>
-              <p class="text-sm mb-0">Maximum Number of Shares Offered</p>
-              <p class="text-sm" style="color:black;font-weight:bold">60000</p>
-
-              <p class="text-sm mb-0">Offering Type</p>
-              <p class="text-sm" style="color:black;font-weight:bold">Public</p>
-              <p class="text-sm mb-0">Asset Type</p>
-              <p class="text-sm" style="color:black;font-weight:bold">Equity</p>
-              <p class="text-sm mb-0">Shares Offered</p>
-              <p class="text-sm" style="color:black;font-weight:bold">Common</p>
-              <p class="text-sm mb-0">Campaign Organiser</p>
-              <p class="text-sm mb-0" style="color:black;font-weight:bold">Bruce Lee</p>
+            <div class="card-header pb-0 p-3">
+              <div class="row">
+                <div class="d-flex my-2 ">
+                  <img src="https://via.placeholder.com/50" alt="User Avatar" width="50" height="50">
+                  <div class="mx-4">
+                    <div class="name">John Doe</div>
+                    <div class="text-muted">5 hrs ago</div>
+                  </div>
+                </div>
+                <div class="col-6 flex-column align-items-center mt-2">
+                  <h4>{Education 360}</h4>
+                  <p>To Educate People</p>
+                  <img src="https://via.placeholder.com/500x300" alt="Post Image" class="img-fluid">
+                </div>
+              </div>
             </div>
           </div>
+
+        </div>
+        <div class="row mb-4">
+          <DonatorList />
         </div>
       </div>
-
-
     </div>
+
+
 
 
   </div>
@@ -218,9 +147,9 @@ const toggledonation = () => {
     <button id="button" :class="{ 'selected': selectedAmount === 100 }" @click="selectAmount(5000)">5000</button>
     <button id="button" :class="{ 'selected': selectedAmount === 200 }" @click="selectAmount(300000)">300000</button>
     <button id="button" :class="{ 'selected': selectedAmount === 300 }" @click="selectAmount(699994)">699994 </button>
-<div>
-    RM<input class="donationamount" v-model="selectedAmount" @input="updateSelectedAmount" placeholder="Amount" />
-  </div>
+    <div>
+      RM<input class="donationamount" v-model="selectedAmount" @input="updateSelectedAmount" placeholder="Amount" />
+    </div>
     <div class="d-flex align-items-center mt-3" style="margin-left:10px">
       <div class="checkbox-wrapper-46">
         <input class="inp-cbx" id="cbx-46" type="checkbox" />
