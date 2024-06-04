@@ -128,7 +128,7 @@ const transactionList = [{
                   <div class="p-3 pb-0 card-header">
                     <div class="d-flex justify-content-between align-items-center mb-2">
                       <h6 class="mb-0">Most Recent Talks</h6>
-                      <router-link class="nav-link" to="/transactionlist">
+                      <router-link class="nav-link" to="/signin">
                         View All
                       </router-link>
                     </div>

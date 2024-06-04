@@ -20,7 +20,7 @@ defineProps({
   <div class="card px-3">
     <div class="p-3 pb-0 card-header d-flex justify-content-between align-items-center mb-1">
       <h6 class="mb-0">{{ title }}</h6>
-      <router-link class="nav-link" to="/crowdfundlist">
+      <router-link class="nav-link" to="/signin">
         Explore All
       </router-link>
     </div>

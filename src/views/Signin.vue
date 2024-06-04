@@ -54,14 +54,14 @@ function getSelectedRole() {
 
 </script>
 <template>
-  <div class="container top-0 position-sticky z-index-sticky">
+  <!-- <div class="container top-0 position-sticky z-index-sticky">
     <div class="row">
       <div class="col-12">
         <navbar isBlur="blur  border-radius-lg my-3 py-2 start-0 end-0 mx-4 shadow" v-bind:darkMode="true"
           isBtn="bg-gradient-success" />
       </div>
     </div>
-  </div>
+  </div> -->
   <main class="mt-0 main-content">
     <section>
       <div class="page-header min-vh-100">
@@ -81,11 +81,9 @@ function getSelectedRole() {
                     <div class="mb-3">
                       <argon-input id="password" type="password" placeholder="Password" name="password" size="lg" />
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-3" hidden>
                       <select class="form-control" id="sharesOffered">
-                        <option value="---Select role---" selected disabled>--Select role--</option>
-                        <option value="Issuer">Issuer</option>
-                        <option value="Investor">Investor</option>
+                        <option value="Issuer" selected>Issuer</option>
                       </select>
                     </div>
                     <argon-switch id="rememberMe" name="remember-me">Remember me</argon-switch>
@@ -110,16 +108,15 @@ function getSelectedRole() {
               <div
                 class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden"
                 style="
-                  background-image: url(&quot;https://media.istockphoto.com/id/1428262436/vector/crowdfunding-isolated-cartoon-vector-illustrations.jpg?s=612x612&w=0&k=20&c=354FblurcDwrEvmneMTuZrzHNBa4o7K3RTXmfPnI-3A=&quot;);
+                  background-image: url(&quot;https://www.shutterstock.com/shutterstock/videos/1030949834/thumb/4.jpg?ip=x480&quot;);
                   background-size: cover;
                 ">
                 <span class="mask bg-gradient-success opacity-6"></span>
                 <h4 class="mt-5 text-white font-weight-bolder position-relative">
-                  "Attention is the new currency"
+                  "Unleash Your Thoughts"
                 </h4>
                 <p class="text-white position-relative">
-                  The more effortless the writing looks, the more effort the
-                  writer actually put into the process.
+                  A Hub for Honest Conversations; <br>Where Students Speak Freely
                 </p>
               </div>
             </div>
