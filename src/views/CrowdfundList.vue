@@ -64,7 +64,7 @@ const userList = [{
   category: "Fashion",
   comment: 100,
   like: 10,
-  img: "https://via.placeholder.com/500x300"
+  img: "https://via.placeholders.com/500x300"
 },];
 
 const filteredUserList = ref(userList);
