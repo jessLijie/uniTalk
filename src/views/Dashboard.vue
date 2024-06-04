@@ -195,7 +195,7 @@ const transactionList = [{
                   },
                   {
                     icon: { component: 'fa fa-futbol-o', background: 'dark' },
-                    label: 'Sport',
+                    label: 'Sports',
                     description: 'Total <strong>50 </strong>talks',
                   }, {
                     icon: { component: 'fa fa-bus', background: 'dark' },

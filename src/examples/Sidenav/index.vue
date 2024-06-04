@@ -24,10 +24,10 @@ const darkMode = computed(() => store.state.darkMode);
         aria-hidden="true" id="iconSidenav"></i>
 
       <div class="m-0 navbar-brand">
-        <img :src="darkMode || sidebarType === 'bg-default' ? logoWhite : logo" class="navbar-brand-img h-100"
-          alt="main_logo" />
-
-        <span class="ms-2 font-weight-bold me-2">XiLiJiJi</span>
+        <!-- <img :src="darkMode || sidebarType === 'bg-default' ? logoWhite : logo" class="navbar-brand-img h-100"
+          alt="main_logo" /> -->
+          <img src="https://uxwing.com/wp-content/themes/uxwing/download/communication-chat-call/forum-icon.png" class="navbar-brand-img h-100" alt="">
+        <span class="ms-2 font-weight-bold me-2">UniTalk</span>
       </div>
     </div>
 
