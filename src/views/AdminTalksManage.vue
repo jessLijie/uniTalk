@@ -278,6 +278,7 @@ onMounted(() => {
     /* Change the color to gray */
     font-weight: 600 !important;
 }
+
 </style>
 <template>
     <div class="card m-4">
