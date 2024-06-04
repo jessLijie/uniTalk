@@ -2,7 +2,7 @@
 defineProps({
   title: {
     type: String,
-    default: "Categories",
+    default: "Topics",
   },
   categories: {
     type: Array,
@@ -33,7 +33,7 @@ defineProps({
           <div class="d-flex align-items-center">
             <div :class="`text-center shadow icon icon-shape icon-sm bg-gradient-${background} me-3
         }`">
-              <i :class="`${component} text-white opacity-10`"></i>
+              <i :class="`${component} text-sm text-white opacity-10`"></i>
             </div>
             <div class="d-flex flex-column">
               <h6 class="mb-1 text-sm text-dark">{{ label }}</h6>
