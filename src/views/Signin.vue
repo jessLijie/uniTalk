@@ -1,7 +1,7 @@
 <script setup>
 import { onBeforeUnmount, onBeforeMount } from "vue";
 import { useStore } from "vuex";
-import Navbar from "@/examples/PageLayout/Navbar.vue";
+// import Navbar from "@/examples/PageLayout/Navbar.vue";
 import AppFooter from "@/examples/PageLayout/Footer.vue";
 import ArgonInput from "@/components/ArgonInput.vue";
 import ArgonSwitch from "@/components/ArgonSwitch.vue";

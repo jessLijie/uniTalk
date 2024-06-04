@@ -39,11 +39,11 @@ function sortData(criteria) {
 <template>
     <div class="card m-4">
         <div class="card-header pb-0 d-flex justify-content-between align-items-center">
-            <h5>Crowdfunding List</h5>
+            <h5>Talk List</h5>
 
             <div class="d-flex">
                 <a href="/createCampaign">
-                    <argon-button size="sm" class="ms-auto">Create Campaign</argon-button>
+                    <argon-button size="sm" class="ms-auto">Create Talk</argon-button>
                 </a>
             </div>
         </div>
@@ -55,7 +55,7 @@ function sortData(criteria) {
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                 <div class="d-flex align-items-center" @click="sortData('campaignName')"
                                     style="cursor: pointer">
-                                    Campaign
+                                    Talk
                                     <div class="d-flex flex-column ms-3">
                                         <i class="fas fa-caret-up text-sm lh-1"
                                             :class="{ 'text-dark': sortBy === 'campaignName' && sortOrder === 'asc' }"></i>
