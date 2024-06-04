@@ -87,19 +87,19 @@ onBeforeUnmount(() => {
           <div class="card">
             <div class="card-header pb-0 p-3">
               <div class="row p-3">
-                <div class="d-flex my-2 ">
+                <div class="d-flex my-2">
                   <img src="https://via.placeholder.com/50" alt="User Avatar" width="50" height="50">
                   <div class="mx-4">
                     <div class="name">John Doe</div>
                     <div class="text-muted">5 hrs ago</div>
                   </div>
                 </div>
-                <div class="col-6 flex-column align-items-center mb-4">
+                <div class="col-6 flex-column align-items-center my-4">
                   <h4>{Education 360}</h4>
                   <p>To Educate People</p>
                   <img src="https://via.placeholder.com/500x300" alt="Post Image" class="img-fluid ">
                 </div>
-                <div class="d-flex justify-content-between mb-3">
+                <div class="d-flex justify-content-between mb-1">
                   <div>like 100</div>
                   <div>Comment 100</div>
                 </div>

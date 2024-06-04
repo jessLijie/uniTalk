@@ -3,7 +3,7 @@ import Navbar from "@/examples/PageLayout/Navbar.vue";
 import AppFooter from "@/examples/PageLayout/Footer.vue";
 import { onBeforeUnmount, onBeforeMount, ref } from "vue";
 import { useStore } from "vuex";
-import CrowdFundCard from "./components/CrowdfundCard.vue";
+import CrowdfundCard from "./components/CrowdfundCard.vue";
 
 
 const body = document.getElementsByTagName("body")[0];
@@ -25,59 +25,59 @@ onBeforeUnmount(() => {
   body.classList.add("bg-gray-100");
 });
 
-const transactionList = [{
-  title: "Educate360",
+const userList = [{
+  users: "Joshua",
+  time: "5 hrs ago",
+  content: "Hi, this is my first post",
   category: "Food",
-  objective: "To educate people",
-  goal: 7000000,
-  raised: 80000,
-  investor: 4,
-  status: "Open"
+  comment: 100,
+  like: 10,
+  img: "https://via.placeholder.com/500x300"
 }, {
-  title: "BizBoost",
+  users: "John",
+  time: "5 hrs ago",
+  content: "Hi, this is my second post",
   category: "Technology",
-  objective: " Elevate, Expand, Excel!",
-  goal: 3000000,
-  raised: 60000,
-  investor: 2,
-  status: "Open"
+  comment: 100,
+  like: 10,
+  img: "https://via.placeholder.com/500x300"
 }, {
-  title: "Caring",
-  category: "Fashion",
-  objective: "To enhance experience",
-  goal: 10000000,
-  raised: 8000000,
-  investor: 3,
-  status: "Closed"
-}, {
-  title: "AI Technology",
+  users: "Peter",
+  time: "2 hrs ago",
+  content: "Hi, this is my third post",
   category: "Sport",
-  objective: "To enhance experience",
-  goal: 15000000,
-  raised: 10000000,
-  investor: 3,
-  status: "Closed"
+  comment: 100,
+  like: 10,
+  img: "https://via.placeholder.com/500x300"
 }, {
-  title: "Help Victim",
+  users: "Gavin",
+  time: "8 hrs ago",
+  content: "Hi, this is my fourth post",
   category: "Transport",
-  objective: "Together, We Rebuild Lives.",
-  goal: 13000000,
-  raised: 700000,
-  investor: 2,
-  status: "Closed"
+  comment: 100,
+  like: 10,
+  img: "https://via.placeholder.com/500x300"
+}, {
+  users: "Yam",
+  time: "3 hrs ago",
+  content: "Hi, this is my fifth post",
+  category: "Fashion",
+  comment: 100,
+  like: 10,
+  img: "https://via.placeholder.com/500x300"
 },];
 
-const filteredTransactions = ref(transactionList);
+const filteredUserList = ref(userList);
 const selectedCategory = ref(""); // Track the selected category
 
 const filterTransactions = (category) => {
   if (selectedCategory.value === category) {
-    filteredTransactions.value = transactionList;
+    filteredUserList.value = userList;
     selectedCategory.value = "";
   }
   else {
     selectedCategory.value = category; // Update the selected category
-    filteredTransactions.value = transactionList.filter(transaction => transaction.category === category);
+    filteredUserList.value = userList.filter(users => users.category === category);
   }
 };
 
@@ -117,17 +117,13 @@ const filterTransactions = (category) => {
           @click="filterTransactions('Transport')">
           Transport
         </button>
-      </div>
-      <div class="container">
-        <div class="row py-5">
-          <div class="px-3" v-for="(transaction, index) in filteredTransactions" :key="index">
-            <CrowdFundCard :title="`${transaction.title}`" :category="`${transaction.category}`"
-              :objective="`${transaction.objective}`" :goal="`${transaction.goal}`" :raised="`${transaction.raised}`"
-              :investor="`${transaction.investor}`" :status="`${transaction.status}`" />
-          </div>
+        <div class="px-3" v-for="(user, index) in filteredUserList" :key="index">
+          {{ user.users }}
+          <CrowdfundCard :user="user.users" :time="user.time" :content="user.content" :comment="user.comment"
+            :like="user.like" :img="user.img" />
         </div>
-
       </div>
+
     </section>
   </main>
   <app-footer />

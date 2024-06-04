@@ -3,58 +3,59 @@ import { ref, onBeforeMount, onBeforeUnmount } from "vue";
 import { useStore } from "vuex";
 import CrowdFundCard from "./components/CrowdfundCard.vue";
 
-const transactionList = [{
-    title: "Educate360",
-    category: "Transport",
-    objective: "To educate people",
-    goal: 7000000,
-    raised: 80000,
-    investor: 4,
-    status: "Open"
-}, {
-    title: "BizBoost",
-    category: "Sport",
-    objective: " Elevate, Expand, Excel!",
-    goal: 3000000,
-    raised: 60000,
-    investor: 2,
-    status: "Open"
-}, {
-    title: "Caring",
+const userList = [{
+    users: "Joshua",
+    time: "5 hrs ago",
+    content: "Hi, this is my first post",
     category: "Food",
-    objective: "To enhance experience",
-    goal: 10000000,
-    raised: 8000000,
-    investor: 3,
-    status: "Closed"
+    comment: 100,
+    like: 10,
+    img: "https://via.placeholder.com/500x300"
 }, {
-    title: "AI Technology",
+    users: "John",
+    time: "5 hrs ago",
+    content: "Hi, this is my second post",
     category: "Technology",
-    objective: "To enhance experience",
-    goal: 15000000,
-    raised: 10000000,
-    investor: 3,
-    status: "Closed"
+    comment: 100,
+    like: 10,
+    img: "https://via.placeholder.com/500x300"
 }, {
-    title: "Help Victim",
+    users: "Peter",
+    time: "2 hrs ago",
+    content: "Hi, this is my third post",
+    category: "Sport",
+    comment: 100,
+    like: 10,
+    img: "https://via.placeholder.com/500x300"
+}, {
+    users: "Gavin",
+    time: "8 hrs ago",
+    content: "Hi, this is my fourth post",
+    category: "Transport",
+    comment: 100,
+    like: 10,
+    img: "https://via.placeholder.com/500x300"
+}, {
+    users: "Yam",
+    time: "3 hrs ago",
+    content: "Hi, this is my fifth post",
     category: "Fashion",
-    objective: "Together, We Rebuild Lives.",
-    goal: 13000000,
-    raised: 700000,
-    investor: 2,
-    status: "Closed"
+    comment: 100,
+    like: 10,
+    img: "https://via.placeholder.com/500x300"
 },];
-const filteredTransactions = ref(transactionList);
+
+const filteredUserList = ref(userList);
 const selectedCategory = ref(""); // Track the selected category
 
 const filterTransactions = (category) => {
     if (selectedCategory.value === category) {
-        filteredTransactions.value = transactionList;
+        filteredUserList.value = userList;
         selectedCategory.value = "";
     }
     else {
         selectedCategory.value = category; // Update the selected category
-        filteredTransactions.value = transactionList.filter(transaction => transaction.category === category);
+        filteredUserList.value = userList.filter(users => users.category === category);
     }
 };
 
@@ -94,6 +95,7 @@ onBeforeUnmount(() => {
     }
 })
 
+
 </script>
 
 <template>
@@ -124,11 +126,9 @@ onBeforeUnmount(() => {
         </div>
         <div class="container">
             <div class="row py-2">
-                <div class="px-3" v-for="(transaction, index) in filteredTransactions" :key="index">
-                    <CrowdFundCard :title="`${transaction.title}`" :category="`${transaction.category}`"
-                        :objective="`${transaction.objective}`" :goal="`${transaction.goal}`"
-                        :raised="`${transaction.raised}`" :investor="`${transaction.investor}`"
-                        :status="`${transaction.status}`" />
+                <div class="px-3" v-for="(user, index) in filteredUserList" :key="index">
+                    <CrowdFundCard :user="user.users" :time="user.time" :content="user.content" :comment="user.comment"
+                        :like="user.like" :img="user.img" />
                 </div>
             </div>
 
