@@ -458,173 +458,43 @@ onMounted(() => {
                                                             <div class="row">
                                                                 <div class="col-md-6">
                                                                     <label for="investmentName"
-                                                                        class="form-label">Campaign
-                                                                        Name</label>
+                                                                        class="form-label">Title</label>
                                                                     <input type="text" class="form-control"
                                                                         placeholder="Enter investment name"
                                                                         :value="item.title" />
                                                                 </div>
                                                                 <div class="col-md-6">
                                                                     <label for="investmentPoster"
-                                                                        class="form-label">Campaign
-                                                                        Poster (Image File Format)</label>
+                                                                        class="form-label">Images(.png .jpg .jpeg)</label>
                                                                     <br>
                                                                     <input type="file" class="form-control"
                                                                         id="investmentPoster" accept="image/*" />
                                                                 </div>
                                                                 <div class="col-md-6">
                                                                     <label for="investmentPurpose" class="form-label">
-                                                                        Purpose</label>
-                                                                    <input type="text" class="form-control"
+                                                                        Topic</label>
+                                                                <select name="topic" id="topic" class="form-control">
+                                                                    <option value="Fashion" :selected="item.topic === 'Fashion'">Fashion</option>
+                                                                    <option value="Food" :selected="item.topic === 'Food'">Food</option>
+                                                                    <option value="Sports" :selected="item.topic === 'Sports'">Sports</option>
+                                                                    <option value="Transportation" :selected="item.topic === 'Transportation'">Transportation</option>
+                                                                    <option value="Technology" :selected="item.topic === 'Technology'">Technology</option>
+                                                                </select>
+                                                                    <!-- <input type="text" class="form-control"
                                                                         placeholder="Enter investment description"
-                                                                        :value="item.purpose" />
+                                                                        :value="item.purpose" /> -->
 
                                                                 </div>
                                                                 <div class="col-md-6">
                                                                     <label for="investmentOrganization"
-                                                                        class="form-label">Campaign Issuer
-                                                                        Name</label>
-                                                                    <input type="text" class="form-control"
+                                                                        class="form-label">Content</label>
+                                                                    <textarea type="text" class="form-control"
                                                                         placeholder="Enter issuer name"
-                                                                        :value="item.name" />
+                                                                        :value="item.content" />
                                                                 </div>
                                                             </div>
 
-                                                            <hr class="horizontal dark" />
-
-                                                            <p class="text-uppercase text-sm">Campaign Details</p>
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <label for="investmentPricePerShare"
-                                                                        class="form-label">Price Per Share
-                                                                        (ETH)</label>
-                                                                    <input type="number" step="0.01"
-                                                                        class="form-control" placeholder="0.00"
-                                                                        :value="item.pricePerShare" />
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <label for="investmentTargetAmount"
-                                                                        class="form-label">Target Amount
-                                                                        (ETH)</label>
-                                                                    <input type="number" step="0.01"
-                                                                        class="form-control" placeholder="0.00"
-                                                                        :value="item.target" />
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <label for="investmentDeadline"
-                                                                        class="form-label">Deadline
-                                                                        (dd/mm/yy
-                                                                        hh:mm)</label>
-                                                                    <input type="datetime-local" class="form-control"
-                                                                        placeholder="Select deadline"
-                                                                        :value="item.deadline" />
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <label for="investmentValuation"
-                                                                        class="form-label">Valuation</label>
-                                                                    <input type="text" class="form-control"
-                                                                        placeholder="Enter valuation"
-                                                                        :value="item.valuation" />
-                                                                </div>
-                                                            </div>
-
-                                                            <hr class="horizontal dark" />
-
-                                                            <p class="text-uppercase text-sm">Investment Breakdown</p>
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <label for="minInvestment"
-                                                                        class="form-label">Minimum
-                                                                        Investment
-                                                                        (ETH)</label>
-                                                                    <input type="number" step="0.01"
-                                                                        class="form-control" placeholder="0.00"
-                                                                        :value="item.minInvestment" />
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <label for="maxInvestment"
-                                                                        class="form-label">Maximum
-                                                                        Investment
-                                                                        (ETH)</label>
-                                                                    <input type="number" step="0.01"
-                                                                        class="form-control" placeholder="0.00"
-                                                                        :value="item.maxInvestment" />
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <label for="minSharesOffered"
-                                                                        class="form-label">Minimum
-                                                                        Number of Shares
-                                                                        Offered</label>
-                                                                    <input type="number" class="form-control"
-                                                                        placeholder="Enter minimum shares"
-                                                                        :value="item.minSharesOffered" />
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <label for="maxSharesOffered"
-                                                                        class="form-label">Maximum
-                                                                        Number of Shares
-                                                                        Offered</label>
-                                                                    <input type="number" class="form-control"
-                                                                        placeholder="Enter maximum shares"
-                                                                        :value="item.maxSharesOffered" />
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <label for="offeringType"
-                                                                        class="form-label">Offering
-                                                                        Type</label>
-                                                                    <select class="form-control" id="offeringType">
-                                                                        <option value="---Select offering type---"
-                                                                            disabled>
-                                                                            --Select offering type--
-                                                                        </option>
-                                                                        <option value="public"
-                                                                            :selected="item.offeringType === 'public'">
-                                                                            Public
-                                                                        </option>
-                                                                        <option value="private"
-                                                                            :selected="item.offeringType === 'private'">
-                                                                            Private
-                                                                        </option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <label for="assetType" class="form-label">Asset
-                                                                        Type</label>
-                                                                    <select class="form-control" id="assetType">
-                                                                        <option value="---Select asset type---"
-                                                                            disabled>
-                                                                            --Select asset type--
-                                                                        </option>
-                                                                        <option value="equity"
-                                                                            :selected="item.assetType === 'equity'">
-                                                                            Equity
-                                                                        </option>
-                                                                        <option value="debt"
-                                                                            :selected="item.assetType === 'debt'">
-                                                                            Debt
-                                                                        </option>
-                                                                        <option value="real estate"
-                                                                            :selected="item.assetType === 'real estate'">
-                                                                            Real Estate
-                                                                        </option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <label for="sharesOffered" class="form-label">Shares
-                                                                        Offered</label>
-                                                                    <select class="form-control" id="sharesOffered">
-                                                                        <option value="---Select shares offered---"
-                                                                            selected disabled>--Select shares offered--
-                                                                        </option>
-                                                                        <option value="common"
-                                                                            :selected="item.sharesOffered === 'common'">
-                                                                            Common</option>
-                                                                        <option value="preferred"
-                                                                            :selected="item.sharesOffered === 'preferred'">
-                                                                            Preferred</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
+                                                            <!-- <hr class="horizontal dark" /> -->
 
                                                         </form>
 
@@ -806,8 +676,7 @@ onMounted(() => {
                                                             <div class="row">
                                                                 <div class="col-md-6">
                                                                     <label for="investmentPoster"
-                                                                        class="form-label">Campaign
-                                                                        Poster (Image File Format)</label>
+                                                                        class="form-label">Images (.png .jpg. jpeg)</label>
                                                                     <br>
                                                                     <img src="../assets/img/signin.png" width="260"
                                                                         style="max-height: 220px" />
@@ -815,172 +684,32 @@ onMounted(() => {
                                                                 <div class="col">
                                                                     <div class="col">
                                                                         <label for="investmentName"
-                                                                            class="form-label">Campaign
-                                                                            Name</label>
+                                                                            class="form-label">Title</label>
                                                                         <input type="text" class="form-control"
                                                                             placeholder="Enter investment name"
                                                                             :value="item.title" disabled />
                                                                     </div>
                                                                     <div class="col">
-                                                                        <label for="investmentPurpose"
-                                                                            class="form-label">
-                                                                            Purpose</label>
+                                                                        <label for="investmentOrganization"
+                                                                            class="form-label">Topic</label>
                                                                         <input type="text" class="form-control"
-                                                                            placeholder="Enter investment description"
-                                                                            :value="item.purpose" disabled />
-
+                                                                            placeholder="Talks topic"
+                                                                            :value="item.topic" disabled />
                                                                     </div>
                                                                     <div class="col">
-                                                                        <label for="investmentOrganization"
-                                                                            class="form-label">Campaign Issuer
-                                                                            Name</label>
-                                                                        <input type="text" class="form-control"
-                                                                            placeholder="Enter issuer name"
-                                                                            :value="item.name" disabled />
+                                                                        <label for="investmentPurpose"
+                                                                            class="form-label">
+                                                                            Content</label>
+                                                                        <textarea type="text" class="form-control"
+                                                                            placeholder="Enter investment description"
+                                                                            :value="item.content" disabled />
+
                                                                     </div>
+                                                                   
                                                                 </div>
                                                             </div>
 
                                                             <hr class="horizontal dark" />
-
-                                                            <p class="text-uppercase text-sm">Campaign Details</p>
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <label for="investmentPricePerShare"
-                                                                        class="form-label">Price Per Share
-                                                                        (ETH)</label>
-                                                                    <input type="number" step="0.01"
-                                                                        class="form-control" placeholder="0.00"
-                                                                        :value="item.pricePerShare" disabled />
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <label for="investmentTargetAmount"
-                                                                        class="form-label">Target Amount
-                                                                        (ETH)</label>
-                                                                    <input type="number" step="0.01"
-                                                                        class="form-control" placeholder="0.00"
-                                                                        :value="item.target" disabled />
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <label for="investmentDeadline"
-                                                                        class="form-label">Deadline
-                                                                        (dd/mm/yy
-                                                                        hh:mm)</label>
-                                                                    <input type="datetime-local" class="form-control"
-                                                                        placeholder="Select deadline"
-                                                                        :value="item.deadline" disabled />
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <label for="investmentValuation"
-                                                                        class="form-label">Valuation</label>
-                                                                    <input type="text" class="form-control"
-                                                                        placeholder="Enter valuation"
-                                                                        :value="item.valuation" disabled />
-                                                                </div>
-                                                            </div>
-
-                                                            <hr class="horizontal dark" />
-
-                                                            <p class="text-uppercase text-sm">Investment Breakdown</p>
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <label for="minInvestment"
-                                                                        class="form-label">Minimum
-                                                                        Investment
-                                                                        (ETH)</label>
-                                                                    <input type="number" step="0.01"
-                                                                        class="form-control" placeholder="0.00"
-                                                                        :value="item.minInvestment" disabled />
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <label for="maxInvestment"
-                                                                        class="form-label">Maximum
-                                                                        Investment
-                                                                        (ETH)</label>
-                                                                    <input type="number" step="0.01"
-                                                                        class="form-control" placeholder="0.00"
-                                                                        :value="item.maxInvestment" disabled />
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <label for="minSharesOffered"
-                                                                        class="form-label">Minimum
-                                                                        Number of Shares
-                                                                        Offered</label>
-                                                                    <input type="number" class="form-control"
-                                                                        placeholder="Enter minimum shares"
-                                                                        :value="item.minSharesOffered" disabled />
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <label for="maxSharesOffered"
-                                                                        class="form-label">Maximum
-                                                                        Number of Shares
-                                                                        Offered</label>
-                                                                    <input type="number" class="form-control"
-                                                                        placeholder="Enter maximum shares"
-                                                                        :value="item.maxSharesOffered" disabled />
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <label for="offeringType"
-                                                                        class="form-label">Offering
-                                                                        Type</label>
-                                                                    <select class="form-control" id="offeringType"
-                                                                        disabled>
-                                                                        <option value="---Select offering type---"
-                                                                            disabled>
-                                                                            --Select offering type--
-                                                                        </option>
-                                                                        <option value="public"
-                                                                            :selected="item.offeringType === 'public'">
-                                                                            Public
-                                                                        </option>
-                                                                        <option value="private"
-                                                                            :selected="item.offeringType === 'private'">
-                                                                            Private
-                                                                        </option>
-                                                                    </select>
-
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <label for="assetType" class="form-label">Asset
-                                                                        Type</label>
-                                                                    <select class="form-control" id="assetType"
-                                                                        disabled>
-                                                                        <option value="---Select asset type---"
-                                                                            disabled>
-                                                                            --Select asset type--
-                                                                        </option>
-                                                                        <option value="equity"
-                                                                            :selected="item.assetType === 'equity'">
-                                                                            Equity
-                                                                        </option>
-                                                                        <option value="debt"
-                                                                            :selected="item.assetType === 'debt'">
-                                                                            Debt
-                                                                        </option>
-                                                                        <option value="real estate"
-                                                                            :selected="item.assetType === 'real estate'">
-                                                                            Real Estate
-                                                                        </option>
-                                                                    </select>
-
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <label for="sharesOffered" class="form-label">Shares
-                                                                        Offered</label>
-                                                                    <select class="form-control" id="sharesOffered"
-                                                                        disabled>
-                                                                        <option value="---Select shares offered---"
-                                                                            selected disabled>--Select shares offered--
-                                                                        </option>
-                                                                        <option value="common"
-                                                                            :selected="item.sharesOffered === 'common'">
-                                                                            Common</option>
-                                                                        <option value="preferred"
-                                                                            :selected="item.sharesOffered === 'preferred'">
-                                                                            Preferred</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
 
                                                         </form>
 
