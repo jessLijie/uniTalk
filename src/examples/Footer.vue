@@ -10,19 +10,19 @@
             class="text-sm text-center copyright text-muted text-lg-start"
           >
             ©
-            {{ new Date().getFullYear() }}, made by Xilijiji
+            {{ new Date().getFullYear() }}, made by UniTalk
           </div>
         </div>
         <div class="col-lg-6">
           <ul
             class="nav nav-footer justify-content-center justify-content-lg-end"
           >
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a
                 href="#"
                 class="nav-link text-muted"
                 target="_blank"
-                >Xilijiji</a
+                >UniTalk</a
               >
             </li>
             <li class="nav-item">
@@ -48,7 +48,7 @@
                 target="_blank"
                 >License</a
               >
-            </li>
+            </li> -->
           </ul>
         </div>
       </div>
