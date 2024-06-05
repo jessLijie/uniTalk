@@ -100,7 +100,7 @@ onBeforeUnmount(() => {
 
 <template>
     <div class="card m-4 px-4 pt-1">
-        <h1 class="m-0 mx-auto pt-3">Crowdfund List</h1>
+        <h1 class="m-0 mx-auto pt-5">Crowdfund List</h1>
         <div class="d-flex justify-content-center align-items-center w-100 mt-4"
             :class="`${darkMode ? 'bg-transparent' : ''}`">
             <button type="button" class="btn" :class="{ 'btn-success': selectedCategory === 'Food' }"
@@ -125,8 +125,8 @@ onBeforeUnmount(() => {
             </button>
         </div>
         <div class="container">
-            <div class="row py-2">
-                <div class="px-3" v-for="(user, index) in filteredUserList" :key="index">
+            <div class="row">
+                <div class="px-3 py-2" v-for="(user, index) in filteredUserList" :key="index">
                     <CrowdFundCard :user="user.users" :time="user.time" :content="user.content" :comment="user.comment"
                         :like="user.like" :img="user.img" />
                 </div>
