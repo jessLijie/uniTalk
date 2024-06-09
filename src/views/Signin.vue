@@ -40,19 +40,35 @@ async function signIn() {
       const signInUser = response.data;
       console.log('Sign-in successful:', signInUser);
       const role = signInUser.role;
-      navigateToRolePage(role);
+      const userId = signInUser.id;
+      navigateToRolePage(role,userId);
     } else {
-      console.error('Sign-in failed:', response.data.message);
+      console.error('Sign-in failed:', );
+      displayErrorMessage(response.data.message);
     }
   } catch (error) {
-    console.error('Sign-in failed:', error.response.data.message);
+    console.error('Sign-in failed:', );
+    displayErrorMessage(error.response.data.message);
   }
 }
-
+function displayErrorMessage(message) {
+  const errorMessageElement = document.getElementById('error-message'); // Assuming you have an element with id 'error-message' to display the error message
+  errorMessageElement.innerHTML = `<center><span class="fade-in error-badge" style="color: red; font-size:15px">${message}</span></center>`;
+}
+const isValidEmail = ref(false);
+function validateEmail() {
+  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  if (emailRegex.test(email.value)) {
+    isValidEmail.value = true;
+  } else {
+    isValidEmail.value = false;
+  }
+}
 // Method to navigate to the appropriate page based on the selected role
-function navigateToRolePage(role) {
+function navigateToRolePage(role, userId) {
   if (role === "user") {
     localStorage.setItem("role", "user");
+    localStorage.setItem("userid", userId);
     router.push("/generallist");
   } else {
     localStorage.setItem("role", "admin");
@@ -77,13 +93,16 @@ function navigateToRolePage(role) {
                 <div class="card-body">
                   <form role="form">
                     <div class="mb-3">
-                      <argon-input v-model="email" id="email" type="email" placeholder="Email" name="email" size="lg" />
-                    </div>
+                      <argon-input v-model="email" id="email" placeholder="Email" name="email" size="lg" @input="validateEmail" />
+                      <span v-if="!isValidEmail && email.length > 0" style="color: red;">Please enter a valid email address</span>  
+                      </div>
                     <div class="mb-3">
                       <argon-input v-model="password" id="password" type="password" placeholder="Password" name="password" size="lg" />
                     </div>
                     
-                    <argon-checkbox id="rememberMe" name="remember-me">Remember me</argon-checkbox>
+                    <argon-checkbox id="rememberMe" name="remember-me" checked>Remember me</argon-checkbox>
+                    <div id="error-message"></div>
+
                     <div class="text-center">
                       <argon-button @click.prevent="signIn" class="mt-4" variant="gradient" color="success" fullWidth
                         size="lg">Sign
@@ -125,3 +144,26 @@ function navigateToRolePage(role) {
   </main>
   <app-footer />
 </template>
+
+<style >
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  .error-badge {
+    background-color: rgb(255, 223, 223);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 10px;
+  }
+
+</style>
