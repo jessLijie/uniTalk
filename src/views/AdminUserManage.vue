@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 import { ref, onMounted, onBeforeMount, onBeforeUnmount } from 'vue';
 import { useRouter } from 'vue-router';
 import { useStore } from "vuex";
@@ -26,6 +26,8 @@ const temp = ref([
     }
 ]
 );
+
+
 const currentPage = ref(1);
 const maxPageSize = ref(null);
 const listData = ref([]);
@@ -140,7 +142,7 @@ onBeforeUnmount(() => {
   }
 })
 
-</script>
+</script> -->
 
 <template>
     <div class="card m-4">
@@ -149,9 +151,10 @@ onBeforeUnmount(() => {
 
             <div class="d-flex">
                 <div class="form-outline">
-                    <input type="search" id="form1" class="form-control rounded-start rounded-0" placeholder="name" />
+                    <input type="search" id="form1" class="form-control rounded-start rounded-0" placeholder="name"
+                    v-model="searchVal"/>
                 </div>
-                <button id="search-button" type="button" class="btn btn-success rounded-0 rounded-end">
+                <button id="search-button" type="button" class="btn btn-success rounded-0 rounded-end" v-on:click="fetchUsers()">
                     <i class="fas fa-search"></i>
                 </button>
             </div>
@@ -176,64 +179,37 @@ onBeforeUnmount(() => {
                                     </div>
                                 </div>
                             </th>
-                            <!-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                First Name
-                            </th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                Last Name
-                            </th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                Phone Number
-                            </th> -->
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                 Email
                             </th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                 Total talks
                             </th>
-                            <!-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                Fund Raised
-                            </th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                Target
-                            </th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                Status <i class="fas fa-filter"></i>
-                            </th> -->
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                 Action
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(item, index) in listData" :key="index">
+                        <tr v-for="user in users" :key="user.id">
                             <td>
-                                <h6 class="item ps-3">{{ item.id }}</h6>
+                                <h6 class="item ps-3">{{ user.id }}</h6>
                             </td>
                             <td>
-                                <h6 class="item ps-3">{{ item.username }}</h6>
-                            </td>
-                            <!-- <td>
-                                <h6 class="item">{{ item.firstName }}</h6>
+                                <h6 class="item ps-3">{{ user.username }}</h6>
                             </td>
                             <td>
-                                <h6 class="item">{{ item.lastName }}</h6>
+                                <h6 class="item">{{ user.email }}</h6>
                             </td>
                             <td>
-                                <h6 class="item">{{ item.phone }}</h6>
-                            </td> -->
-                            <td>
-                                <h6 class="item">{{ item.email }}</h6>
-                            </td>
-                            <td>
-                                <h6 class="item">{{ item.total_talk }}</h6>
+                                <h6 class="item">user.total_talk</h6>
                             </td>
                             <td>
                                 <button type="button" class="btn mb-0" data-bs-toggle="modal"
-                                    :data-bs-target="'#row' + index"><i class="fas fa-edit"></i></button>
+                                    :data-bs-target="'#row' + user.id"><i class="fas fa-edit"></i></button>
 
                                 <!-- Edit Modal -->
-                                <div class="modal fade" :id="'row' + index" tabindex="-1" aria-labelledby="ModalLabel"
+                                <div class="modal fade" :id="'row' + user.id" tabindex="-1" aria-labelledby="ModalLabel"
                                     aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -247,33 +223,18 @@ onBeforeUnmount(() => {
                                                     <div class="mb-3">
                                                         <label for="username" class="form-label">Username:</label>
                                                         <input type="text" class="form-control" id="username"
-                                                            placeholder="Enter name" :value="item.username">
+                                                            placeholder="Enter name" :value="user.username">
                                                     </div>
-                                                    <div class="mb-3">
-                                                        <label for="firstName" class="form-label">First Name:</label>
-                                                        <input type="text" class="form-control" id="firstName"
-                                                            placeholder="Enter name" :value="item.firstName">
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="lastName" class="form-label">Last Name:</label>
-                                                        <input type="text" class="form-control" id="lastName"
-                                                            placeholder="Enter name" :value="item.lastName">
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="phone" class="form-label">Last Name:</label>
-                                                        <input type="text" class="form-control" id="phone"
-                                                            placeholder="Enter name" :value="item.phone">
-                                                    </div>
+                                                    
                                                     <div class="mb-3">
                                                         <label for="email" class="form-label">Email:</label>
                                                         <input type="email" class="form-control" id="email"
-                                                            :value="item.email">
+                                                            :value="user.email">
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="walletAddress" class="form-label">Wallet
-                                                            Address:</label>
-                                                        <input type="text" class="form-control" id="walletAddress"
-                                                            :value="item.walletAddress">
+                                                        <label for="walletAddress" class="form-label">Password:</label>
+                                                        <input type="text" class="form-control" id="password"
+                                                            :value="user.password">
                                                     </div>
                                                 </form>
                                             </div>
@@ -307,6 +268,73 @@ onBeforeUnmount(() => {
         </div>
     </div>
 </template>
+
+<script>
+export default ({
+    data(){
+        return {
+            users: [],
+            sortBy: '',
+            sortOrder: 'asc',
+            currentPage: 1,
+            searchVal: '',
+        }
+    },
+    methods: {
+        async fetchUsers() {
+            try {
+                const response = await fetch(`http://localhost:8080/userList?search_val=${this.searchVal}`);
+                this.users = await response.json();
+                this.filteredUsers = this.users;
+            } catch (error) {
+                console.error('Error fetching users:', error);
+            }
+        },
+        sortData(criteria) {
+            if (this.sortBy === criteria) {
+                this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
+            } else {
+                this.sortBy = criteria;
+                this.sortOrder = 'asc';
+            }
+
+            this.users.sort((a, b) => {
+                const factor = this.sortOrder === 'asc' ? 1 : -1;
+                if (a[criteria] < b[criteria]) return -1 * factor;
+                if (a[criteria] > b[criteria]) return 1 * factor;
+                return 0;
+            });
+        },
+        goToPreviousPage() {
+            if (this.currentPage > 1) {
+                this.currentPage--;
+            }
+            this.sliceTempArray();
+        },
+        goToNextPage() {
+            if (this.currentPage < this.maxPageSize) {
+                this.currentPage++;
+            }
+            this.sliceTempArray();
+        },
+        sliceTempArray() {
+            const startIndex = (this.currentPage - 1) * 6;
+            const endIndex = startIndex + 6;
+            this.users = this.users.slice(startIndex, endIndex);
+        },
+        searchUsers() {
+            this.filteredUsers = this.users.filter(user => {
+                return user.username.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+                       user.email.toLowerCase().includes(this.searchQuery.toLowerCase());
+            });
+        },
+    },
+      
+    mounted() {
+        this.fetchUsers();
+    },
+})
+</script>
 
 <style>
 .item {
