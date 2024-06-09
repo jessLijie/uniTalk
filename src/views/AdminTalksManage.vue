@@ -1,153 +1,12 @@
-<script setup>
+<!-- <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 import { useRouter } from 'vue-router';
-
-/* Approved page */
-const temp = ref([
-    {
-        title: 'New trend is style: Wearing the black out of the blue ',
-        content: 'Lately, the reporters from T...',
-        topic: 'Fashion',
-        author: 'Bella Hadid',
-        posted_date: '22 Jan 2024',
-        like: 5800,
-        comment: 15
-
-    },
-    {
-        title: 'The Rise of Plant-Based Diets: What You Need to Know',
-        content: 'With the growing awareness of health...',
-        topic: 'Food',
-        author: 'Jamie Oliver',
-        posted_date: '15 Feb 2024',
-        like: 4200,
-        comment: 37
-    },
-    {
-        title: 'Revolutionizing Urban Mobility: The Future of E-Scooters',
-        content: 'E-scooters have become increasingly popular...',
-        topic: 'Transportation',
-        author: 'Elon Musk',
-        posted_date: '8 Mar 2024',
-        like: 7600,
-        comment: 54
-    },
-    {
-        title: 'AI in 2024: What’s Next for Artificial Intelligence?',
-        content: 'Artificial intelligence continues to advance...',
-        topic: 'Technology',
-        author: 'Sundar Pichai',
-        posted_date: '20 Jan 2024',
-        like: 9300,
-        comment: 82
-    },
-    {
-        title: 'Top 10 Streetwear Trends to Watch This Year',
-        content: 'Streetwear has evolved significantly...',
-        topic: 'Fashion',
-        author: 'Virgil Abloh',
-        posted_date: '5 Apr 2024',
-        like: 6800,
-        comment: 45
-    },
-    {
-        title: 'The Best Foods to Boost Your Immune System',
-        content: 'Incorporating these foods into your diet...',
-        topic: 'Food',
-        author: 'Gordon Ramsay',
-        posted_date: '10 May 2024',
-        like: 5200,
-        comment: 23
-    },
-    {
-        title: 'How Data Analytics is Changing the Game in Sports',
-        content: 'Data analytics is revolutionizing the sports...',
-        topic: 'Sports',
-        author: 'Bill James',
-        posted_date: '12 Feb 2024',
-        like: 7800,
-        comment: 67
-    },
-    {
-        title: 'Exploring the Latest Innovations in Electric Vehicles',
-        content: 'The electric vehicle market is expanding...',
-        topic: 'Transportation',
-        author: 'Mary Barra',
-        posted_date: '30 Jan 2024',
-        like: 6100,
-        comment: 39
-    },
-    {
-        title: '5G Technology: The Future of Connectivity',
-        content: '5G technology promises to revolutionize...',
-        topic: 'Technology',
-        author: 'Tim Cook',
-        posted_date: '2 Mar 2024',
-        like: 8500,
-        comment: 59
-    },
-    {
-        title: 'The Impact of Sustainable Fashion on the Industry',
-        content: 'Sustainable fashion is becoming a...',
-        topic: 'Fashion',
-        author: 'Stella McCartney',
-        posted_date: '18 Apr 2024',
-        like: 7100,
-        comment: 32
-    },
-    {
-        title: 'Healthy Eating on a Budget: Tips and Tricks',
-        content: 'Eating healthy doesn’t have to be expensive...',
-        topic: 'Food',
-        author: 'Alice Waters',
-        posted_date: '25 May 2024',
-        like: 4800,
-        comment: 20
-    },
-    {
-        title: 'Analyzing the Latest Trends in Sports Technology',
-        content: 'Sports technology is evolving rapidly...',
-        topic: 'Sports',
-        author: 'Mark Cuban',
-        posted_date: '28 Feb 2024',
-        like: 6700,
-        comment: 50
-    }
-
-]);
-
-const sortBy = ref(null);
-const sortOrder = ref('asc');
-const currentPage = ref(1);
-const maxPageSize = ref(null);
-const listData = ref([]);
-
-function truncatedTitle(title) {
-    return title.length > 25 ? title.substring(0, 25) + '...' : title;
-}
-
-function sortData(criteria) {
-    if (sortBy.value === criteria) {
-        sortOrder.value = sortOrder.value === 'asc' ? 'desc' : 'asc';
-    } else {
-        sortBy.value = criteria;
-        sortOrder.value = 'asc';
-    }
-
-    listData.value.sort((a, b) => {
-        const factor = sortOrder.value === 'asc' ? 1 : -1;
-        if (a[criteria] < b[criteria]) return -1 * factor;
-        if (a[criteria] > b[criteria]) return 1 * factor;
-        return 0;
-    });
-}
 
 const router = useRouter();
 const beforeEachGuard = (to, from, next) => {
     closeModal();
     next();
 };
-
 router.beforeEach(beforeEachGuard);
 
 onBeforeUnmount(() => {
@@ -160,113 +19,8 @@ onBeforeUnmount(() => {
     });
 });
 
-function closeModal() {
-    document.body.classList.remove('modal-open');
-    const modalBackdrop = document.querySelector('.modal-backdrop');
-    if (modalBackdrop) {
-        modalBackdrop.parentNode.removeChild(modalBackdrop);
-    }
-}
+</script> -->
 
-const goToPreviousPage = () => {
-    if (currentPage.value > 1) {
-        currentPage.value--;
-    }
-    sliceTempArray();
-}
-
-const goToNextPage = () => {
-    if (currentPage.value < maxPageSize.value) {
-        currentPage.value++;
-    }
-    sliceTempArray();
-}
-
-function setMaxPageSize() {
-    maxPageSize.value = Math.ceil(temp.value.length / 6);
-}
-
-function sliceTempArray() {
-    const startIndex = (currentPage.value - 1) * 6;
-    const endIndex = startIndex + 6;
-    listData.value = temp.value.slice(startIndex, endIndex);
-}
-
-onMounted(() => {
-    setMaxPageSize();
-    sliceTempArray();
-})
-
-/* Pending page */
-const temp2 = ref([
-    {
-        title: 'Healthy Eating on a Budget: Tips and Tricks',
-        content: 'Eating healthy doesn’t have to be expensive...',
-        topic: 'Food',
-        author: 'Alice Waters',
-        posted_date: '25 May 2024'
-    },
-    {
-        title: 'Analyzing the Latest Trends in Sports Technology',
-        content: 'Sports technology is evolving rapidly...',
-        topic: 'Sports',
-        author: 'Mark Cuban',
-        posted_date: '28 Feb 2024'
-    }
-]);
-
-const sortBy2 = ref(null);
-const sortOrder2 = ref('asc');
-const currentPage2 = ref(1);
-const maxPageSize2 = ref(null);
-const listData2 = ref([]);
-
-function sortData2(criteria) {
-    if (sortBy2.value === criteria) {
-        sortOrder2.value = sortOrder2.value === 'asc' ? 'desc' : 'asc';
-    } else {
-        sortBy2.value = criteria;
-        sortOrder2.value = 'asc';
-    }
-
-    listData2.value.sort((a, b) => {
-        const factor = sortOrder2.value === 'asc' ? 1 : -1;
-        if (a[criteria] < b[criteria]) return -1 * factor;
-        if (a[criteria] > b[criteria]) return 1 * factor;
-        return 0;
-    });
-}
-
-const goToPreviousPage2 = () => {
-    if (currentPage2.value > 1) {
-        currentPage2.value--;
-    }
-    sliceTempArray2();
-}
-
-const goToNextPage2 = () => {
-    if (currentPage2.value < maxPageSize2.value) {
-        currentPage2.value++;
-    }
-    sliceTempArray2();
-}
-
-function setMaxPageSize2() {
-    maxPageSize2.value = Math.ceil(temp2.value.length / 6);
-}
-
-function sliceTempArray2() {
-    const startIndex = (currentPage2.value - 1) * 6;
-    const endIndex = startIndex + 6;
-    listData2.value = temp2.value.slice(startIndex, endIndex);
-}
-
-onMounted(() => {
-    setMaxPageSize2();
-    sliceTempArray2();
-})
-
-</script>
 <style>
 .nav-btn:not(.active) {
     color: gray !important;
@@ -278,7 +32,6 @@ onMounted(() => {
     /* Change the color to gray */
     font-weight: 600 !important;
 }
-
 </style>
 <template>
     <div class="card m-4">
@@ -286,15 +39,16 @@ onMounted(() => {
             <li class="nav-item" role="presentation">
                 <button class="nav-btn nav-link active" id="pills-approved-tab" data-bs-toggle="pill"
                     data-bs-target="#pills-approve" type="button" role="tab" aria-controls="pills-approve"
-                    aria-selected="true">Approved ({{ temp.length }})</button>
+                    aria-selected="true">Approved ({{ approvedTalks.length }})</button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-btn nav-link" id="pills-pending-tab" data-bs-toggle="pill"
                     data-bs-target="#pills-pending" type="button" role="tab" aria-controls="pills-pending"
-                    aria-selected="false">Pending ({{ temp2.length }})</button>
+                    aria-selected="false">Pending ({{ pendingTalks.length }})</button>
             </li>
         </ul>
         <div class="tab-content" id="pills-tabContent">
+            <!-- Approved -->
             <div class="tab-pane fade show active" id="pills-approve" role="tabpanel"
                 aria-labelledby="pills-approved-tab" tabindex="0">
                 <div class="card-header py-0 d-flex justify-content-between align-items-center">
@@ -327,28 +81,17 @@ onMounted(() => {
                                             </div>
                                         </div>
                                     </th>
-                                    <!-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        <div class="d-flex align-items-center" @click="sortData('content')"
-                                            style="cursor: pointer">
-                                            Content
-                                            <div class="d-flex flex-column ms-3">
-                                                <i class="fas fa-caret-up text-sm lh-1"
-                                                    :class="{ 'text-dark': sortBy === 'content' && sortOrder === 'asc' }"></i>
-                                                <i class="fas fa-caret-down text-sm lh-1"
-                                                    :class="{ 'text-dark': sortBy === 'content' && sortOrder === 'desc' }"></i>
-                                            </div>
-                                        </div>
-                                    </th> -->
+
                                     <th
                                         class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        <div class="d-flex align-items-center" @click="sortData('topic')"
+                                        <div class="d-flex align-items-center" @click="sortData('category')"
                                             style="cursor: pointer">
                                             Topic
                                             <div class="d-flex flex-column ms-3">
                                                 <i class="fas fa-caret-up text-sm lh-1"
-                                                    :class="{ 'text-dark': sortBy === 'topic' && sortOrder === 'asc' }"></i>
+                                                    :class="{ 'text-dark': sortBy === 'category' && sortOrder === 'asc' }"></i>
                                                 <i class="fas fa-caret-down text-sm lh-1"
-                                                    :class="{ 'text-dark': sortBy === 'topic' && sortOrder === 'desc' }"></i>
+                                                    :class="{ 'text-dark': sortBy === 'category' && sortOrder === 'desc' }"></i>
                                             </div>
                                         </div>
                                     </th>
@@ -367,14 +110,14 @@ onMounted(() => {
                                     </th>
                                     <th
                                         class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        <div class="d-flex align-items-center" @click="sortData('posted_date')"
+                                        <div class="d-flex align-items-center" @click="sortData('posted_datetime')"
                                             style="cursor: pointer">
                                             Posted Date
                                             <div class="d-flex flex-column ms-3">
                                                 <i class="fas fa-caret-up text-sm lh-1"
-                                                    :class="{ 'text-dark': sortBy === 'posted_date' && sortOrder === 'asc' }"></i>
+                                                    :class="{ 'text-dark': sortBy === 'posted_datetime' && sortOrder === 'asc' }"></i>
                                                 <i class="fas fa-caret-down text-sm lh-1"
-                                                    :class="{ 'text-dark': sortBy === 'posted_date' && sortOrder === 'desc' }"></i>
+                                                    :class="{ 'text-dark': sortBy === 'posted_datetime' && sortOrder === 'desc' }"></i>
                                             </div>
                                         </div>
                                     </th>
@@ -404,134 +147,73 @@ onMounted(() => {
                                             </div>
                                         </div>
                                     </th>
-                                    <th
-                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2" style="text-align: center;"> 
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
+                                        style="text-align: center;">
                                         Action
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="(item, index) in listData" :key="index">
-                                    <td>
-                                        <h6 class="item ps-3">{{ truncatedTitle(item.title) }}</h6>
-                                    </td>
-                                    <!-- <td>
-                                        <h6 class="item ps-3">{{ item.content }}</h6>
-                                    </td> -->
-                                    <td>
-                                        <h6 class="item">{{ item.topic }}</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="item">{{ item.author }}</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="item">{{ item.posted_date }}</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="item">{{ item.like }}</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="item" >{{ item.comment }}</h6>
-                                    </td>
-                                    <td>
-                                        <router-link class="btn mb-0" to="/campaign-detail"><i
-                                                class="fas fa-info-circle"></i></router-link>
-                                        <button type="button" class="btn mb-0 ms-3" data-bs-toggle="modal"
-                                            :data-bs-target="'#row' + index"><i class="fas fa-edit"></i></button>
-                                        <button type="button" class="btn mb-0 ms-3" data-bs-toggle="modal"
-                                            :data-bs-target="'#rowDelete' + index"><i
-                                                class="fas fa-trash-alt"></i></button>
+                                <template v-if="approvedTalks.length > 0">
+                                    <tr v-for="(item, index) in approvedTalks" :key="index">
+                                        <td>
+                                            <h6 class="item ps-3">{{ truncatedTitle(item.title) }}</h6>
+                                        </td>
 
-                                        <!-- Edit Modal -->
-                                        <div class="modal fade" :id="'row' + index" tabindex="-1"
-                                            aria-labelledby="ModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog" style="max-width: 600px !important">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h1 class="modal-title fs-5" id="ModalLabel"><i
-                                                                class="fas fa-edit"></i>
-                                                            Edit</h1>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <form>
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <label for="investmentName"
-                                                                        class="form-label">Title</label>
-                                                                    <input type="text" class="form-control"
-                                                                        placeholder="Enter investment name"
-                                                                        :value="item.title" />
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <label for="investmentPoster"
-                                                                        class="form-label">Images(.png .jpg .jpeg)</label>
-                                                                    <br>
-                                                                    <input type="file" class="form-control"
-                                                                        id="investmentPoster" accept="image/*" />
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <label for="investmentPurpose" class="form-label">
-                                                                        Topic</label>
-                                                                <select name="topic" id="topic" class="form-control">
-                                                                    <option value="Fashion" :selected="item.topic === 'Fashion'">Fashion</option>
-                                                                    <option value="Food" :selected="item.topic === 'Food'">Food</option>
-                                                                    <option value="Sports" :selected="item.topic === 'Sports'">Sports</option>
-                                                                    <option value="Transportation" :selected="item.topic === 'Transportation'">Transportation</option>
-                                                                    <option value="Technology" :selected="item.topic === 'Technology'">Technology</option>
-                                                                </select>
-                                                                    <!-- <input type="text" class="form-control"
-                                                                        placeholder="Enter investment description"
-                                                                        :value="item.purpose" /> -->
+                                        <td>
+                                            <h6 class="item">{{ item.category }}</h6>
+                                        </td>
+                                        <td>
+                                            <h6 class="item">{{ getUsername(item.user_id) }}</h6>
+                                        </td>
+                                        <td>
+                                            <h6 class="item">{{ item.posted_datetime }}</h6>
+                                        </td>
+                                        <td>
+                                            <h6 class="item">{{ item.likes }}</h6>
+                                        </td>
+                                        <td>
+                                            <h6 class="item">{{ item.comment_count }}</h6>
+                                        </td>
+                                        <td>
+                                            <router-link class="btn mb-0" to="/campaign-detail"><i
+                                                    class="fas fa-info-circle"></i></router-link>
 
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <label for="investmentOrganization"
-                                                                        class="form-label">Content</label>
-                                                                    <textarea type="text" class="form-control"
-                                                                        placeholder="Enter issuer name"
-                                                                        :value="item.content" />
-                                                                </div>
-                                                            </div>
+                                            <button type="button" class="btn mb-0 ms-3" data-bs-toggle="modal"
+                                                :data-bs-target="'#rowDelete' + index"><i
+                                                    class="fas fa-trash-alt"></i></button>
 
-                                                            <!-- <hr class="horizontal dark" /> -->
 
-                                                        </form>
 
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary"
-                                                            data-bs-dismiss="modal">Close</button>
-                                                        <button type="button" class="btn btn-primary">Save
-                                                            changes</button>
+                                            <!-- Delete Modal -->
+                                            <div class="modal fade" :id="'rowDelete' + index" tabindex="-1"
+                                                aria-labelledby="ModalLabelD" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="ModalLabelD"><i
+                                                                    class="fas fa-trash-alt"></i> Delete</h1>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            Confirm to delete <strong>"{{ item.title }}"</strong> ?
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">Close</button>
+                                                            <button type="button"
+                                                                class="btn btn-primary" @click="deleteTalk(item.id)">Delete</button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-
-                                        <!-- Delete Modal -->
-                                        <div class="modal fade" :id="'rowDelete' + index" tabindex="-1"
-                                            aria-labelledby="ModalLabelD" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h1 class="modal-title fs-5" id="ModalLabelD"><i
-                                                                class="fas fa-trash-alt"></i> Delete</h1>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        Confirm to delete "{{ item.name }}" ?
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary"
-                                                            data-bs-dismiss="modal">Close</button>
-                                                        <button type="button" class="btn btn-primary">Delete</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        </td>
+                                    </tr>
+                                </template>
+                                <tr v-else>
+                                    <td colspan="7">
+                                        <h6 class="text-center">No talks available</h6>
                                     </td>
                                 </tr>
                                 <tr>
@@ -552,6 +234,7 @@ onMounted(() => {
                     </div>
                 </div>
             </div>
+            <!-- Pending -->
             <div class="tab-pane fade" id="pills-pending" role="tabpanel" aria-labelledby="pills-pending-tab"
                 tabindex="0">
                 <div class="card-header py-0 d-flex justify-content-between align-items-center">
@@ -587,14 +270,14 @@ onMounted(() => {
 
                                     <th
                                         class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        <div class="d-flex align-items-center" @click="sortData2('topic')"
+                                        <div class="d-flex align-items-center" @click="sortData2('category')"
                                             style="cursor: pointer">
                                             Topic
                                             <div class="d-flex flex-column ms-3">
                                                 <i class="fas fa-caret-up text-sm lh-1"
-                                                    :class="{ 'text-dark': sortBy2 === 'topic' && sortOrder2 === 'asc' }"></i>
+                                                    :class="{ 'text-dark': sortBy2 === 'category' && sortOrder2 === 'asc' }"></i>
                                                 <i class="fas fa-caret-down text-sm lh-1"
-                                                    :class="{ 'text-dark': sortBy2 === 'topic' && sortOrder2 === 'desc' }"></i>
+                                                    :class="{ 'text-dark': sortBy2 === 'category' && sortOrder2 === 'desc' }"></i>
                                             </div>
                                         </div>
                                     </th>
@@ -614,160 +297,187 @@ onMounted(() => {
 
                                     <th
                                         class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        <div class="d-flex align-items-center" @click="sortData2('posted_date')"
+                                        <div class="d-flex align-items-center" @click="sortData2('posted_datetime')"
                                             style="cursor: pointer">
                                             Posted Date
                                             <div class="d-flex flex-column ms-3">
                                                 <i class="fas fa-caret-up text-sm lh-1"
-                                                    :class="{ 'text-dark': sortBy2 === 'posted_date' && sortOrder2 === 'asc' }"></i>
+                                                    :class="{ 'text-dark': sortBy2 === 'posted_datetime' && sortOrder2 === 'asc' }"></i>
                                                 <i class="fas fa-caret-down text-sm lh-1"
-                                                    :class="{ 'text-dark': sortBy2 === 'posted_date' && sortOrder2 === 'desc' }"></i>
+                                                    :class="{ 'text-dark': sortBy2 === 'posted_datetime' && sortOrder2 === 'desc' }"></i>
                                             </div>
                                         </div>
                                     </th>
-                                    <th
-                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2" style="text-align: center;">
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
+                                        style="text-align: center;">
                                         Action
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="(item, index) in listData2" :key="index">
-                                    <td>
-                                        <h6 class="item ps-3">{{ item.title }}</h6>
-                                    </td>
+                                <template v-if="pendingTalks.length > 0">
+                                    <tr v-for="(item, index) in pendingTalks" :key="index">
+                                        <td>
+                                            <h6 class="item ps-3"> {{ truncatedTitle(item.title) }}</h6>
+                                        </td>
+                                        <td>
+                                            <h6 class="item">{{ item.category }}</h6>
+                                        </td>
+                                        <td>
+                                            <h6 class="item">{{ getUsername(item.user_id) }}</h6>
+                                        </td>
+                                        <td>
+                                            <h6 class="item">{{ item.posted_datetime }}</h6>
+                                        </td>
+                                        <td>
+                                            <center>
+                                                <button type="button" class="btn mb-0 ms-3" data-bs-toggle="modal"
+                                                    :data-bs-target="'#rowPending' + index">
+                                                    <i class="fas fa-info-circle"></i>
+                                                </button>
+                                                <button type="button" class="btn mb-0 ms-3" data-bs-toggle="modal"
+                                                    :data-bs-target="'#rowApprove' + index">
+                                                    <i class="fas fa-check"></i>
+                                                </button>
+                                                <button type="button" class="btn mb-0 ms-3" data-bs-toggle="modal"
+                                                    :data-bs-target="'#rowReject' + index">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </center>
+                                            <!-- View Modal -->
+                                            <div class="modal fade" :id="'rowPending' + index" tabindex="-1"
+                                                aria-labelledby="ModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" style="max-width: 600px !important">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="ModalLabel"><i
+                                                                    class="fas fa-info-circle"></i>
+                                                                View</h1>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form>
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <label for="investmentPoster"
+                                                                            class="form-label">Images (.png .jpg.
+                                                                            jpeg)</label>
+                                                                        <br>
+                                                                        <img src="../assets/img/signin.png" width="260"
+                                                                            style="max-height: 220px" />
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        <div class="col">
+                                                                            <label for="author"
+                                                                                class="form-label">Author</label>
+                                                                            <input type="text" class="form-control"
+                                                                                placeholder="Enter investment name"
+                                                                                :value="getUsername(item.user_id)"
+                                                                                disabled />
+                                                                        </div>
+                                                                        <div class="col">
+                                                                            <label for="investmentName"
+                                                                                class="form-label">Title</label>
+                                                                            <input type="text" class="form-control"
+                                                                                placeholder="Enter investment name"
+                                                                                :value="item.title" disabled />
+                                                                        </div>
+                                                                        <div class="col">
+                                                                            <label for="investmentOrganization"
+                                                                                class="form-label">Category</label>
+                                                                            <input type="text" class="form-control"
+                                                                                placeholder="Talks topic"
+                                                                                :value="item.category" disabled />
+                                                                        </div>
+                                                                        <div class="col">
+                                                                            <label for="investmentPurpose"
+                                                                                class="form-label">
+                                                                                Content</label>
+                                                                            <textarea type="text" class="form-control"
+                                                                                placeholder="Enter investment description"
+                                                                                :value="item.content" disabled />
 
-                                    <td>
-                                        <h6 class="item">{{ item.topic }}</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="item">{{ item.author }}</h6>
-                                    </td>
-                                    <td>
-                                        <h6 class="item">{{ item.posted_date }}</h6>
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn mb-0 ms-3" data-bs-toggle="modal"
-                                            :data-bs-target="'#rowPending' + index">
-                                            <i class="fas fa-info-circle"></i>
-                                        </button>
-                                        <button type="button" class="btn mb-0 ms-3" data-bs-toggle="modal"
-                                            :data-bs-target="'#rowApprove' + index">
-                                            <i class="fas fa-check"></i>
-                                        </button>
-                                        <button type="button" class="btn mb-0 ms-3" data-bs-toggle="modal"
-                                            :data-bs-target="'#rowReject' + index">
-                                            <i class="fas fa-times"></i>
-                                        </button>
+                                                                        </div>
+                                                                        <div class="col">
+                                                                            <label for="datetime" class="form-label">
+                                                                                Posted by</label>
+                                                                            <textarea type="text" class="form-control"
+                                                                                placeholder="Enter investment description"
+                                                                                :value="item.posted_datetime"
+                                                                                disabled />
 
-                                        <!-- View Modal -->
-                                        <div class="modal fade" :id="'rowPending' + index" tabindex="-1"
-                                            aria-labelledby="ModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog" style="max-width: 600px !important">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h1 class="modal-title fs-5" id="ModalLabel"><i
-                                                                class="fas fa-info-circle"></i>
-                                                            View</h1>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <form>
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <label for="investmentPoster"
-                                                                        class="form-label">Images (.png .jpg. jpeg)</label>
-                                                                    <br>
-                                                                    <img src="../assets/img/signin.png" width="260"
-                                                                        style="max-height: 220px" />
+                                                                        </div>
+
+                                                                    </div>
                                                                 </div>
-                                                                <div class="col">
-                                                                    <div class="col">
-                                                                        <label for="investmentName"
-                                                                            class="form-label">Title</label>
-                                                                        <input type="text" class="form-control"
-                                                                            placeholder="Enter investment name"
-                                                                            :value="item.title" disabled />
-                                                                    </div>
-                                                                    <div class="col">
-                                                                        <label for="investmentOrganization"
-                                                                            class="form-label">Topic</label>
-                                                                        <input type="text" class="form-control"
-                                                                            placeholder="Talks topic"
-                                                                            :value="item.topic" disabled />
-                                                                    </div>
-                                                                    <div class="col">
-                                                                        <label for="investmentPurpose"
-                                                                            class="form-label">
-                                                                            Content</label>
-                                                                        <textarea type="text" class="form-control"
-                                                                            placeholder="Enter investment description"
-                                                                            :value="item.content" disabled />
 
-                                                                    </div>
-                                                                   
-                                                                </div>
-                                                            </div>
+                                                                <hr class="horizontal dark" />
 
-                                                            <hr class="horizontal dark" />
+                                                            </form>
 
-                                                        </form>
-
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary"
-                                                            data-bs-dismiss="modal">Close</button>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">Close</button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
 
-                                        <!-- Approve Modal -->
-                                        <div class="modal fade" :id="'rowApprove' + index" tabindex="-1"
-                                            aria-labelledby="ModalLabelD" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h1 class="modal-title fs-5" id="ModalLabelD"><i
-                                                                class="fas fa-check"></i> Approve</h1>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        Confirm to approve the creation of "{{ item.title }}" ?
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary"
-                                                            data-bs-dismiss="modal">Close</button>
-                                                        <button type="button" class="btn btn-primary">Confirm</button>
+                                            <!-- Approve Modal -->
+                                            <div class="modal fade" :id="'rowApprove' + index" tabindex="-1"
+                                                aria-labelledby="ModalLabelD" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="ModalLabelD"><i
+                                                                    class="fas fa-check"></i> Approve</h1>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            Confirm to publish <strong>"{{ item.title }}"</strong> ?
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" class="btn btn-primary"
+                                                                @click="approveTalk(item.id)">Confirm</button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
 
-                                        <!-- Reject Modal -->
-                                        <div class="modal fade" :id="'rowReject' + index" tabindex="-1"
-                                            aria-labelledby="ModalLabelD" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h1 class="modal-title fs-5" id="ModalLabelD"><i
-                                                                class="fas fa-times"></i> Reject</h1>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        Confirm to reject the creation of "{{ item.title }}" ?
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary"
-                                                            data-bs-dismiss="modal">Close</button>
-                                                        <button type="button" class="btn btn-primary">Confirm</button>
+                                            <!-- Reject Modal -->
+                                            <div class="modal fade" :id="'rowReject' + index" tabindex="-1"
+                                                aria-labelledby="ModalLabelD" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="ModalLabelD"><i
+                                                                    class="fas fa-times"></i> Reject</h1>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            Confirm to reject the publish of "{{ item.title }}" ?
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">Close</button>
+                                                            <button type="button"
+                                                                class="btn btn-primary" @click="deleteTalk(item.id)">Confirm</button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </td>
+                                    </tr>
+                                </template>
+                                <tr v-else>
+                                    <td colspan="7">
+                                        <h6 class="text-center">No talks available</h6>
                                     </td>
                                 </tr>
                                 <tr>
@@ -792,6 +502,217 @@ onMounted(() => {
 
     </div>
 </template>
+
+<script>
+import Swal from 'sweetalert2';
+// import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.min.js';
+
+export default ({
+    data() {
+        return {
+            approvedTalks: [],
+            pendingTalks: [],
+            sortBy: '',
+            sortOrder: 'asc',
+            currentPage: 1,
+            maxPageSize: null,
+            sortBy2: '',
+            sortOrder2: 'asc',
+            currentPage2: 1,
+            maxPageSize2: null,
+            userMap: {}
+        }
+    },
+    methods: {
+        async fetchTalks(status) {
+            try {
+                const response = await fetch(`http://localhost:8080/talkList?status=${status}`);
+                const talks = await response.json();
+                if (status === 'approved') {
+                    this.approvedTalks = talks;
+                } else if (status === 'pending') {
+                    this.pendingTalks = talks;
+                }
+
+                const userResponse = await fetch(`http://localhost:8080/userList`);
+                const users = await userResponse.json();
+
+                // Create userMap using reduce
+                this.userMap = users.reduce((map, user) => {
+                    map[user.id] = user.username;
+                    return map;
+                }, {});
+
+                console.log(this.userMap);
+
+
+                console.log(`Fetched ${status} talks:`, talks);
+            } catch (error) {
+                console.error(`Error fetching ${status} talks:`, error);
+            }
+        },
+
+        async approveTalk(talkId) {
+            try {
+                // Assuming the API endpoint to update talk status
+                const response = await fetch(`http://localhost:8080/talks/${talkId}/approve`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                if (response.ok) {
+                    // this.pendingTalks = this.pendingTalks.filter(talk => talk.id !== talkId);
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: 'Talk approved successfully!',
+                        timer: 2000,
+                        showConfirmButton: false
+                    }).then(() => {
+                        window.location.reload();
+
+                    });
+
+                } else {
+                    console.error('Failed to approve talk');
+                }
+            } catch (error) {
+                console.error('Error approving talk:', error);
+            }
+        },
+        async deleteTalk(talkId) {
+            try {
+                const response = await fetch(`http://localhost:8080/talks/${talkId}/delete`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    const responseData = await response.json();
+                    // Show success message using SweetAlert2
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: responseData.message
+                    }).then(() => {
+                        window.location.reload();
+                    })
+                } else {
+                    const errorData = await response.json();
+                    console.error(errorData.message); // Log the error message
+                }
+            } catch (error) {
+                console.error('An error occurred while deleting the talk:', error);
+            }
+        },
+
+        fetchApprovedTalks() {
+            this.fetchTalks('approved');
+        },
+        fetchPendingTalks() {
+            this.fetchTalks('pending');
+        },
+        truncatedTitle(title) {
+            return title.length > 25 ? title.substring(0, 25) + '...' : title;
+        },
+        sortData(criteria) {
+            if (this.sortBy === criteria) {
+                this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
+            } else {
+                this.sortBy = criteria;
+                this.sortOrder = 'asc';
+            }
+
+            this.approvedTalks.sort((a, b) => {
+                const factor = this.sortOrder === 'asc' ? 1 : -1;
+                if (a[criteria] < b[criteria]) return -1 * factor;
+                if (a[criteria] > b[criteria]) return 1 * factor;
+                return 0;
+            });
+        },
+        sortData2(criteria) {
+            if (this.sortBy2 === criteria) {
+                this.sortOrder2 = this.sortOrder2 === 'asc' ? 'desc' : 'asc';
+            } else {
+                this.sortBy2 = criteria;
+                this.sortOrder2 = 'asc';
+            }
+
+            this.pendingTalks.sort((a, b) => {
+                const factor = this.sortOrder2 === 'asc' ? 1 : -1;
+                if (a[criteria] < b[criteria]) return -1 * factor;
+                if (a[criteria] > b[criteria]) return 1 * factor;
+                return 0;
+            });
+        },
+        sliceTempArray() {
+            const startIndex = (this.currentPage - 1) * 6;
+            const endIndex = startIndex + 6;
+            this.approvedTalks = this.approvedTalks.slice(startIndex, endIndex);
+        },
+        sliceTempArray2() {
+            const startIndex = (this.currentPage2 - 1) * 6;
+            const endIndex = startIndex + 6;
+            this.pendingTalks = this.pendingTalks.slice(startIndex, endIndex);
+        },
+        setMaxPageSize() {
+            this.maxPageSize = Math.ceil(this.approvedTalks.length / 6);
+        },
+        setMaxPageSize2() {
+            this.maxPageSize2 = Math.ceil(this.pendingTalks.length / 6);
+        },
+        goToPreviousPage() {
+            if (this.currentPage > 1) {
+                this.currentPage--;
+            }
+            this.sliceTempArray();
+        },
+
+        goToNextPage() {
+            if (this.currentPage < this.maxPageSize) {
+                this.currentPage++;
+            }
+            this.sliceTempArray();
+        },
+        goToPreviousPage2() {
+            if (this.currentPage2 > 1) {
+                this.currentPage2--;
+            }
+            this.sliceTempArray2();
+        },
+
+        goToNextPage2() {
+            if (this.currentPage2 < this.maxPageSize2) {
+                this.currentPage2++;
+            }
+            this.sliceTempArray2();
+        },
+        closeModal() {
+            document.body.classList.remove('modal-open');
+            const modalBackdrop = document.querySelector('.modal-backdrop');
+            if (modalBackdrop) {
+                modalBackdrop.parentNode.removeChild(modalBackdrop);
+            }
+        },
+        getUsername(userId) {
+            return this.userMap[userId];
+        }
+    },
+    mounted() {
+        this.fetchApprovedTalks();
+        this.fetchPendingTalks();
+        this.setMaxPageSize();
+        this.sliceTempArray();
+        this.setMaxPageSize2();
+        this.sliceTempArray2();
+    }
+})
+</script>
+
+
 
 <style>
 .item {

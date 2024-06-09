@@ -132,6 +132,7 @@ export default ({
             sortOrder: 'asc',
             currentPage: 1,
             searchVal: '',
+            maxPageSize: 0
         }
     },
     methods: {
@@ -176,6 +177,9 @@ export default ({
             const endIndex = startIndex + 6;
             this.users = this.users.slice(startIndex, endIndex);
         },
+        setMaxPageSize() {
+            this.maxPageSize = Math.ceil(this.users.length / 6);
+        },
         searchUsers() {
             this.filteredUsers = this.users.filter(user => {
                 return user.username.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
@@ -186,6 +190,8 @@ export default ({
       
     mounted() {
         this.fetchUsers();
+        this.setMaxPageSize();
+        this.sliceTempArray();
     },
 })
 </script>
