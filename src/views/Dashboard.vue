@@ -1,13 +1,10 @@
 <script setup>
 import MiniStatisticsCard from "@/examples/Cards/MiniStatisticsCard.vue";
-// import GradientLineChart from "@/examples/Charts/GradientLineChart.vue";
-// import Carousel from "./components/Carousel.vue";
 import CategoriesList from "./components/CategoriesList.vue";
-// import Navbar from "@/examples/PageLayout/Navbar.vue";
+
 import AppFooter from "@/examples/PageLayout/Footer.vue";
 import { onBeforeUnmount, onBeforeMount } from "vue";
 import { useStore } from "vuex";
-
 const body = document.getElementsByTagName("body")[0];
 
 const store = useStore();
@@ -26,49 +23,112 @@ onBeforeUnmount(() => {
   body.classList.add("bg-gray-100");
 });
 
-const transactionList = [{
-  hash: "OMG!! Double decker bus caught fire in Lagos",
-  sender: "0x2256dfq424efrt382341",
-  receiver: "Anonymous",
-  timestamp: "56",
-  amount: 8000
-},
-{
-  hash: "Hey guys I found out that the new iPhone 88 is out!!",
-  sender: "0x2256dfq424efrt382341",
-  receiver: "Qian888",
-  timestamp: "56",
-  amount: 7000
-},
-{
-  hash: "What do you think about the new song of Ariana...",
-  sender: "0x2256dfq424efrt382341",
-  receiver: "Jess666",
-  timestamp: "57",
-  amount: 10000
-}, {
-  hash: "Did you guys know that we can actually fly to t...",
-  sender: "0x2256dfq424efrt382341",
-  receiver: "Anonymous",
-  timestamp: "57",
-  amount: 10000
-}, {
-  hash: "I hate it when my friends don't reply my messages",
-  sender: "0x2256dfq424efrt382341",
-  receiver: "Loy Chai",
-  timestamp: "57",
-  amount: 10000
-},];// Log VueSession object
 </script>
+
+<script>
+
+import axios from 'axios';
+export default {
+  data() {
+    return {
+      categories: [],
+      recentTalks: [],
+      userMap: {},
+      userCount: 0,
+      talkCount: 0,
+      talkCountSinceYesterday: 0,
+    };
+  },
+  mounted() {
+    this.fetchMostRecentTalks();
+    this.fetchCategoryCounts();
+    this.fetchUserCount();
+    this.fetchTalkCount();
+  },
+  methods: {
+    async fetchMostRecentTalks() {
+      try {
+        const response = await axios.get('http://localhost:8080/talks/recent');
+        this.recentTalks = response.data;
+
+        const userResponse = await fetch(`http://localhost:8080/userList`);
+        const users = await userResponse.json();
+
+        // Create userMap using reduce
+        this.userMap = users.reduce((map, user) => {
+          map[user.id] = user.username;
+          return map;
+        }, {});
+      } catch (error) {
+        console.error('Error fetching most recent talks:', error);
+      }
+    },
+    async fetchCategoryCounts() {
+      try {
+        const response = await axios.get('http://localhost:8080/categoryCounts');
+        this.categories = response.data;
+        console.log('Categories:', this.categories);
+      } catch (error) {
+        console.error('Error fetching category counts:', error);
+      }
+    },
+    async fetchUserCount() {
+      try {
+        const response = await axios.get('http://localhost:8080/userCount');
+        this.userCount = response.data;
+        console.log('User count:', this.userCount);
+      } catch (error) {
+        console.error('Error fetching user count:', error);
+      }
+    },
+
+    async fetchTalkCount() {
+      try {
+        const response = await axios.get('http://localhost:8080/talkCount');
+        this.talkCount = response.data;
+        console.log('Talk count:', this.talkCount);
+      } catch (error) {
+        console.error('Error fetching talk count:', error);
+      }
+    },
+
+    formatTimeAgo(postedDatetime) {
+      const postedDate = new Date(postedDatetime);
+      const timeDifference = Date.now() - postedDate.getTime();
+
+      const seconds = Math.floor(timeDifference / 1000);
+      const minutes = Math.floor(seconds / 60);
+      const hours = Math.floor(minutes / 60);
+      const days = Math.floor(hours / 24);
+      const weeks = Math.floor(days / 7);
+      const months = Math.floor(weeks / 4);
+      const years = Math.floor(months / 12);
+
+      if (years > 0) {
+        return years + (years === 1 ? ' year' : ' years') + ' ago';
+      } else if (months > 0) {
+        return months + (months === 1 ? ' month' : ' months') + ' ago';
+      } else if (weeks > 0) {
+        return weeks + (weeks === 1 ? ' week' : ' weeks') + ' ago';
+      } else if (days > 0) {
+        return days + (days === 1 ? ' day' : ' days') + ' ago';
+      } else if (hours > 0) {
+        return hours + (hours === 1 ? ' hour' : ' hours') + ' ago';
+      } else if (minutes > 0) {
+        return minutes + (minutes === 1 ? ' minute' : ' minutes') + ' ago';
+      } else {
+        return 'Just now';
+      }
+    },
+    getUsername(userId) {
+      return this.userMap[userId];
+    }
+  },
+};
+</script>
+
 <template>
-  <!-- <div class="container top-0 position-sticky z-index-sticky">
-    <div class="row">
-      <div class="col-12">
-        <navbar isBlur="blur  border-radius-lg my-3 py-2 start-0 end-0 mx-4 shadow" v-bind:darkMode="true"
-          isBtn="bg-gradient-success" />
-      </div>
-    </div>
-  </div> -->
+
   <main class="main-content">
     <section>
       <div class="min-height-400 d-flex justify-content-center align-items-center w-100 top-0 "
@@ -97,13 +157,9 @@ const transactionList = [{
           <div class="col-lg-12">
             <div class="row" style="padding-top: 3rem;">
               <div class="col-lg-4 col-md-6 col-12">
-                <mini-statistics-card title="Total Talks" value="500" description="<span
-                class='text-sm font-weight-bolder text-success'
-                >+34</span> since yesterday" :icon="{
-                  component: 'ni ni-paper-diploma',
-                  background: 'bg-gradient-primary',
-                  shape: 'rounded-circle',
-                }" />
+                <mini-statistics-card title="Total Talks" :value="talkCount.total"
+                  :description="`<span class='text-sm font-weight-bolder text-success'>Yet to discuss more !</span> `"
+                  :icon="{ component: 'ni ni-paper-diploma', background: 'bg-gradient-primary', shape: 'rounded-circle' }" />
               </div>
               <div class="col-lg-4 col-md-6 col-12">
                 <mini-statistics-card title="Topics to talk" value="5++" description="
@@ -114,9 +170,9 @@ const transactionList = [{
                     }" />
               </div>
               <div class="col-lg-4 col-md-6 col-12">
-                <mini-statistics-card title="UniTalkers" value="+100" description="<span
+                <mini-statistics-card title="UniTalkers" :value="userCount.total" description="<span
                 class='text-sm font-weight-bolder text-success'
-                >+2%</span>" :icon="{
+                >Still increasing !</span>" :icon="{
                   component: 'ni  ni-world-2',
                   background: 'bg-gradient-info',
                   shape: 'rounded-circle',
@@ -140,7 +196,7 @@ const transactionList = [{
                   <div class="table-responsive pe-3">
                     <table class="table align-items-center">
                       <tbody>
-                        <tr v-for="(transaction, index) in transactionList" :key="index">
+                        <tr v-for="(talk, index) in recentTalks" :key="index">
                           <td class="w-30">
                             <div class="px-2 py-1 d-flex align-items-center">
                               <div class="d-flex px-2 align-items-center justify-content-center">
@@ -150,18 +206,18 @@ const transactionList = [{
                                 <p class="mb-0 text-xs font-weight-bold">
                                   Topic:
                                 </p>
-                                <h6 class="mb-0 text-sm">{{ transaction.hash }}</h6>
+                                <h6 class="mb-0 text-sm">{{ talk.title }}</h6>
                               </div>
                             </div>
                           </td>
                           <td>
                             <div class="text-center">
-                              <h6 class="mb-0 text-xs">Posted by {{ transaction.receiver }}</h6>
+                              <h6 class="mb-0 text-xs"><i>Posted by {{ getUsername(talk.user_id) }}</i></h6>
                             </div>
                           </td>
                           <td class="text-sm align-middle">
                             <div class="text-end col">
-                              <h6 class="mb-0 text-xs">{{ transaction.timestamp }} minutes ago</h6>
+                              <h6 class="mb-0 text-xs">{{ formatTimeAgo(talk.posted_datetime) }}</h6>
                             </div>
                           </td>
                         </tr>
@@ -171,38 +227,7 @@ const transactionList = [{
                 </div>
               </div>
               <div class="col-lg-5">
-                <categories-list :categories="[
-                  {
-                    icon: {
-                      component: 'fa fa-cutlery',
-                      background: 'dark',
-                    },
-                    label: 'Food',
-                    description: 'Total <strong>888 </strong>talks',
-                  },
-                  {
-                    icon: {
-                      component: 'ni ni-world-2',
-                      background: 'dark',
-                    },
-                    label: 'Technology',
-                    description: 'Total <strong>254 </strong>talks',
-                  },
-                  {
-                    icon: { component: 'fa fa-heart', background: 'dark' },
-                    label: 'Fashion',
-                    description: 'Total <strong>100 </strong>talks',
-                  },
-                  {
-                    icon: { component: 'fa fa-futbol-o', background: 'dark' },
-                    label: 'Sports',
-                    description: 'Total <strong>50 </strong>talks',
-                  }, {
-                    icon: { component: 'fa fa-bus', background: 'dark' },
-                    label: 'Transport',
-                    description: 'Total <strong>5 </strong>talks',
-                  },
-                ]" />
+                <categories-list :categories="categories" />
               </div>
             </div>
           </div>

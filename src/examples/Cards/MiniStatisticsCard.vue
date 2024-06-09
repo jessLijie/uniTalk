@@ -88,16 +88,16 @@ defineProps({
           <div class="numbers">
             <p
               class="mb-0 text-sm text-uppercase font-weight-bold"
-              :class="title.color"
+              :class="title?.color"
             >
-              {{ typeof title === "string" ? title : title.text }}
+              {{ typeof title === 'string' ? title : title?.text }}
             </p>
-            <h5 :class="`mt-2 font-weight-bolder ${value.color}`">
+            <h5 :class="`mt-2 font-weight-bolder ${value?.color}`">
               {{
-                (value && typeof value === "string") ||
-                (value && typeof value === "number")
+                (value && typeof value === 'string') ||
+                (value && typeof value === 'number')
                   ? value
-                  : value.text
+                  : value?.text
               }}
               <span
                 v-if="percentage && typeof percentage === 'string'"
@@ -107,9 +107,9 @@ defineProps({
               </span>
               <span
                 v-if="percentage && typeof percentage === 'object'"
-                :class="`text-sm font-weight-bolder text-${percentage.color}`"
+                :class="`text-sm font-weight-bolder text-${percentage?.color}`"
               >
-                {{ percentage.value }}
+                {{ percentage?.value }}
               </span>
             </h5>
             <!--  eslint-disable-next-line vue/no-v-html -->
