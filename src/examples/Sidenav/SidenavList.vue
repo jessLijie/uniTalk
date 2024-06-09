@@ -18,7 +18,7 @@ const sessionData = ref(localStorage.getItem('role'));
       <!-- admin -->
       <li class="mt-3 nav-item">
         <h6 class="text-xs ps-4 text-uppercase font-weight-bolder opacity-6 ms-2">
-          Crowdfund
+          Talks
         </h6>
       </li>
       <li class="nav-item">
@@ -28,28 +28,28 @@ const sessionData = ref(localStorage.getItem('role'));
           </template>
         </sidenav-item>
       </li>
-      <li class="nav-item" v-if="sessionData === 'Admin'">
-        <sidenav-item to="/crowdfundmanage" :class="getRoute() === 'crowdfundmanage' ? 'active' : ''" navText="Manage">
+      <li class="nav-item" v-if="sessionData === 'admin'">
+        <sidenav-item to="/admin/talks-manage" :class="getRoute() === 'crowdfundmanage' ? 'active' : ''" navText="Manage">
           <template v-slot:icon>
             <i class="fas fa-money-check text-sm text-dark opacity-10 position-absolute" style="top: 6px;"></i>
           </template>
         </sidenav-item>
       </li>
 
-      <li class="mt-3 nav-item" v-if="sessionData === 'Admin'">
+      <li class="mt-3 nav-item" v-if="sessionData === 'admin'">
         <h6 class="text-xs ps-4 text-uppercase font-weight-bolder opacity-6 ms-2">
-          User
+          Users
         </h6>
       </li>
-      <li class="nav-item" v-if="sessionData === 'Admin'">
-        <sidenav-item to="/usermanage" :class="getRoute() === 'usermanage' ? 'active' : ''" navText="Manage">
+      <li class="nav-item" v-if="sessionData === 'admin'">
+        <sidenav-item to="/admin/users-manage" :class="getRoute() === 'usermanage' ? 'active' : ''" navText="Manage">
           <template v-slot:icon>
             <i class="fas fa-users text-sm text-dark opacity-10 position-absolute" style="top: 6px;"></i>
           </template>
         </sidenav-item>
       </li>
-      <!-- issuer -->
-      <li class="nav-item" v-if="sessionData === 'Issuer'">
+      <!-- user -->
+      <li class="nav-item" v-if="sessionData === 'user'">
         <sidenav-item to="/issuer/crowdfundmanage" :class="getRoute() === 'issuer/crowdfundmanage' ? 'active' : ''"
           navText="Manage">
           <template v-slot:icon>
@@ -57,12 +57,12 @@ const sessionData = ref(localStorage.getItem('role'));
           </template>
         </sidenav-item>
       </li>
-      <li class="mt-3 nav-item" v-if="sessionData === 'Issuer'">
+      <li class="mt-3 nav-item" v-if="sessionData === 'user'">
         <h6 class="text-xs ps-4 text-uppercase font-weight-bolder opacity-6 ms-2">
           ACCOUNT
         </h6>
       </li>
-      <li class="nav-item" v-if="sessionData === 'Issuer'">
+      <li class="nav-item" v-if="sessionData === 'user'">
         <sidenav-item to="/profile" :class="getRoute() === 'profile' ? 'active' : ''" navText="Profile">
           <template v-slot:icon>
             <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
