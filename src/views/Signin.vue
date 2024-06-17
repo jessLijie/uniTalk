@@ -67,11 +67,11 @@ function validateEmail() {
 // Method to navigate to the appropriate page based on the selected role
 function navigateToRolePage(role, userId) {
   if (role === "user") {
-    localStorage.setItem("role", "user");
-    localStorage.setItem("userid", userId);
+    sessionStorage.setItem("role", "user");
+    sessionStorage.setItem("userid", userId);
     router.push("/generallist");
   } else {
-    localStorage.setItem("role", "admin");
+    sessionStorage.setItem("role", "admin");
     router.push("/admin/users-manage");
   }
 }

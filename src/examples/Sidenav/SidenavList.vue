@@ -9,7 +9,7 @@ const getRoute = () => {
   return routeArr[1];
 };
 
-const sessionData = ref(localStorage.getItem('role'));
+const sessionData = ref(sessionStorage.getItem('role'));
 
 </script>
 <template>

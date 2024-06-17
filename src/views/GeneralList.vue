@@ -59,10 +59,10 @@ const filterTransactions = (category) => {
     }
 };
 
-const role = ref(localStorage.getItem('role'));
+const role = ref(sessionStorage.getItem('role'));
 const store = useStore();
 onBeforeMount(() => {
-    role.value = localStorage.getItem('role');
+    role.value = sessionStorage.getItem('role');
     console.log(role.value);
     if (role.value !== 'null') {
         store.state.showNavbar = true;
@@ -77,7 +77,7 @@ onBeforeMount(() => {
 })
 
 onBeforeUnmount(() => {
-    role.value = localStorage.getItem('role');
+    role.value = sessionStorage.getItem('role');
     if (role.value !== 'null') {
         store.state.layout = "default";
         store.state.isAbsolute = false;
