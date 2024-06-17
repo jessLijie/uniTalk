@@ -8,13 +8,17 @@ defineProps({
         type: String,
         default: "Undefined",
     },
+    title: {
+        type: String,
+        default: "Undefined",
+    },
     content: {
         type: String,
         default: "Undefined",
     },
     comment: {
         type: String,
-        default: "Undefined",
+        default: "0",
     },
     like: {
         type: String,
@@ -26,6 +30,7 @@ defineProps({
     }
 });
 </script>
+
 <template>
     <div class="container my-4">
         <div class="post">
@@ -38,8 +43,9 @@ defineProps({
                     </div>
                 </div>
                 <div class="my-2">
+                    <h3>{{ title }}</h3>
                     <p>{{ content }}</p>
-                    <img src="https://via.placeholder.com/500x300" alt="Post Image" class="img-fluid">
+                    <img :src="img" alt="Post Image" class="img-fluid">
                 </div>
             </router-link>
             <div class="d-flex justify-content-between px-3 mb-3">
