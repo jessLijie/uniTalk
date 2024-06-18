@@ -144,7 +144,7 @@ function sortData(criteria) {
             <h5>Talk List</h5>
 
             <div class="d-flex">
-                <a href="/createCampaign">
+                <a href="/createTalk">
                     <argon-button size="sm" class="ms-auto">Create Talk</argon-button>
                 </a>
             </div>

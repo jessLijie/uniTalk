@@ -1,10 +1,12 @@
 <script setup>
-import { onBeforeMount, onMounted, onBeforeUnmount } from "vue";
-import { useStore } from "vuex";
-import ArgonButton from "@/components/ArgonButton.vue";
-import ArgonInput from "@/components/ArgonInput.vue";
 import setNavPills from "@/assets/js/nav-pills.js";
 import setTooltip from "@/assets/js/tooltip.js";
+import ArgonButton from "@/components/ArgonButton.vue";
+import ArgonInput from "@/components/ArgonInput.vue";
+import { onBeforeMount, onBeforeUnmount, onMounted } from "vue";
+import { useStore } from "vuex";
+import { ref } from 'vue';
+import axios from 'axios';
 
 const body = document.getElementsByTagName("body")[0];
 
@@ -32,6 +34,37 @@ onBeforeUnmount(() => {
   store.state.hideConfigButton = false;
   body.classList.remove("profile-overview");
 });
+
+const talkContent = ref('');
+const topic = ref('');
+const image = ref(null);
+
+const onFileChange= (event) =>{
+  image.value = event.target.files[0];
+}
+
+const submitTalk = async() => {
+    const formData = new FormData();
+
+    formData.append('talkContent', talkContent.value);
+    formData.append('topic', topic.value);
+    if(image.value){
+      formData.append('image', image.value);
+    }
+
+    try{
+      const response = await axios.post('http://localhost:8080/createTalk', formData, {
+        headers: {
+          'Content-Type' : 'multipart/form-data'
+        }
+      });
+      console.log('Talk created successfully:', response.data);
+    }catch(error){
+      console.error('Talk creation failed', error.response.data.message);
+    }
+};
+
+
 </script>
 
 <template>
@@ -65,12 +98,12 @@ onBeforeUnmount(() => {
           <p class="text-uppercase text-sm">General Information</p>
             <div class="col-md-12">
               <label for="investmentName" class="form-control-label">Talk Content</label>
-              <argon-input type="text" placeholder="Enter investment name"></argon-input>
+              <argon-input type="text" v-model= "talkContent" placeholder="Enter the content of your talk"></argon-input>
             </div>
             <div class="col-md-12">
               <label for="investmentPoster" class="form-control-label">Image</label>
               <br>
-              <input type="file" class="form-control" id="investmentPoster" accept="image/*" />
+              <input type="file" class="form-control" id="investmentPoster" accept="image/*" @change="onFileChange"/>
             </div>
             <div class="col-md-6">
               <label for="plan" class="form-control-label">Topic
@@ -78,7 +111,7 @@ onBeforeUnmount(() => {
                   <i class="fas fa-info-circle"></i>
                 </span>
               </label>
-              <select class="form-control" id="plan">
+              <select class="form-control" v-model="topic" id="plan">
                 <option value="---Select topic---" selected disabled>--Select topic--</option>
                 <option value="Food">Food</option>
                 <option value="Technology">Technology</option>
@@ -111,7 +144,7 @@ onBeforeUnmount(() => {
             </div>
           </div>
 
-          <argon-button color="success" size="sm" class="ms-auto" style="float: right;">Submit</argon-button>
+          <argon-button @click.prevent="submitTalk" color="success" size="sm" class="ms-auto" style="float: right;">Submit</argon-button>
         </div>
       </div>
     </div>
