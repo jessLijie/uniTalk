@@ -80,7 +80,7 @@ export default {
 </script>
 <template>
     <div class="card m-4 px-4 pt-1">
-        <h1 class="m-0 mx-auto pt-5">Crowdfund List</h1>
+        <h1 class="m-0 mx-auto pt-5">Let's UniTalk</h1>
         <div class="d-flex justify-content-center align-items-center w-100 mt-4"
             :class="`${darkMode ? 'bg-transparent' : ''}`">
             <button type="button" class="btn" :class="{ 'btn-success': selectedCategory === 'Food' }"
@@ -107,9 +107,9 @@ export default {
         <div class="container">
             <div class="row">
                 <div class="px-3 py-2" v-for="(talk, index) in filteredTalkList" :key="index">
-                    <CrowdFundCard :user="getUsername(talk.user_id)" :time="formatTimeAgo(talk.posted_datetime)"
-                        :title="talk.title" :content="talk.content" :comment="talk.comment" :like="talk.likes"
-                        :img="talk.image" />
+                    <CrowdFundCard :id="talk.id" :user="getUsername(talk.user_id)"
+                        :time="formatTimeAgo(talk.posted_datetime)" :title="talk.title" :content="talk.content"
+                        :comment="talk.comment" :like="talk.likes" :img="talk.image" />
                 </div>
             </div>
 

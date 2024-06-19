@@ -14,7 +14,7 @@ const title = ref('');
 const topic = ref('');
 const content = ref('');
 const image = ref(null);
-
+const userId = ref(sessionStorage.getItem("userid"));
 const handleFileUpload = (event) => {
   image.value = event.target.files[0];
 };
@@ -26,6 +26,7 @@ const handleSubmit = async () => {
   }
 
   const formData = new FormData();
+  formData.append('userId', userId.value);
   formData.append('title', title.value);
   formData.append('topic', topic.value);
   formData.append('content', content.value);

@@ -27,9 +27,10 @@ const routes = [
     component: Dashboard,
   },
   {
-    path: "/campaign-detail",
-    name: "campaigndetail",
+    path: "/talks/:id",
+    name: "CampaignDetail",
     component: Billing,
+    props: true,
   },
   {
     path: "/profile",
