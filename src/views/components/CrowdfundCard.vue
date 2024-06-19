@@ -94,7 +94,7 @@ const unlikePost = async (id, like, userId) => {
 };
 
 const gotopage = async (id) => {
-    router.push(`/campaign-detail/${id}`);
+    router.push(`/talks/${id}`);
 }
 
 onMounted(() => {
