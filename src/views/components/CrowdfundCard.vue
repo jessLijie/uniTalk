@@ -41,6 +41,7 @@ const props = defineProps({
 });
 
 var likingvalue = ref(props.like);
+var commentvalue = ref(props.comment);
 
 const checkLike = async () => {
     try {
@@ -59,6 +60,7 @@ const checkLike = async () => {
         console.error('Error checking like status:', error);
     }
 };
+
 
 const likePost = async (id, like, userId) => {
     try {
@@ -122,7 +124,7 @@ onMounted(() => {
             </router-link>
             <div class="d-flex justify-content-between px-3 mb-3">
                 <div>like {{ likingvalue }}</div>
-                <div>Comment {{ props.comment }}</div>
+                <div>Comment {{ commentvalue }}</div>
             </div>
             <div class="d-flex bg-success p-2">
                 <button
