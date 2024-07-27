@@ -9,7 +9,7 @@ const getRoute = () => {
   return routeArr[1];
 };
 
-const sessionData = ref(localStorage.getItem('role'));
+const sessionData = ref(sessionStorage.getItem('role'));
 
 </script>
 <template>
@@ -50,7 +50,7 @@ const sessionData = ref(localStorage.getItem('role'));
       </li>
       <!-- user -->
       <li class="nav-item" v-if="sessionData === 'user'">
-        <sidenav-item to="/issuer/crowdfundmanage" :class="getRoute() === 'issuer/crowdfundmanage' ? 'active' : ''"
+        <sidenav-item to="/talkList" :class="getRoute() === 'talkList' ? 'active' : ''"
           navText="Manage">
           <template v-slot:icon>
             <i class="fas fa-list text-sm text-dark opacity-10 position-absolute" style="top: 6px;"></i>

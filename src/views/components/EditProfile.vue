@@ -206,7 +206,7 @@ export default {
     return {
       user:[],
       editProfile: false,
-      user_id: localStorage.getItem('userid'),
+      user_id: sessionStorage.getItem('userid'),
     };
   },
   methods: {

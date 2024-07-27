@@ -1,27 +1,165 @@
 <script setup>
 import DonatorList from "./components/DonatorList.vue";
-// import ArgonButton from "@/components/ArgonButton.vue";
-import Navbar from "@/examples/PageLayout/Navbar.vue";
 import { ref, onBeforeMount, onMounted, onBeforeUnmount } from "vue";
-import { useStore } from "vuex";
-
+import { useRoute, useRouter } from 'vue-router';
+import axios from 'axios';
 import setNavPills from "@/assets/js/nav-pills.js";
 import setTooltip from "@/assets/js/tooltip.js";
+import ArgonButton from '@/components/ArgonButton.vue';
+import { useStore } from "vuex";
 
 const body = document.getElementsByTagName("body")[0];
-
+const route = useRoute();
 const store = useStore();
+const router = useRouter();
 const role = ref(localStorage.getItem('role'));
+const talks = ref(null);
+const userMap = ref({});
+const liking = ref(false);
+const userId = ref(sessionStorage.getItem("userid"));
+var likingvalue = ref();
+const commentInput = ref(null);
+const commentTextarea = ref(null);
+
+
+const fetchCampaignDetails = async () => {
+  const campaignId = route.params.id;
+  try {
+    const response = await axios.get(`http://localhost:8080/talks/${campaignId}`);
+    talks.value = response.data;
+
+    const userResponse = await fetch('http://localhost:8080/userList');
+    const users = await userResponse.json();
+
+    userMap.value = users.reduce((map, user) => {
+      map[user.id] = user.username;
+      return map;
+    }, {});
+
+    const checklike = await fetch(`http://localhost:8080/talks/check-like/${userId.value}/${talks.value.id}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    if (checklike.ok) {
+      const data = await checklike.json();
+      liking.value = data.liked;
+    }
+  } catch (error) {
+    console.error('Error fetching campaign details:', error);
+  }
+};
+
+const goBack = () => {
+  router.go(-1);  // Go back to the previous page
+};
+
+const formatTimeAgo = (postedDatetime) => {
+  const postedDate = new Date(postedDatetime);
+  const timeDifference = Date.now() - postedDate.getTime();
+
+  const seconds = Math.floor(timeDifference / 1000);
+  const minutes = Math.floor(seconds / 60);
+  const hours = Math.floor(minutes / 60);
+  const days = Math.floor(hours / 24);
+  const weeks = Math.floor(days / 7);
+  const months = Math.floor(weeks / 4);
+  const years = Math.floor(months / 12);
+
+  if (years > 0) {
+    return years + (years === 1 ? ' year' : ' years') + ' ago';
+  } else if (months > 0) {
+    return months + (months === 1 ? ' month' : ' months') + ' ago';
+  } else if (weeks > 0) {
+    return weeks + (weeks === 1 ? ' week' : ' weeks') + ' ago';
+  } else if (days > 0) {
+    return days + (days === 1 ? ' day' : ' days') + ' ago';
+  } else if (hours > 0) {
+    return hours + (hours === 1 ? ' hour' : ' hours') + ' ago';
+  } else if (minutes > 0) {
+    return minutes + (minutes === 1 ? ' minute' : ' minutes') + ' ago';
+  } else {
+    return 'Just now';
+  }
+};
+
+function getUsername(userId) {
+  return this.userMap[userId];
+}
+
+const likePost = async (id, like, userId) => {
+  try {
+    const response = await fetch(`http://localhost:8080/talks/add/${id}/${like}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ userId })
+    }); if (response.ok) {
+      likingvalue.value++;
+      liking.value = true;
+    }
+  } catch (error) {
+    console.error('Error liking post:', error);
+  }
+};
+
+const unlikePost = async (id, like, userId) => {
+  try {
+    const response = await fetch(`http://localhost:8080/talks/reduce/${id}/${like}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ userId })
+    }); if (response.ok) {
+      likingvalue.value--;
+      liking.value = false;
+    }
+  } catch (error) {
+    console.error('Error liking post:', error);
+  }
+};
+
+const adjustTextareaHeight = () => {
+  const textarea = commentTextarea.value;
+  textarea.style.height = 'auto'; // Reset height to auto to calculate the new height
+  textarea.style.height = `${textarea.scrollHeight}px`; // Set height based on scrollHeight
+  const button = textarea.nextElementSibling;
+  button.style.height = `${textarea.scrollHeight}px`; // Match button height to textarea height
+};
+
+const submitComment = async (talkId) => {
+  try {
+    const response = await fetch(`http://localhost:8080/talks/comment`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ userId: userId.value, talkId: talkId, comment: commentInput.value })
+    }); if (response.ok) {
+      commentInput.value = ''; // Clear the input field after successful submission
+      adjustTextareaHeight(); // Adjust the textarea height
+    }
+  } catch (error) {
+    console.error('Error liking post:', error);
+  }
+};
+
 onMounted(() => {
   setNavPills();
   setTooltip();
   role.value = localStorage.getItem('role');
   store.state.isAbsolute = true;
+  fetchCampaignDetails().then(() => {
+    likingvalue.value = talks.value.likes;
+  });
 });
 
 onBeforeMount(() => {
   role.value = localStorage.getItem('role');
-  console.log(role.value);
   if (role.value !== 'null') {
     store.state.layout = "profile-overview";
     store.state.imageLayout = "profile-overview";
@@ -37,7 +175,7 @@ onBeforeMount(() => {
     store.state.showFooter = false;
     body.classList.remove("bg-gray-100");
   }
-})
+});
 
 onBeforeUnmount(() => {
   role.value = localStorage.getItem('role');
@@ -55,76 +193,73 @@ onBeforeUnmount(() => {
     store.state.showNavbar = true;
     store.state.showSidenav = true;
     store.state.showFooter = true;
-    // body.classList.add("bg-gray-100");
   }
-})
-
+});
 </script>
-
 <template>
-
-  <div class="container top-0 position-sticky z-index-sticky" v-if="role === 'null'">
-    <div class="row">
-      <div class="col-12">
-        <navbar isBlur="blur border-radius-lg my-3 py-2 start-0 end-0 mx-4 shadow" v-bind:darkMode="true"
-          isBtn="bg-gradient-success" />
+  <div>
+    <!-- Campaign Header -->
+    <div class="container-fluid">
+      <div class="page-header min-height-200 bg-success" style="margin-right: -24px; margin-left: -34%;">
+        <span class="mask bg-gradient-success opacity-1"></span>
       </div>
     </div>
-  </div>
-  <div class="container-fluid">
-    <div class="page-header min-height-200 bg-success" style="
-        margin-right: -24px;
-        margin-left: -34%;
-      ">
-      <span class="mask bg-gradient-success opacity-1"></span>
+    <div class="d-flex" style="float: right;">
+      <argon-button @click="goBack" size="sm" class="ms-auto">Back</argon-button>
     </div>
-  </div>
-  <div class="container-fluid" style="margin-top:-5%;">
-    <div class="row">
-      <div class="col-md-12 mb-4">
-        <div class="row mb-4">
-
+    <!-- Campaign Details -->
+    <div class="container-fluid" style="margin-top:-5%;">
+      <div class="row">
+        <div class="col-md-12 mb-4">
           <div class="card">
-            <div class="card-header pb-0 p-3">
-              <div class="row p-3">
+            <div class="card-header pb-0 p-6">
+              <div class="row" v-if="talks">
                 <div class="d-flex my-2">
-                  <img src="https://via.placeholder.com/50" alt="User Avatar" width="50" height="50">
+                  <img :src="talks.userAvatar || 'https://via.placeholder.com/50'" alt="User Avatar" width="50"
+                    height="50">
                   <div class="mx-4">
-                    <div class="name">John Doe</div>
-                    <div class="text-muted">5 hrs ago</div>
+                    <div class="name">{{ getUsername(talks.user_id) }}</div>
+                    <div class="text-muted">{{ formatTimeAgo(talks.postedDatetime) }}</div>
                   </div>
                 </div>
-                <div class="col-6 flex-column align-items-center my-4">
-                  <h4>{Education 360}</h4>
-                  <p>To Educate People</p>
-                  <img src="https://via.placeholder.com/500x300" alt="Post Image" class="img-fluid ">
+                <div class="flex-column align-items-center my-4">
+                  <h4>{{ talks.title }}</h4>
+                  <p>{{ talks.content }}</p>
+                  <img :src="talks.image || 'https://via.placeholder.com/500x300'" alt="Post Image" class="img-fluid"
+                    width="1000" height="1000">
                 </div>
                 <div class="d-flex justify-content-between mb-1">
-                  <div>like 100</div>
-                  <div>Comment 100</div>
+                  <div>like {{ likingvalue }}</div>
+                  <div>Comment {{ talks.comments || 0 }}</div>
                 </div>
               </div>
               <div class="d-flex bg-success p-2">
-                <button class="border-0 bg-success text-white w-100 my-0">Like</button>
+                <button
+                  @click=" liking ? unlikePost(talks.id, likingvalue, userId) : likePost(talks.id, likingvalue, userId)"
+                  class="border-0 bg-success text-white w-100 my-0"> {{ liking ? 'Unlike' : 'Like' }}
+                </button>
                 <button class="border-0 bg-success text-white w-100 my-0">Comment</button>
                 <button class="border-0 bg-success text-white w-100 my-0">Share</button>
               </div>
+              <form @submit.prevent="submitComment(talks.id)">
+                <div class="row my-4 mx-1">
+                  <div class="border-radius-1 border comment-container d-flex align-items-center mt-3 p-3">
+                    <textarea style=" resize: none;" ref="commentTextarea" type="text"
+                      class="form-control me-2 border-0" v-model="commentInput" placeholder="Write a comment..."
+                      @input="adjustTextareaHeight" required></textarea>
+                    <button class="btn btn-success mb-0 h-100">Comment</button>
+                  </div>
+                </div>
+              </form>
               <div class="row my-4 mx-1">
                 <DonatorList />
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </div>
-
-
-
-
   </div>
-
-
 </template>
 
 

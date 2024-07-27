@@ -14,7 +14,7 @@ import Transaction from "../views/transaction.vue";
 import Certificate from "../views/Certificate.vue";
 import GeneralList from "../views/GeneralList.vue";
 import AdminUserManage from "../views/AdminUserManage.vue";
-import issuerCrowdfundList from "../views/TalkList.vue";
+import TalkList from "../views/TalkList.vue";
 const routes = [
   {
     path: "/",
@@ -27,9 +27,10 @@ const routes = [
     component: Dashboard,
   },
   {
-    path: "/campaign-detail",
-    name: "campaigndetail",
+    path: "/talks/:id",
+    name: "CampaignDetail",
     component: Billing,
+    props: true,
   },
   {
     path: "/profile",
@@ -52,9 +53,9 @@ const routes = [
     component: AdminTalksManage,
   },
   {
-    path: "/issuer/crowdfundmanage",
-    name: "issuerCrowdfundList",
-    component: issuerCrowdfundList,
+    path: "/talkList",
+    name: "talkList",
+    component: TalkList,
   },
   {
     path: "/admin/users-manage",

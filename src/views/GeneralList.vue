@@ -1,134 +1,115 @@
-<script setup>
-import { ref, onBeforeMount, onBeforeUnmount } from "vue";
-import { useStore } from "vuex";
-import CrowdFundCard from "./components/CrowdfundCard.vue";
+<script>
+import axios from 'axios';
+import CrowdFundCard from './components/CrowdfundCard.vue';
 
-const userList = [{
-    users: "Joshua",
-    time: "5 hrs ago",
-    content: "Hi, this is my first post",
-    category: "Food",
-    comment: 100,
-    like: 10,
-    img: "https://via.placeholder.com/500x300"
-}, {
-    users: "John",
-    time: "5 hrs ago",
-    content: "Hi, this is my second post",
-    category: "Technology",
-    comment: 100,
-    like: 10,
-    img: "https://via.placeholder.com/500x300"
-}, {
-    users: "Peter",
-    time: "2 hrs ago",
-    content: "Hi, this is my third post",
-    category: "Sport",
-    comment: 100,
-    like: 10,
-    img: "https://via.placeholder.com/500x300"
-}, {
-    users: "Gavin",
-    time: "8 hrs ago",
-    content: "Hi, this is my fourth post",
-    category: "Transport",
-    comment: 100,
-    like: 10,
-    img: "https://via.placeholder.com/500x300"
-}, {
-    users: "Yam",
-    time: "3 hrs ago",
-    content: "Hi, this is my fifth post",
-    category: "Fashion",
-    comment: 100,
-    like: 10,
-    img: "https://via.placeholder.com/500x300"
-},];
+export default {
+    components: {
+        CrowdFundCard
+    },
+    data() {
+        return {
+            talks: [],
+            userMap: {},
+            selectedCategory: '',
+            filteredTalkList: []
+        };
+    },
+    mounted() {
+        this.fetchMostRecentTalks();
+    },
+    methods: {
+        async fetchMostRecentTalks() {
+            try {
+                const response = await axios.get('http://localhost:8080/talks');
+                this.talks = response.data;
+                this.filteredTalkList = this.talks;
 
-const filteredUserList = ref(userList);
-const selectedCategory = ref(""); // Track the selected category
+                const userResponse = await fetch('http://localhost:8080/userList');
+                const users = await userResponse.json();
 
-const filterTransactions = (category) => {
-    if (selectedCategory.value === category) {
-        filteredUserList.value = userList;
-        selectedCategory.value = "";
-    }
-    else {
-        selectedCategory.value = category; // Update the selected category
-        filteredUserList.value = userList.filter(users => users.category === category);
+                this.userMap = users.reduce((map, user) => {
+                    map[user.id] = user.username;
+                    return map;
+                }, {});
+            } catch (error) {
+                console.error('Error fetching most recent talks:', error);
+            }
+        },
+        formatTimeAgo(postedDatetime) {
+            const postedDate = new Date(postedDatetime);
+            const timeDifference = Date.now() - postedDate.getTime();
+
+            const seconds = Math.floor(timeDifference / 1000);
+            const minutes = Math.floor(seconds / 60);
+            const hours = Math.floor(minutes / 60);
+            const days = Math.floor(hours / 24);
+            const weeks = Math.floor(days / 7);
+            const months = Math.floor(weeks / 4);
+            const years = Math.floor(months / 12);
+
+            if (years > 0) {
+                return years + (years === 1 ? ' year' : ' years') + ' ago';
+            } else if (months > 0) {
+                return months + (months === 1 ? ' month' : ' months') + ' ago';
+            } else if (weeks > 0) {
+                return weeks + (weeks === 1 ? ' week' : ' weeks') + ' ago';
+            } else if (days > 0) {
+                return days + (days === 1 ? ' day' : ' days') + ' ago';
+            } else if (hours > 0) {
+                return hours + (hours === 1 ? ' hour' : ' hours') + ' ago';
+            } else if (minutes > 0) {
+                return minutes + (minutes === 1 ? ' minute' : ' minutes') + ' ago';
+            } else {
+                return 'Just now';
+            }
+        },
+        getUsername(userId) {
+            return this.userMap[userId];
+        },
+        filterTalk(category) {
+            if (this.selectedCategory === category) {
+                this.filteredTalkList = this.talks;
+                this.selectedCategory = '';
+            } else {
+                this.selectedCategory = category;
+                this.filteredTalkList = this.talks.filter(talk => talk.category === category);
+            }
+        }
     }
 };
-
-const role = ref(localStorage.getItem('role'));
-const store = useStore();
-onBeforeMount(() => {
-    role.value = localStorage.getItem('role');
-    console.log(role.value);
-    if (role.value !== 'null') {
-        store.state.showNavbar = true;
-        store.state.showFooter = true;
-        store.state.hideConfigButton = true;
-    } else {
-        store.state.hideConfigButton = true;
-        store.state.showNavbar = false;
-        store.state.showSidenav = false;
-        store.state.showFooter = false;
-    }
-})
-
-onBeforeUnmount(() => {
-    role.value = localStorage.getItem('role');
-    if (role.value !== 'null') {
-        store.state.layout = "default";
-        store.state.isAbsolute = false;
-        store.state.imageLayout = "default";
-        store.state.showNavbar = true;
-        store.state.showFooter = true;
-        store.state.hideConfigButton = false;
-    } else {
-        store.state.hideConfigButton = false;
-        store.state.isAbsolute = false;
-        store.state.showNavbar = true;
-        store.state.showSidenav = true;
-        store.state.showFooter = true;
-        // body.classList.add("bg-gray-100");
-    }
-})
-
-
 </script>
-
 <template>
     <div class="card m-4 px-4 pt-1">
-        <h1 class="m-0 mx-auto pt-5">Crowdfund List</h1>
+        <h1 class="m-0 mx-auto pt-5">Let's UniTalk</h1>
         <div class="d-flex justify-content-center align-items-center w-100 mt-4"
             :class="`${darkMode ? 'bg-transparent' : ''}`">
             <button type="button" class="btn" :class="{ 'btn-success': selectedCategory === 'Food' }"
-                @click="filterTransactions('Food')">
+                @click="filterTalk('Food')">
                 Food
             </button>
             <button type="button" class="btn mx-3" :class="{ 'btn-success': selectedCategory === 'Technology' }"
-                @click="filterTransactions('Technology')">
+                @click="filterTalk('Technology')">
                 Technology
             </button>
             <button type="button" class="btn" :class="{ 'btn-success': selectedCategory === 'Fashion' }"
-                @click="filterTransactions('Fashion')">
+                @click="filterTalk('Fashion')">
                 Fashion
             </button>
             <button type="button" class="btn mx-3" :class="{ 'btn-success': selectedCategory === 'Sport' }"
-                @click="filterTransactions('Sport')">
+                @click="filterTalk('Sport')">
                 Sport
             </button>
             <button type="button" class="btn" :class="{ 'btn-success': selectedCategory === 'Transport' }"
-                @click="filterTransactions('Transport')">
+                @click="filterTalk('Transport')">
                 Transport
             </button>
         </div>
         <div class="container">
             <div class="row">
-                <div class="px-3 py-2" v-for="(user, index) in filteredUserList" :key="index">
-                    <CrowdFundCard :user="user.users" :time="user.time" :content="user.content" :comment="user.comment"
-                        :like="user.like" :img="user.img" />
+                <div class="px-3 py-2" v-for="(talk, index) in filteredTalkList" :key="index">
+                    <CrowdFundCard :id="talk.id" :user="getUsername(talk.user_id)"
+                        :time="formatTimeAgo(talk.posted_datetime)" :title="talk.title" :content="talk.content"
+                        :comment="talk.comment" :like="talk.likes" :img="talk.image" />
                 </div>
             </div>
 
