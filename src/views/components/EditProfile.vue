@@ -1,38 +1,106 @@
 <script setup>
+import axios from 'axios';
+import { onMounted, ref } from 'vue';
 
-const transactionList = [{
-  hash: "OMG!! Double decker bus caught fire in Lagos",
-  sender: "0x2256dfq424efrt382341c",
-  //   receiver: "Anonymous",
-  amount: 8000
-},
-{
-  hash: "Hey guys I found out that the new iPhone 88 is out!!",
-  sender: "0x2256dfq424efrt382341",
-  //   receiver: "Qian888",
-  amount: 7000
-},
-{
-  hash: "What do you think about the new song of Ariana...",
-  sender: "0x2256dfq424efrt382341",
-  //   receiver: "Jess666",
-  amount: 10000
-}, {
-  hash: "Did you guys know that we can actually fly to t...",
-  sender: "0x2256dfq424efrt382341",
-  //   receiver: "Anonymous",
-  amount: 10000
-}, {
-  hash: "I hate it when my friends don't reply my messages",
-  sender: "0x2256dfq424efrt382341",
-  //   receiver: "Loy Chai",
-  amount: 10000
-},];
+const user = ref({
+  id: null,
+  username: '',
+  email: '',
+  password: '',
+});
+
+const editProfile = ref(false);
+const user_id = ref(sessionStorage.getItem('userid'));
+
+const talks = ref([]);
+
+// Fetch user data
+const fetchUsers = async () => {
+  try {
+    const response = await fetch(`http://localhost:8080/userList?user_id=${user_id.value}`);
+    const userData = await response.json();
+    if (userData && userData.length > 0) {
+      user.value = userData[0];
+    } else {
+      console.error('User data is missing.');
+    }
+  } catch (error) {
+    console.error('Error fetching users:', error);
+  }
+};
+
+const toggleEditProfile = () => {
+  editProfile.value = !editProfile.value;
+};
+
+const updateUser = async () => {
+  try {
+
+    console.log("Username:", user.value.username);
+    console.log("Email:", user.value.email);
+    console.log("Password:", user.value.password);
+
+    if (!user_id.value) {
+      alert('User ID is missing. Cannot update profile.');
+      return;
+    }
+
+    if (!user.value.username || !user.value.email || !user.value.password) {
+      alert('User data is missing. Cannot update profile.');
+      return;
+    }
+
+    const userID = user_id.value;
+    const response = await axios.put(
+      `http://localhost:8080/users/${userID}`,
+      {
+        username: user.value.username,
+        email: user.value.email,
+        password: user.value.password,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+    if (response.status === 200) {
+      alert('Profile updated successfully');
+      toggleEditProfile();
+    } else {
+      alert('Failed to update profile');
+    }
+  } catch (error) {
+    console.error('Error updating user:', error);
+  }
+};
+
+const fetchLikedPost = async () => {
+  try{
+        const userID = user_id.value;
+
+        if (!userID) {
+          console.error('User ID is missing.');
+          return;
+        }
+        const response = await axios.get(`http://localhost:8080/talks/liked-by/${userID}`);
+        console.log("API Response:", response.data); // Log the response data
+        talks.value = response.data;
+    }catch(error){
+        console.error('Error fetching talks:', error);
+    }
+};
+
+onMounted(() => {
+    fetchUsers();
+    fetchLikedPost();
+});
+  
 </script>
+
 <template>
-
   <div class="row">
-
     <div v-if="editProfile" class="row">
       <div class="col-md-4 col11 d-flex justify-content-center align-items-center" style="background-color:white;">
         <div class="container d-flex justify-content-center">
@@ -44,12 +112,12 @@ const transactionList = [{
                 style="background-color:white;border-radius:50%;height:150px;width:150px; " />
             </div>
             <div class=" d-flex flex-row justify-content-center align-items-center gap-2  mt-4">
-              <div class=" d-flex flex-column"> <!-- HTML !-->
+              <div class=" d-flex flex-column">
                 <div class="button-31" style="margin-bottom: 20px;">
                   <span>Upload Photo</span>
                   <input type="file" class="upload-file-button">
                 </div>
-                <button class="button-31" role="button" @click="toggleEditProfile">Save Profile</button>
+                <button class="button-31" role="button" @click="updateUser">Save Profile</button>
               </div>
             </div>
           </div>
@@ -57,24 +125,28 @@ const transactionList = [{
       </div>
       <div class="card col-md-8 col22">
         <div class="p-4 form-style-5" style="border-radius: 1rem;">
-          <h5 class="mb-4">User Information</h5>
+          <h5 class="mb-4 d-flex justify-content-between align-items-center">
+            User Information
+            <router-link class="nav-link back-link" to="/">
+              Back
+            </router-link>
+          </h5>
           <div class="row">
             <div class="col-md-10">
               <label for="example-text-input" class="form-control-label">Username</label>
-              <input type="text" :value="user[0].username" />
+              <input type="text" v-model="user.username" />
             </div>
             <div class="col-md-10">
               <label for="example-text-input" class="form-control-label">Email</label>
-              <input type="email" :value="user[0].email" />
+              <input type="email" v-model="user.email" />
             </div>
             <div class="col-md-10">
               <label for="example-text-input" class="form-control-label">Password</label>
-              <input class="form-control" type="text" :value="user[0].password" />
+              <input class="form-control" type="text" v-model="user.password" />
             </div>
           </div>
         </div>
       </div>
-
     </div>
     <div v-else class="row">
       <div class="col-md-4 d-flex justify-content-center align-items-center col11" style="background-color:white;">
@@ -87,7 +159,7 @@ const transactionList = [{
                 style="background-color:white;border-radius:50%;height:150px;width:150px; " />
             </div>
             <div class=" d-flex flex-row justify-content-center align-items-center gap-2  mt-4">
-              <div class=" d-flex"> <!-- HTML !-->
+              <div class=" d-flex">
                 <button class="button-31" role="button" @click="toggleEditProfile">Edit Profile</button>
               </div>
             </div>
@@ -101,20 +173,20 @@ const transactionList = [{
         </div>
         <div class="card-body">
           <h5 class="mb-4">User Information</h5>
-          <div v-if="user && user.length > 0">
+          <div v-if="user && user.username">
             <div>
               <h6 style="display:inline-block; width:30%;">Username</h6>
-              <p style="display:inline-block;">{{ user[0].username }}</p>
+              <p style="display:inline-block;">{{ user.username }}</p>
             </div>
             <br>
             <div>
               <h6 style="display:inline-block; width:30%;">Email </h6>
-              <p style="display:inline-block;">{{ user[0].email }}</p>
+              <p style="display:inline-block;">{{ user.email }}</p>
             </div>
             <br>
             <div>
               <h6 style="display:inline-block; width:30%;">Password </h6>
-              <p style="display:inline-block;">{{ user[0].password }}</p>
+              <p style="display:inline-block;">{{ user.password }}</p>
             </div>
           </div>
           <div v-else>
@@ -129,33 +201,26 @@ const transactionList = [{
           <div class="p-3 pb-0 card-header">
             <div class="d-flex justify-content-between align-items-center mb-2">
               <h6 class="mb-0">Liked Post</h6>
-              <router-link class="nav-link" to="/signin">
-                View All
-              </router-link>
-            </div>
           </div>
           <div class="table-responsive pe-3">
             <table class="table align-items-center">
               <tbody>
-                <tr v-for="(transaction, index) in transactionList" :key="index">
+                <tr v-for="(talk, index) in talks" :key="index">
                   <td class="w-30">
+                    <a :href="`/talks/${talk.id}`">
                     <div class="px-2 py-1 d-flex align-items-center">
                       <div class="d-flex px-2 align-items-center justify-content-center">
-                        <i class="rounded-circle me-2 ni ni-bold-right" alt="hash"></i>
+                        <a :href="`/talks/${talk.id}`">
+                          <i class="rounded-circle me-2 ni ni-bold-right" alt="hash"></i>
+                        </a>                      
                       </div>
                       <div class="ms-2">
-                        <p class="mb-0 text-xs font-weight-bold">
-                          Topic:
-                        </p>
-                        <h6 class="mb-0 text-sm">{{ transaction.hash }}</h6>
+                        <h6 class="mb-0 text-sm">{{ talk.title }}</h6>
+                        <h7 class="mb-0 text-xs">{{ talk.content }}</h7>
                       </div>
                     </div>
+                    </a>
                   </td>
-                  <!-- <td>
-                            <div class="text-center">
-                              <h6 class="mb-0 text-xs">Posted by {{ transaction.receiver }}</h6>
-                            </div>
-                          </td> -->
                 </tr>
               </tbody>
             </table>
@@ -186,49 +251,20 @@ const transactionList = [{
             description: 'Total <strong>100 </strong>talks',
           },
           {
-            icon: { component: 'fa fa-futbol-o', background: 'dark' },
-            label: 'Sport',
-            description: 'Total <strong>50 </strong>talks',
-          }, {
-            icon: { component: 'fa fa-bus', background: 'dark' },
-            label: 'Transport',
-            description: 'Total <strong>5 </strong>talks',
+            icon: { component: 'fa fa-book', background: 'dark' },
+            label: 'Study',
+            description: 'Total <strong>200 </strong>talks',
           },
         ]" />
       </div>
     </div>
   </div>
+</div>
 </template>
-<script>
 
-export default {
-  data() {
-    return {
-      user:[],
-      editProfile: false,
-      user_id: sessionStorage.getItem('userid'),
-    };
-  },
-  methods: {
-    async fetchUsers() {
-      try {
-        const response = await fetch(`http://localhost:8080/userList?user_id=${this.user_id}`);
-        this.user = await response.json();
-        console.log('User:', this.user);
-      } catch (error) {
-        console.error('Error fetching users:', error);
-      }
-    },
-    toggleEditProfile() {
-      this.editProfile = !this.editProfile;
-    },
 
-  },
-  mounted() {
-    this.fetchUsers();
-  },
-};
-</script>
+
+
 
 <style scoped>
 input[type="file"] {
@@ -405,6 +441,22 @@ col-md-8 {
 
 .col22 {
   border-radius: 0 1rem 1rem 0 !important;
+}
+
+.back-link {
+  margin-left: auto; 
+}
+
+.d-flex {
+  display: flex;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.align-items-center {
+  align-items: center;
 }
 
 @media screen and (max-width: 765px) {

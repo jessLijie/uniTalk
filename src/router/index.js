@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import AdminTalksManage from "../views/AdminTalksManage.vue";
 import Billing from "../views/Billing.vue";
-import createCampaign from "../views/CreateCampaign.vue";
+import createTalk from "../views/CreateTalk.vue";
 import Dashboard from "../views/Dashboard.vue";
 import Information from "../views/Information.vue";
 import Notification from "../views/Notification.vue";
@@ -14,7 +14,7 @@ import Transaction from "../views/transaction.vue";
 import Certificate from "../views/Certificate.vue";
 import GeneralList from "../views/GeneralList.vue";
 import AdminUserManage from "../views/AdminUserManage.vue";
-import issuerCrowdfundList from "../views/issuerCrowdfundList.vue";
+import TalkList from "../views/TalkList.vue";
 const routes = [
   {
     path: "/",
@@ -53,9 +53,9 @@ const routes = [
     component: AdminTalksManage,
   },
   {
-    path: "/issuer/crowdfundmanage",
-    name: "issuerCrowdfundList",
-    component: issuerCrowdfundList,
+    path: "/talkList",
+    name: "talkList",
+    component: TalkList,
   },
   {
     path: "/admin/users-manage",
@@ -73,9 +73,9 @@ const routes = [
     component: TransactionList,
   },
   {
-    path: "/createCampaign",
-    name: "createCampaign",
-    component: createCampaign,
+    path: "/createTalk",
+    name: "createTalk",
+    component: createTalk,
   },
   {
     path: "/info",
