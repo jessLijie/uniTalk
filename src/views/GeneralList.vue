@@ -109,7 +109,7 @@ export default {
                 <div class="px-3 py-2" v-for="(talk, index) in filteredTalkList" :key="index">
                     <CrowdFundCard :id="talk.id" :user="getUsername(talk.user_id)"
                         :time="formatTimeAgo(talk.posted_datetime)" :title="talk.title" :content="talk.content"
-                        :comment="talk.comment" :like="talk.likes" :img="talk.image" />
+                        :comment="talk.comments" :like="talk.likes" :img="talk.image" />
                 </div>
             </div>
 

@@ -1,31 +1,29 @@
 <script setup>
 import DonatorList from "./components/DonatorList.vue";
 import { ref, onBeforeMount, onMounted, onBeforeUnmount } from "vue";
-import { useRoute, useRouter } from 'vue-router';
+import { useRoute } from 'vue-router';
 import axios from 'axios';
 import setNavPills from "@/assets/js/nav-pills.js";
 import setTooltip from "@/assets/js/tooltip.js";
-import ArgonButton from '@/components/ArgonButton.vue';
 import { useStore } from "vuex";
 
 const body = document.getElementsByTagName("body")[0];
 const route = useRoute();
 const store = useStore();
-const router = useRouter();
 const role = ref(localStorage.getItem('role'));
 const talks = ref(null);
 const userMap = ref({});
 const liking = ref(false);
 const userId = ref(sessionStorage.getItem("userid"));
 var likingvalue = ref();
+var commentvalue = ref();
 const commentInput = ref(null);
 const commentTextarea = ref(null);
-
+const talkId = route.params.id;
 
 const fetchCampaignDetails = async () => {
-  const campaignId = route.params.id;
   try {
-    const response = await axios.get(`http://localhost:8080/talks/${campaignId}`);
+    const response = await axios.get(`http://localhost:8080/talks/${talkId}`);
     talks.value = response.data;
 
     const userResponse = await fetch('http://localhost:8080/userList');
@@ -50,10 +48,6 @@ const fetchCampaignDetails = async () => {
   } catch (error) {
     console.error('Error fetching campaign details:', error);
   }
-};
-
-const goBack = () => {
-  router.go(-1);  // Go back to the previous page
 };
 
 const formatTimeAgo = (postedDatetime) => {
@@ -138,10 +132,11 @@ const submitComment = async (talkId) => {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ userId: userId.value, talkId: talkId, comment: commentInput.value })
+      body: JSON.stringify({ userId: userId.value, talkId: talkId, comment: commentInput.value, commentValue: commentvalue.value })
     }); if (response.ok) {
       commentInput.value = ''; // Clear the input field after successful submission
       adjustTextareaHeight(); // Adjust the textarea height
+      window.location.reload(); // Refresh the page
     }
   } catch (error) {
     console.error('Error liking post:', error);
@@ -155,6 +150,7 @@ onMounted(() => {
   store.state.isAbsolute = true;
   fetchCampaignDetails().then(() => {
     likingvalue.value = talks.value.likes;
+    commentvalue.value = talks.value.comments;
   });
 });
 
@@ -204,9 +200,6 @@ onBeforeUnmount(() => {
         <span class="mask bg-gradient-success opacity-1"></span>
       </div>
     </div>
-    <div class="d-flex" style="float: right;">
-      <argon-button @click="goBack" size="sm" class="ms-auto">Back</argon-button>
-    </div>
     <!-- Campaign Details -->
     <div class="container-fluid" style="margin-top:-5%;">
       <div class="row">
@@ -228,7 +221,7 @@ onBeforeUnmount(() => {
                   <img :src="talks.image || 'https://via.placeholder.com/500x300'" alt="Post Image" class="img-fluid"
                     width="1000" height="1000">
                 </div>
-                <div class="d-flex justify-content-between mb-1">
+                <div class="d-flex justify-content-between mb-2">
                   <div>like {{ likingvalue }}</div>
                   <div>Comment {{ talks.comments || 0 }}</div>
                 </div>
@@ -252,7 +245,7 @@ onBeforeUnmount(() => {
                 </div>
               </form>
               <div class="row my-4 mx-1">
-                <DonatorList />
+                <DonatorList :id="talkId" :userId="userId" :commentValue="commentvalue" />
               </div>
             </div>
           </div>
